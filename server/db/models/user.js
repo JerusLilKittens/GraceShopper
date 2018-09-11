@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize')
 const db = require('../db')
 
@@ -19,7 +20,16 @@ const User = db.define('user', {
     validate: {notEmpty: true}
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('password')
+    }
+  },
+  salt: {
+      type: Sequelize.STRING,
+      get(){
+        return ()=> this.getDataValue('data')
+      }
   },
 
     isAdmin: {
