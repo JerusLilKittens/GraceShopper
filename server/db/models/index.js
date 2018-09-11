@@ -1,10 +1,7 @@
-const User = require('./user')
-<<<<<<< HEAD
+// const User = require('./user')
 const Orders = require('./orders')
 
-=======
 const Cart = require('./cart')
->>>>>>> ab94f8b93f7119252e31e3783f2530e294f80a23
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -20,9 +17,5 @@ const Cart = require('./cart')
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-<<<<<<< HEAD
-  User, Orders
-=======
-  User, Cart
->>>>>>> ab94f8b93f7119252e31e3783f2530e294f80a23
+  Orders, Cart
 }

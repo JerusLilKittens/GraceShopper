@@ -70,14 +70,12 @@ describe('Orders model', () => {
       try {
 
         result = await order2.validate();
-        console.log("result", result)
         throw Error('validation was successful when should not have been')
       } catch (err) {
-        console.log(err)
       }
 
       let isUndefined = (result === undefined)
-      console.log(isUndefined)
+
       expect(isUndefined).to.equal.false;
 
     });
