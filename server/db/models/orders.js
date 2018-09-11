@@ -2,23 +2,23 @@ const db = require('./database')
 const Sequelize = require('sequelize')
 
 const Orders = db.define('orders', {
-  Products: {
+  products: {
     type: Sequelize.ARRAY(Sequelize.STRING),
     allowNull: false
   },
-  BillingInfo: {
+  billingInfo: {
     type: Sequelize.TEXT,
     allowNull: false
   },
-  ShippingInfo: {
-    type: Sequelize.Text,
+  shippingInfo: {
+    type: Sequelize.TEXT,
     allownull: false
   },
-  TotalAmount: {
+  totalAmount: {
     type: Sequelize.DECIMAL,
     allowNull: false
   },
-  UserID: {
+  userId: {
     type: Sequelize.INTEGER,
     allowNull: false
   }
