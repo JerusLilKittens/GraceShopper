@@ -1,6 +1,7 @@
 const User = require('./user')
 const Category = require('./category')
-// const Product = require('./product')
+const Product = require('./product')
+const Cart = require('./cart')
 
 // Category.hasMany(Product)
 // Product.hasMany(Category)
@@ -12,5 +13,8 @@ const Category = require('./category')
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-  User
+  User,
+  Cart,
+  Category,
+  Product
 }
