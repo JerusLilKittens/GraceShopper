@@ -1,18 +1,18 @@
 const db = require('../db')
 const Sequelize = require('sequelize')
 
-const Orders = db.define('orders', {
+const Order = db.define('order', {
   products: {
     type: Sequelize.JSON,
-    allowNull: false,
+    allowNull: false
   },
   billingInfo: {
     type: Sequelize.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   shippingInfo: {
     type: Sequelize.TEXT,
-    allownull: false,
+    allowNull: false
   },
   totalAmount: {
     type: Sequelize.DECIMAL,
@@ -20,14 +20,7 @@ const Orders = db.define('orders', {
     validate: {
       isDecimal: true
     }
-  },
-  userId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      isInt: true
-    }
   }
 })
 
-module.exports = Orders
+module.exports = Order
