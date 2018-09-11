@@ -1,4 +1,4 @@
-const {db, Product} = require('./server/db')
+const {db, Product, Order, User, Review} = require('./server/db/index')
 const {green, red} = require('chalk')
 
 const products = [{
@@ -43,10 +43,88 @@ const products = [{
   price: 2.50
 }]
 
+const orders = [{
+  products: [{1: {quantity: 2, price: 3}}, {2: {quantity: 1, price: 1.15}}],
+  billingInfo: '1 Hacker Way',
+  shippingInfo: 'Sear\'s Tower, Chicago',
+  totalAmount: 3.99,
+  // userId: 5
+  },{
+  products: [{3: {quantity: 1, price: 2.15}}, {5: {quantity: 5, price: 7.15}}],
+  billingInfo: '5 Hacker Way',
+  shippingInfo: '405 W Superior, Chicago',
+  totalAmount: 23.99,
+  // userId: 2
+  },{
+  products: [{4: {quantity: 3, price: 2.65}}],
+  billingInfo: '2 Hacker Way',
+  shippingInfo: '305 W Huron, Chicago',
+  totalAmount: 4.99,
+  // userId: 6
+  }]
+
+const reviews = [{
+  rating: 5,
+  text: 'This is a great product! My cat totally loves it.'
+}, {
+  rating: 1,
+  text: 'My cat refuses to touch this! Horrible.'
+}, {
+  rating: 3,
+  text: 'It\'s just okay.'
+}, {
+  rating: 2,
+  text: 'It has a weird smell.'
+}, {
+  rating: 4,
+  text: 'Solid product. Would recommend to a friend\'s cat.'
+}]
+
+const users = [{
+  firstName: 'Rajiv',
+  lastName: 'Bhatia',
+  email: 'rb@mail.com',
+  password: '123456',
+  isAdmin: false,
+  streetNameNumber: '405 W Superior',
+  city: 'Chicago',
+  state: 'IL'
+},{
+  firstName: 'Eric',
+  lastName: 'Guo',
+  email: 'eguo@mail.com',
+  password: '123456',
+  isAdmin: false,
+  streetNameNumber: '233 S Wacker Drive',
+  city: 'Chicago',
+  state: 'IL'
+},{
+  firstName: 'Mickey',
+  lastName: 'Mouse',
+  email: 'mickey@mail.com',
+  password: '123456',
+  isAdmin: false,
+  streetNameNumber: '1 Happiest Place',
+  city: 'Orlando',
+  state: 'FL'
+},{
+  firstName: 'Steve',
+  lastName: 'Jobs',
+  email: 'Steve@me.com',
+  password: 'Apple',
+  isAdmin: false,
+  streetNameNumber: '1 Infinite Loop',
+  city: 'Cupertino',
+  state: 'CA'
+}]
+
+
 const seed = async () => {
   await db.sync({force: true})
-
   await Promise.all(products.map(product => Product.create(product)))
+  await Promise.all(orders.map(order => Order.create(order)))
+  await Promise.all(users.map(user => User.create(user)))
+  await Promise.all(reviews.map(review => Review.create(review)))
   console.log(green('Seeding success!'))
 }
 
