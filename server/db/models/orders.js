@@ -1,26 +1,32 @@
-const db = require('./database')
+const db = require('../db')
 const Sequelize = require('sequelize')
 
 const Orders = db.define('orders', {
   products: {
     type: Sequelize.ARRAY(Sequelize.STRING),
-    allowNull: false
+    allowNull: false,
   },
   billingInfo: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   shippingInfo: {
     type: Sequelize.TEXT,
-    allownull: false
+    allownull: false,
   },
   totalAmount: {
     type: Sequelize.DECIMAL,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isDecimal: true
+    }
   },
   userId: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isInt: true
+    }
   }
 })
 
