@@ -1,4 +1,4 @@
-const {db, Product, Order, User, Review} = require('./server/db')
+const {db, Product, Order, User, Review} = require('./server/db/index')
 const {green, red} = require('chalk')
 
 const products = [{
@@ -48,19 +48,19 @@ const orders = [{
   billingInfo: '1 Hacker Way',
   shippingInfo: 'Sear\'s Tower, Chicago',
   totalAmount: 3.99,
-  userId: 5
+  // userId: 5
   },{
   products: [{3: {quantity: 1, price: 2.15}}, {5: {quantity: 5, price: 7.15}}],
   billingInfo: '5 Hacker Way',
   shippingInfo: '405 W Superior, Chicago',
   totalAmount: 23.99,
-  userId: 2
+  // userId: 2
   },{
   products: [{4: {quantity: 3, price: 2.65}}],
   billingInfo: '2 Hacker Way',
   shippingInfo: '305 W Huron, Chicago',
   totalAmount: 4.99,
-  userId: 6
+  // userId: 6
   }]
 
 const reviews = [{
@@ -123,7 +123,7 @@ const seed = async () => {
   await db.sync({force: true})
   await Promise.all(products.map(product => Product.create(product)))
   await Promise.all(orders.map(order => Order.create(order)))
-  // await Promise.all(users.map(user => User.create(user)))
+  await Promise.all(users.map(user => User.create(user)))
   await Promise.all(reviews.map(review => Review.create(review)))
   console.log(green('Seeding success!'))
 }
