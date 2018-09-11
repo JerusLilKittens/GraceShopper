@@ -1,4 +1,4 @@
-
+const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
@@ -28,7 +28,7 @@ const User = db.define('user', {
   salt: {
       type: Sequelize.STRING,
       get(){
-        return ()=> this.getDataValue('data')
+        return ()=> this.getDataValue('salt')
       }
   },
 
