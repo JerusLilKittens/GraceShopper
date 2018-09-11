@@ -18,8 +18,7 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue:
-      'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Cat-512.png',
+    defaultValue: 'default_product.png',
     allowNull: false,
     validate: {
       notEmpty: true
