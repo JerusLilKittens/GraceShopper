@@ -38,5 +38,24 @@ describe('Review model', () => {
       expect(review.rating).to.equal(4)
       expect(review.text).to.equal(null)
     })
+  })
+
+  describe('Text of the review must be at least 10 characters or longer if leaving a review',  () => {
+
+    it('Review must have at least 10 characters', async () => {
+
+    let review = Review.build({
+      text: 'not 10'
+    })
+
+    try {
+      await review.validate()
+      throw Error(
+        'Validation was successful, should have failed if text was shorter then 10 characters'
+      )
+    } catch (err) {
+      expect(err.message).to.contain('Validation error')
+    }
+  })
   }) // end describe('create rating no text')
 }) // end describe('Review model')
