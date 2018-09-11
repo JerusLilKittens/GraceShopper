@@ -1,6 +1,6 @@
 const {expect} = require('chai')
-const db = require('../index')
-const Orders = db.model('orders')
+const db = require('..')
+const Order = db.model('orders')
 
 
 describe('Orders model', () => {
@@ -13,7 +13,7 @@ describe('Orders model', () => {
   let productArray = ['1', '2']
 
   beforeEach(() => {
-    order = Orders.build({
+    order = Order.build({
       products: productArray,
       billingInfo: '1 Hacker Way',
       shippingInfo: '1 Infinite Loop',
@@ -58,7 +58,7 @@ describe('Orders model', () => {
 
     it('requires `products`, `billingInfo`, `shippingInfo`, `totalAmount` and userId` to be right data types', async () => {
 
-      const order2 = Orders.build()
+      const order2 = Order.build()
 
       order2.products = "this is a string";
       order2.billingInfo = 4.4;
@@ -72,11 +72,12 @@ describe('Orders model', () => {
         result = await order2.validate();
         throw Error('validation was successful when should not have been')
       } catch (err) {
+        console.error(err)
       }
 
       let isUndefined = (result === undefined)
 
-      expect(isUndefined).to.equal.false;
+      expect(isUndefined).to.equal(false);
 
     });
 
