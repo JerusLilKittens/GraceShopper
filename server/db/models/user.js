@@ -17,7 +17,10 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
-    validate: {notEmpty: true}
+    validate: {
+      notEmpty: true,
+      isEmail: true
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -26,15 +29,15 @@ const User = db.define('user', {
     }
   },
   salt: {
-      type: Sequelize.STRING,
-      get(){
-        return ()=> this.getDataValue('salt')
-      }
+    type: Sequelize.STRING,
+    get() {
+      return () => this.getDataValue('salt')
+    }
   },
 
-    isAdmin: {
-      type: Sequelize.BOOLEAN
-    },
+  isAdmin: {
+    type: Sequelize.BOOLEAN
+  },
   streetNameNumber: {
     type: Sequelize.STRING
   },

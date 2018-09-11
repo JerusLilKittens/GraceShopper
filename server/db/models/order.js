@@ -3,16 +3,16 @@ const Sequelize = require('sequelize')
 
 const Order = db.define('order', {
   products: {
-    type: Sequelize.ARRAY(Sequelize.JSON),
-    allowNull: false,
+    type: Sequelize.JSON,
+    allowNull: false
   },
   billingInfo: {
     type: Sequelize.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   shippingInfo: {
     type: Sequelize.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   totalAmount: {
     type: Sequelize.DECIMAL,

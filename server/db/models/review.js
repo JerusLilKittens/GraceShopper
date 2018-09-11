@@ -11,7 +11,13 @@ const Review = db.define('review', {
     }
   },
   text: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    allowNull: true,
+    validate: {checkLength(val){
+        if(val.length < 10 ){
+          throw new Error('Please write a discription')
+        }
+    }}
   }
 })
 
