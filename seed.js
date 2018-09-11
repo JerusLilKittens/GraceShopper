@@ -1,4 +1,4 @@
-const {db, Product, Order} = require('./server/db')
+const {db, Product, Order, User, Review} = require('./server/db')
 const {green, red} = require('chalk')
 
 const products = [{
@@ -63,11 +63,68 @@ const orders = [{
   userId: 6
   }]
 
+const reviews = [{
+  rating: 5,
+  text: 'This is a great product! My cat totally loves it.'
+}, {
+  rating: 1,
+  text: 'My cat refuses to touch this! Horrible.'
+}, {
+  rating: 3,
+  text: 'It\'s just okay.'
+}, {
+  rating: 2,
+  text: 'It has a weird smell.'
+}, {
+  rating: 4,
+  text: 'Solid product. Would recommend to a friend\'s cat.'
+}]
+
+const users = [{
+  firstName: 'Rajiv',
+  lastName: 'Bhatia',
+  email: 'rb@mail.com',
+  password: '123456',
+  isAdmin: false,
+  streetNameNumber: '405 W Superior',
+  city: 'Chicago',
+  state: 'IL'
+},{
+  firstName: 'Eric',
+  lastName: 'Guo',
+  email: 'eguo@mail.com',
+  password: '123456',
+  isAdmin: false,
+  streetNameNumber: '233 S Wacker Drive',
+  city: 'Chicago',
+  state: 'IL'
+},{
+  firstName: 'Mickey',
+  lastName: 'Mouse',
+  email: 'mickey@mail.com',
+  password: '123456',
+  isAdmin: false,
+  streetNameNumber: '1 Happiest Place',
+  city: 'Orlando',
+  state: 'FL'
+},{
+  firstName: 'Steve',
+  lastName: 'Jobs',
+  email: 'Steve@me.com',
+  password: 'Apple',
+  isAdmin: false,
+  streetNameNumber: '1 Infinite Loop',
+  city: 'Cupertino',
+  state: 'CA'
+}]
+
+
 const seed = async () => {
   await db.sync({force: true})
-
   await Promise.all(products.map(product => Product.create(product)))
   await Promise.all(orders.map(order => Order.create(order)))
+  // await Promise.all(users.map(user => User.create(user)))
+  await Promise.all(reviews.map(review => Review.create(review)))
   console.log(green('Seeding success!'))
 }
 

@@ -10,7 +10,7 @@ const Cart = require('./cart')
 // User.hasMany(Review)
 
 Category.hasMany(Product)
-Product.hasMany(Category)
+Product.belongsToMany(Category, {through: 'prod_cat'})
 
 module.exports = {
   User,
