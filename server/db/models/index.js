@@ -4,6 +4,7 @@ const Category = require('./category')
 const Product = require('./product')
 const Cart = require('./cart')
 
+
 // Review.belongsTo(Product)
 // Product.hasMany(Review)
 // Review.belongsTo(User)
