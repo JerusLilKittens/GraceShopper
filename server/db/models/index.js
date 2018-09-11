@@ -1,9 +1,9 @@
 const User = require('./user')
 const Category = require('./category')
-const Product = require('./product')
+// const Product = require('./product')
 
-Category.hasMany(Product)
-Product.hasMany(Category)
+// Category.hasMany(Product)
+// Product.hasMany(Category)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

@@ -11,23 +11,30 @@ describe('Category model', () => {
 
   describe('create Category', () => {
     let category
-    let badCategory
 
-    beforeEach(async () => {
-      category = await Category.create({
+    beforeEach(() => {
+      category = Category.build({
         name: 'Cat Toys'
       })
-      badCategory = await Category.create({
-        name: ''
-      })
     })
 
-    it('creates a category with name', () => {
-      expect(category.name('Cat Toys')).to.be.equal(true)
+    it('creates a category with name', async () => {
+      const savedCategory = await category.save()
+      expect(savedCategory.name).to.equal('Cat Toys')
     })
 
-    it('doesnt create a category without a name', () => {
-      expect(badCategory.to.not.exist)
-    })
+    it('doesnt create a category without a name', async () => {
+      category.name = ''
+      let result, error;
+      try {
+        result = await category.validate();
+      } catch (err) {
+        error = err;
+      }
+
+      if (result) throw Error('validation should fail when name is empty');
+
+      expect(error).to.be.an.instanceOf(Error);
+      expect(error.message).to.contain('Validation error');    })
   }) // end describe('create category')
 }) // end describe('Category model')
