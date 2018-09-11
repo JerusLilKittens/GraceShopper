@@ -5,15 +5,15 @@ const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    validation: {
-      isEmpty: false
+    validate: {
+      notEmpty: true
     }
   },
   description: {
     type: Sequelize.TEXT,
     allowNull: false,
-    validation: {
-      isEmpty: false
+    validate: {
+      notEmpty: true
     }
   },
   imageUrl: {
@@ -21,8 +21,8 @@ const Product = db.define('product', {
     defaultValue:
       'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Cat-512.png',
     allowNull: false,
-    validation: {
-      isEmpty: false
+    validate: {
+      notEmpty: true
     }
   },
   price: {
