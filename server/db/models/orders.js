@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 
 const Orders = db.define('orders', {
   products: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+    type: Sequelize.JSON,
     allowNull: false,
   },
   billingInfo: {
