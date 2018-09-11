@@ -20,8 +20,8 @@ describe('Review model', () => {
     })
 
     it('Creates a review with rating and text', () => {
-      expect(review.rating(4)).to.be.equal(true)
-      expect(review.text('This is a great product!')).to.be.equal(true)
+      expect(review.rating).to.equal(4)
+      expect(review.text).to.equal('This is a great product!')
     })
   }) // end describe('create rating')
 
@@ -35,8 +35,8 @@ describe('Review model', () => {
     })
 
     it('Creates a review with rating and no text', () => {
-      expect(review.rating(4)).to.be.equal(true)
-      expect(review.text(null)).to.be.equal(true)
+      expect(review.rating).to.equal(4)
+      expect(review.text).to.equal(null)
     })
   }) // end describe('create rating no text')
 }) // end describe('Review model')

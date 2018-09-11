@@ -1,11 +1,11 @@
 const User = require('./user')
 const Review = require('./review')
-const Product = require('./product')
+// const Product = require('./product')
 
-Review.belongsTo(Product)
-Product.hasMany(Review)
-Review.belongsTo(User)
-User.hasMany(Review)
+// Review.belongsTo(Product)
+// Product.hasMany(Review)
+// Review.belongsTo(User)
+// User.hasMany(Review)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
