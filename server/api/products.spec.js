@@ -37,15 +37,6 @@ describe('Product routes', () => {
     const fullText =
       'The South African cliff swallow (Petrochelidon spilodera), also known as the South African swallow, is a species of bird in the Hirundinidae family.'
 
-    // beforeEach(() => {
-    //   return Product.create({
-    //     name: 'Catnip',
-    //     description: fullText,
-    //     price: 42.13,
-    //     stock: 3
-    //   })
-    // })
-
     it('POST /api/products', async () => {
       const {body} = await request(app)
         .post('/api/products')
@@ -57,7 +48,6 @@ describe('Product routes', () => {
         })
         .expect(201)
 
-      console.log(body.name, '+++++++ data.names')
       expect(body.name).to.be.equal('Catnip')
     })
   }) // end describe('/api/products')
