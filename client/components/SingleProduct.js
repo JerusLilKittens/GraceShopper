@@ -5,6 +5,8 @@ import { Rating, Icon, Image, Item } from 'semantic-ui-react'
 
 const SingleProduct = (props) => {
   const product = props.product
+  const reviews = product.reviews
+
   return (
     <div id="single-product">
       <Item>
@@ -19,6 +21,21 @@ const SingleProduct = (props) => {
           </Item.Extra>
         </Item.Content>
       </Item>
+
+      <div id="product-reviews">
+      <Item.Group>
+      {reviews.map(review => {
+        return (
+        <Item key={review.id}>
+          <Item.Content>
+            <Item.Header>Header</Item.Header>
+            <Rating icon='star' rating={review.rating} maxRating={5} />
+            <Item.Description>{review.text}</Item.Description>
+          </Item.Content>
+        </Item>
+      )})}
+      </Item.Group>
+      </div>
     </div>
   )
 }
