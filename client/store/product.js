@@ -1,12 +1,7 @@
 import axios from 'axios'
 
 // const GET_PRODUCTS = 'GET_PRODUCTS'
-const GOT_PRODUCTS = 'GOT_PROUCTS'
-
-const initialState = {
-  products: [],
-  selectedProduct: {}
-}
+const GOT_PRODUCTS = 'GOT_PRODUCTS'
 
 const gotProducts = products => ({type: GOT_PRODUCTS, products})
 
@@ -21,10 +16,10 @@ export const getProducts = () => {
   }
 }
 
-const productReducer = (state = initialState, action) => {
+const productReducer = (state = [], action) => {
   switch (action.type) {
     case GOT_PRODUCTS:
-      return {...state, products: action.products}
+      return action.products
     default:
       return state
   }
