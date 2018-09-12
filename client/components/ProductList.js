@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {Container} from 'semantic-ui-react'
+import {Container, Card} from 'semantic-ui-react'
 
 import {getProducts} from '../store/product'
 import ProductCard from './ProductCard'
@@ -16,13 +16,15 @@ class ProductList extends React.Component {
     console.log('STATE', this.state)
     return (
       <Container>
-        {products ? (
-          products.map(product => {
-            return <ProductCard key={product.id} product={product} />
-          })
-        ) : (
-          <h1>nothing</h1>
-        )}
+        <Card.Group>
+          {products ? (
+            products.map(product => {
+              return <ProductCard key={product.id} product={product} />
+            })
+          ) : (
+            <h1>nothing</h1>
+          )}
+        </Card.Group>
       </Container>
     )
   }
