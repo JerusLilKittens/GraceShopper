@@ -16,6 +16,20 @@ export const getProducts = () => {
   }
 }
 
+export const createProduct = (formData) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/products', formData)
+      // sending back the single product created to be displayed 
+      //TODO: need to create a gotProduct actions
+      //dispatch(gotProduct(data))
+      console.log(data)
+    } catch (err){
+      console.error(err)
+    }
+  }
+}
+
 const productReducer = (state = [], action) => {
   switch (action.type) {
     case GOT_PRODUCTS:
