@@ -15,8 +15,19 @@ export const getProducts = () => {
     try {
       const {data} = await axios.get('/api/products')
       dispatch(gotProducts(data))
-    } catch(err) {
+    } catch (err) {
       console.error(err)
     }
   }
 }
+
+const productReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GOT_PRODUCTS:
+      return {...state, products: action.products}
+    default:
+      return state
+  }
+}
+
+export default productReducer
