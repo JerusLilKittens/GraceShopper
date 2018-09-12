@@ -2,10 +2,6 @@ const db = require('../db')
 const Sequelize = require('sequelize')
 
 const Order = db.define('order', {
-  products: {
-    type: Sequelize.JSON,
-    allowNull: false
-  },
   billingInfo: {
     type: Sequelize.TEXT,
     allowNull: false
