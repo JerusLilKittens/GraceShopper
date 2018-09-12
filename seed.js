@@ -1,4 +1,4 @@
-const {db, Product, Order, User, Review, LineItem} = require('./server/db/index')
+const {db, Product, Order, User, Review, LineItem, CartItem, Cart} = require('./server/db/index')
 const {green, red} = require('chalk')
 
 const products = [{
@@ -60,16 +60,12 @@ const orders = [{
   const lineItems = [{
     quantity: 2,
     price: 3.99,
-    // productId: 1,
-    // orderId: 2,
     lineItemProductId: 1,
     lineItemOrderId: 2
     },
     {
     quantity: 2,
     price: 3.99,
-    // productId: 3,
-    // orderId: 2,
     lineItemProductId: 3,
     lineItemOrderId: 2
 
@@ -77,11 +73,45 @@ const orders = [{
     {
     quantity: 2,
     price: 3.99,
-    // productId: 1,
-    // orderId: 1,
     lineItemProductId: 1,
     lineItemOrderId: 1
     }]
+
+const cartItems = [{
+      quantity: 2,
+      cartItemProductId: 1,
+      cartItemCartId: 1,
+      // cartId: 1
+      },
+      {
+      quantity: 2,
+      cartItemProductId: 1,
+      cartItemCartId: 2,
+      // cartId: 2
+
+
+      },
+      {
+      quantity: 2,
+      cartItemProductId: 2,
+      cartItemCartId: 2,
+      // cartId: 3
+
+
+      }
+    ]
+
+  const carts = [
+        {
+        sessionId: 1
+        },
+        {
+        sessionId: 2
+        },
+        {
+        sessionId: 3
+        }
+      ]
 
 const reviews = [{
   rating: 5,
@@ -146,6 +176,11 @@ const seed = async () => {
   await Promise.all(lineItems.map(lineItem => LineItem.create(lineItem)))
   await Promise.all(users.map(user => User.create(user)))
   await Promise.all(reviews.map(review => Review.create(review)))
+  await Promise.all(carts.map(cart => Cart.create(cart)))
+  await Promise.all(cartItems.map(cartItem => CartItem.create(cartItem)))
+
+
+
   console.log(green('Seeding success!'))
 }
 
