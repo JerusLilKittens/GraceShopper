@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// need to test and make a test 
+// need to test and make a test
 // waiting for single product  route to test
 router.put('/', async (req, res, next) => {
   try {
