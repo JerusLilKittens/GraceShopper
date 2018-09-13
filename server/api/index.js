@@ -1,4 +1,4 @@
-const {router} = require('express').Router()
+const router = require('express').Router()
 const isAdmin = (req,res,next) => {
   if(!req.user || !req.user.isAdmin){
     const err = Error('Admin not logged in')
