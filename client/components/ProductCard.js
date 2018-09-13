@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {Card, Icon, Image, Button} from 'semantic-ui-react'
-import {selectProduct} from '../store/product'
+import {getProduct} from '../store/product'
 
 const ProductCard = props => {
   const {imageUrl, name, description, price, id} = props.product
   return (
-    <Card href={`products/${id}`} onClick={() => props.selectProduct(props.product)}>
+    <Card as={Link} to={`/products/${id}`} onClick={() => props.getProduct(props.product)}>
       <Image src={imageUrl} />
       <Card.Content>
         <Card.Header>{name}</Card.Header>
@@ -27,7 +28,7 @@ const ProductCard = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectProduct: product => dispatch(selectProduct(product))
+    getProduct: product => dispatch(getProduct(product))
   }
 }
 

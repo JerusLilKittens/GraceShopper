@@ -18,11 +18,37 @@ export const getProducts = () => {
   }
 }
 
-export const getProduct = product => {
+export const getProduct = productId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/products/${product.id}`)
+      const {data} = await axios.get(`/api/products/${productId}`)
       dispatch(gotProduct(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+export const updateProduct = (id, formData) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put('/api/products/', {id, formData})
+    } catch (err) {
+      console.error(err)
+    }
+    //set to return update on product
+    // dispatch(gotProduct(data))
+  }
+}
+
+export const createProduct = formData => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/products', formData)
+      // sending back the single product created to be displayed
+      //TODO: need to create a gotProduct actions
+      //dispatch(gotProduct(data))
+      console.log(data)
     } catch (err) {
       console.error(err)
     }
