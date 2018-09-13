@@ -12,8 +12,8 @@ class ProductList extends React.Component {
   }
 
   render() {
+    console.log(this.props.match.params.category)
     const products = this.props.products
-    console.log('STATE', this.state)
     return (
       <Container>
         <Card.Group>
