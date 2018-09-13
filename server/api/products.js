@@ -20,6 +20,27 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// need to test and make a test 
+// waiting for single product  route to test
+router.put('/', async (req, res, next) => {
+  try {
+    const {id, productBody} = req.body
+    const {name, description, stock, price} = productBody
+    const product = await Product.update(
+      {name, description, stock, price},
+      {
+        where: {id: id},
+        returning: true,
+        plain: true
+      }
+    )
+    const updatedProduct = await Product.findById(product[1].id)
+    res.send(updatedProduct)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   const {name, description, price, stock} = req.body
   try {
