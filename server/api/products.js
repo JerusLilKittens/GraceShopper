@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product} = require('../db')
+const {Product, Review} = require('../db')
 
 const isAdmin = (req, res, next) => {
   console.log(req)
@@ -19,6 +19,17 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+
+router.get('/:productId', async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.productId, { include: Review })
+    res.json(product)
+  } catch (err) {
+    next(err)
+  }
+})
+
 
 // need to test and make a test
 // waiting for single product  route to test
