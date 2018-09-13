@@ -132,8 +132,8 @@ class EditProductForm extends Component {
 }
 
 const mapStateDispatchToProps = dispatch => ({
-  createProduct: formData => {
-    dispatch(createProduct(formData))
+  editProduct: formData => {
+    dispatch(editProduct(id, formData))
   }
 })
 
