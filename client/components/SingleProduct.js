@@ -6,7 +6,7 @@ import { Rating, Icon, Image, Item } from 'semantic-ui-react'
 const SingleProduct = (props) => {
   const product = props.product
   const reviews = product.reviews
-
+  console.log('product', props.product)
   return (
     <div id="single-product">
       <Item>
@@ -22,7 +22,7 @@ const SingleProduct = (props) => {
         </Item.Content>
       </Item>
 
-      <div id="product-reviews">
+      {/* <div id="product-reviews">
       <Item.Group>
       {reviews.map(review => {
         return (
@@ -35,7 +35,7 @@ const SingleProduct = (props) => {
         </Item>
       )})}
       </Item.Group>
-      </div>
+      </div> */}
     </div>
   )
 }
@@ -51,4 +51,4 @@ const mapDispatchToProps = dispatch => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+export default connect(mapStateToProps)(SingleProduct)

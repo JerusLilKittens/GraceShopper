@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import ProductList from './components/ProductList'
+import SingleProduct from './components/SingleProduct'
 
 /**
  * COMPONENT
@@ -20,7 +21,8 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/products" component={ProductList} />
+        <Route exact path="/products" component={ProductList} />
+        <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (

@@ -13,7 +13,6 @@ class ProductList extends React.Component {
 
   render() {
     const products = this.props.products
-    console.log('STATE', this.state)
     return (
       <Container>
         <Card.Group>
