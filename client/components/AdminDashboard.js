@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {Container, Card, Dropdown, Header, Segment, Divider} from 'semantic-ui-react'
+import AddProductForm from './Admin-AddProductForm'
+import EditProductForm from './Admin-EditProductForm'
 
 
 const optionsProduct = [
@@ -86,7 +88,13 @@ class AdminDashBoard extends React.Component {
 
 
     <Container>
-    {this.state.display}
+    {/* <AddProductForm /> */}
+    {(this.state.display === 'add-product' && <AddProductForm />)}
+    {(this.state.display === 'edit-product' && <EditProductForm />)}
+
+
+
+
     </Container>
 
 
