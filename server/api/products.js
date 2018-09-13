@@ -1,5 +1,7 @@
-const router = require('express').Router()
+const {router, isAdmin} = require('express').Router()
 const {Product} = require('../db')
+
+
 
 router.get('/', async (req, res, next) => {
   try {
@@ -10,7 +12,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAdmin ,async (req, res, next) => {
   const {name, description, price, stock} = req.body
   try {
     const product = await Product.create({

@@ -1,5 +1,13 @@
-const router = require('express').Router()
-module.exports = router
+const {router} = require('express').Router()
+const isAdmin = (req,res,next) => {
+  if(!req.user || !req.user.isAdmin){
+    const err = Error('Admin not logged in')
+    err.status = 403
+    return next(err)
+  }
+  next()
+}
+
 
 router.use('/users', require('./users'))
 router.use('/products', require('./products'))
@@ -9,3 +17,5 @@ router.use((req, res, next) => {
   error.status = 404
   next(error)
 })
+
+module.exports = {router, isAdmin}
