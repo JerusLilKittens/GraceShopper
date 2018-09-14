@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {getOrders} from '../store/order'
 
 class ViewOrders extends React.Component {
+
   componentDidMount() {
     this.props.getOrders()
   }
@@ -26,6 +27,7 @@ class ViewOrders extends React.Component {
               <th>Order Id</th>
               <th>Amount   ($)</th>
               <th>Date   </th>
+              <th>Status </th>
               <th>Shipping Info   </th>
             </tr>
             {orders.map(order => {
@@ -34,6 +36,7 @@ class ViewOrders extends React.Component {
                   <td>{order.id}</td>
                   <td>{order.totalAmount}</td>
                   <td>{order.createdAt}</td>
+                  <td>{order.status}</td>
                   <td>{order.shippingInfo}</td>
                 </tr>
               )
