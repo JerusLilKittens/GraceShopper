@@ -1,11 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {Container, Card} from 'semantic-ui-react'
 
 import {getProducts} from '../store/product'
-import ProductCard from './ProductCard'
 
+import ProductCard from './ProductCard'
 import CategoryList from './CategoryList'
 
 class ProductList extends React.Component {
@@ -15,6 +14,7 @@ class ProductList extends React.Component {
 
   render() {
     const products = this.props.products
+
     return (
       <div>
         <CategoryList />
@@ -37,7 +37,7 @@ class ProductList extends React.Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
-    category: state.category
+    selectedCategory: state.selectedCategory
   }
 }
 

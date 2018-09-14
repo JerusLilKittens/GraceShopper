@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {ProdCat, Category} = require('../db')
+const {Category, Product} = require('../db')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -10,17 +10,20 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// router.get('/:categoryId', async (req, res, next) => {
-//   const categoryId = req.params.categoryId
-//   try {
-//     const categories = await ProdCat.findAll({
-//       where: {categoryId}
-//     })
-//     res.json(categories)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+// router.get('/0')
+
+router.get('/:categoryId', async (req, res, next) => {
+  const categoryId = req.params.categoryId
+  try {
+    const categories = await Category.findAll({
+      include: [{model: Product}],
+      where: {id: categoryId}
+    })
+    res.json(categories)
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.get('')
 

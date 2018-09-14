@@ -1,15 +1,15 @@
 import axios from 'axios'
 
 const GOT_CATEGORIES = 'GOT_CATEGORIES'
-const SELECT_CATEGORY = 'TOGGLE_CATEGORY'
+const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
 const gotCategories = categories => ({
   type: GOT_CATEGORIES,
   categories
 })
-export const selectCategory = categoryId => ({
+export const selectCategory = category => ({
   type: SELECT_CATEGORY,
-  categoryId
+  category
 })
 
 export const getCategories = () => {
@@ -35,7 +35,7 @@ export const categoriesReducer = (state = [], action) => {
 export const selectedCategory = (state = {}, action) => {
   switch (action.type) {
     case SELECT_CATEGORY:
-      return action.categoryId
+      return action.category
     default:
       return state
   }
