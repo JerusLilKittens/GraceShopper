@@ -71,7 +71,6 @@ class EditProductForm extends Component {
   }
 
   render() {
-    console.log(this.props.product.categories)
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group widths="equal">

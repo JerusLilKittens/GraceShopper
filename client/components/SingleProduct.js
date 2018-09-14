@@ -15,7 +15,6 @@ import {getProduct} from '../store/product'
 import {addReview} from '../store/review'
 import EditProductForm from '../components/Admin-EditProductForm'
 import {getCategories} from '../store/category'
-import {getSingleProductCat} from '../store/product'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
@@ -31,6 +30,7 @@ class SingleProduct extends React.Component {
 
   render() {
     const product = this.props.selectedProduct
+    console.log(product, '+++++++++= product')
     const reviews = product.reviews
     return (
       <Container>
@@ -42,6 +42,11 @@ class SingleProduct extends React.Component {
               <Item.Header as="a">{product.name}</Item.Header>
               <Rating icon="star" rating={0} maxRating={5} />
               <Item.Meta>${product.price}</Item.Meta>
+              {
+              product.categories &&
+              (
+              <Item.Meta>Category: {product.categories[0].name}</Item.Meta>)
+              }
               <Item.Description>{product.description}</Item.Description>
               <Item.Extra>
                 <Button color="teal" icon labelPosition="left">
@@ -107,8 +112,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getProduct: product => dispatch(getProduct(product)),
   addReview: review => dispatch(addReview(review)),
-  getCategories: () => dispatch(getCategories()),
-  getSingleProductCat: (id) => dispatch(getSingleProductCat(id))
+  getCategories: () => dispatch(getCategories())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
