@@ -1,4 +1,4 @@
-const {db, Product, Order, User, Review, LineItem, CartItem, Cart} = require('./server/db/index')
+const {db, Product, Order, User, Review, LineItem, CartItem, Cart} = require('./server/db')
 const {green, red} = require('chalk')
 
 const products = [{
@@ -88,16 +88,12 @@ const cartItems = [{
       cartItemProductId: 1,
       cartItemCartId: 2,
       // cartId: 2
-
-
       },
       {
       quantity: 2,
       cartItemProductId: 2,
       cartItemCartId: 2,
       // cartId: 3
-
-
       }
     ]
 
@@ -115,19 +111,24 @@ const cartItems = [{
 
 const reviews = [{
   rating: 5,
-  text: 'This is a great product! My cat totally loves it.'
+  text: 'This is a great product! My cat totally loves it.',
+  productId: 1
 }, {
   rating: 1,
-  text: 'My cat refuses to touch this! Horrible.'
+  text: 'My cat refuses to touch this! Horrible.',
+  productId: 2
 }, {
   rating: 3,
-  text: 'It\'s just okay.'
+  text: 'It\'s just okay.',
+  productId: 3
 }, {
   rating: 2,
-  text: 'It has a weird smell.'
+  text: 'It has a weird smell.',
+  productId: 2
 }, {
   rating: 4,
-  text: 'Solid product. Would recommend to a friend\'s cat.'
+  text: 'Solid product. Would recommend to a friend\'s cat.',
+  productId: 3
 }]
 
 const users = [{

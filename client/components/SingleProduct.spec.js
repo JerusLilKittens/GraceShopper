@@ -18,7 +18,7 @@ describe('SingleProduct view', () => {
 
   it('renders a single product with all information', () => {
     expect(singleProduct.find('header').text()).to.be.equal('Cat Scratcher')
-    expect(singleProduct.find('h3').text()).to.be.equal('A nice cardboard scratcher for your cat to keep her claws sharp.')
-    expect(singleProduct.find('h3').text()).to.be.equal('4.50')
+    expect(singleProduct.find('description').text()).to.be.equal('A nice cardboard scratcher for your cat to keep her claws sharp.')
+    expect(singleProduct.find('price').text()).to.be.equal('4.50')
   })
 })
