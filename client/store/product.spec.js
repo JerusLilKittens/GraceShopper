@@ -30,7 +30,8 @@ describe('thunk creators', () => {
     it('eventually dispatches the GET_PRODUCTS action', async () => {
       const fakeProduct = {
         name: 'Laser Pointer',
-        description: 'Every cat\'s favorite toy! This laser pointer will entertain your cat for hours.',
+        description:
+          "Every cat's favorite toy! This laser pointer will entertain your cat for hours.",
         price: 8.75
       }
       mockAxios.onGet('/products').replyOnce(200, fakeProduct)
@@ -42,7 +43,7 @@ describe('thunk creators', () => {
   })
 
   describe('getProduct', () => {
-    it('logout: eventually dispatches the GET_PRODUCT action', async (productId) => {
+    it('logout: eventually dispatches the GET_PRODUCT action', async productId => {
       mockAxios.onGet(`/product/${productId}`).replyOnce(204)
       await store.dispatch(getProduct(productId))
       const actions = store.getActions()
