@@ -4,10 +4,11 @@ const {
   Order,
   User,
   Review,
-  Category
+  Category,
+  ProdCat
 } = require('./server/db/index')
 
-const ProdCat = require('./server/db/models/product-category')
+// const ProdCat = require('./server/db/models/product-category')
 
 const {green, red} = require('chalk')
 

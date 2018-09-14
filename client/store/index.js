@@ -4,10 +4,13 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import productReducer from './product'
+import {categoriesReducer, selectedCategory} from './category'
 
 const reducer = combineReducers({
   user,
-  products: productReducer
+  products: productReducer,
+  categories: categoriesReducer,
+  selectedCategory
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

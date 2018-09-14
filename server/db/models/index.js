@@ -21,5 +21,6 @@ module.exports = {
   Category,
   Product,
   Review,
-  Order
+  Order,
+  ProdCat
 }

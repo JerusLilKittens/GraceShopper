@@ -6,33 +6,38 @@ import {Container, Card} from 'semantic-ui-react'
 import {getProducts} from '../store/product'
 import ProductCard from './ProductCard'
 
+import CategoryList from './CategoryList'
+
 class ProductList extends React.Component {
   componentDidMount() {
     this.props.getProducts()
   }
 
   render() {
-    console.log(this.props.match.params.category)
     const products = this.props.products
     return (
-      <Container>
-        <Card.Group>
-          {products ? (
-            products.map(product => {
-              return <ProductCard key={product.id} product={product} />
-            })
-          ) : (
-            <h1>nothing</h1>
-          )}
-        </Card.Group>
-      </Container>
+      <div>
+        <CategoryList />
+        <Container>
+          <Card.Group>
+            {products ? (
+              products.map(product => {
+                return <ProductCard key={product.id} product={product} />
+              })
+            ) : (
+              <h1>nothing</h1>
+            )}
+          </Card.Group>
+        </Container>
+      </div>
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    products: state.products
+    products: state.products,
+    category: state.category
   }
 }
 
