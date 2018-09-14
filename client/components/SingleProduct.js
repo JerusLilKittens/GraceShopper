@@ -14,12 +14,14 @@ import {
 import {getProduct} from '../store/product'
 import {addReview} from '../store/review'
 import EditProductForm from '../components/Admin-EditProductForm'
+import {getCategories} from '../store/category'
+import {getSingleProductCat} from '../store/product'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
     const productId = this.props.match.params.productId
     this.props.getProduct(Number(productId))
-    console.log(this.props, "+==+==== isAdmin")
+    this.props.getCategories()
   }
 
   handleClick = event => {
@@ -88,21 +90,25 @@ class SingleProduct extends React.Component {
           </Item>
         </Item.Group>
         <div>
-          {(this.props.selectedProduct.id && this.props.isAdmin) && (
-            <EditProductForm product={this.props.selectedProduct} />
-          )}
+          {this.props.selectedProduct.id &&
+            this.props.isAdmin && <EditProductForm product={this.props} />}
         </div>
       </Container>
     )
   }
 }
 
-const mapStateToProps = state => ({selectedProduct: state.selectedProduct,
-isAdmin: state.user})
+const mapStateToProps = state => ({
+  selectedProduct: state.selectedProduct,
+  isAdmin: state.user,
+  categories: state.categories
+})
 
 const mapDispatchToProps = dispatch => ({
   getProduct: product => dispatch(getProduct(product)),
-  addReview: review => dispatch(addReview(review))
+  addReview: review => dispatch(addReview(review)),
+  getCategories: () => dispatch(getCategories()),
+  getSingleProductCat: (id) => dispatch(getSingleProductCat(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)

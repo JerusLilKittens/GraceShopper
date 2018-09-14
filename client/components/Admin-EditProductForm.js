@@ -17,13 +17,13 @@ class EditProductForm extends Component {
 
   componentDidMount = () => {
     this.setState({
-      name: this.props.product.name,
+      name: this.props.product.selectedProduct.name,
       nameError: '',
-      description: this.props.product.description,
+      description: this.props.product.selectedProduct.description,
       descriptionError: '',
-      price: this.props.product.price,
+      price: this.props.product.selectedProduct.price,
       priceError: '',
-      stock: this.props.product.stock,
+      stock: this.props.product.selectedProduct.stock,
       stockError: ''
     })
   }
@@ -66,21 +66,12 @@ class EditProductForm extends Component {
     const err = this.validate()
 
     if (!err) {
-      this.setState({
-        name: '',
-        nameError: '',
-        price: '',
-        priceError: '',
-        description: '',
-        descriptionError: '',
-        stock: '',
-        stockError: ''
-      })
-      this.props.editProduct(this.props.product.id, formData)
+      this.props.editProduct(this.props.product.selectedProduct.id, formData)
     }
   }
 
   render() {
+    console.log(this.props.product.categories)
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group widths="equal">
@@ -131,10 +122,10 @@ class EditProductForm extends Component {
   }
 }
 
-const mapStateDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   editProduct: (id, formData) => {
     dispatch(editProduct(id, formData))
   }
 })
 
-export default connect(null, mapStateDispatchToProps)(EditProductForm)
+export default connect(null, mapDispatchToProps)(EditProductForm)
