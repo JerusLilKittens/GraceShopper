@@ -20,3 +20,12 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.ordersTable {
+  border-collapse: border;
+  border: 1px solid #222222;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  padding: 4px
+}
