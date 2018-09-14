@@ -1,5 +1,5 @@
 const {expect} = require('chai')
-const db = require('..')
+const {db} = require('..')
 const Order = db.model('order')
 
 describe('Order model', () => {
@@ -46,7 +46,7 @@ describe('Order model', () => {
       order.billingInfo = null
       order.shippingInfo = null
       order.totalAmount = null
-      
+
 
       let result, error
       try {
@@ -64,7 +64,7 @@ describe('Order model', () => {
         order2.billingInfo = 4.4
         order2.shippingInfo = 333
         order2.totalAmount = [1, 'hello world']
-        
+
 
         let result, error
         try {
