@@ -29,15 +29,15 @@ export const getProduct = productId => {
   }
 }
 
-export const updateProduct = (id, formData) => {
+export const editProduct = (id, formData) => {
   return async dispatch => {
     try {
       const {data} = await axios.put('/api/products/', {id, formData})
+      dispatch(gotProduct(data))
     } catch (err) {
       console.error(err)
     }
-    //set to return update on product
-    // dispatch(gotProduct(data))
+
   }
 }
 

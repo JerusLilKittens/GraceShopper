@@ -35,8 +35,10 @@ router.get('/:productId', async (req, res, next) => {
 // waiting for single product  route to test
 router.put('/', async (req, res, next) => {
   try {
-    const {id, productBody} = req.body
-    const {name, description, stock, price} = productBody
+    
+    const id = req.body.id
+    console.log(id, "+++++++++++++++")
+    const {name, description, stock, price} = req.body.formData
     const product = await Product.update(
       {name, description, stock, price},
       {

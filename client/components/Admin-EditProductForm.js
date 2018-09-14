@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {createProduct} from '../store/product'
+import {editProduct} from '../store/product'
 import {connect} from 'react-redux'
 import {Form} from 'semantic-ui-react'
 
@@ -19,7 +19,7 @@ class EditProductForm extends Component {
     this.setState({
       name: this.props.product.name,
       nameError: '',
-      description: this.props.product.address,
+      description: this.props.product.description,
       descriptionError: '',
       price: this.props.product.price,
       priceError: '',
@@ -76,7 +76,7 @@ class EditProductForm extends Component {
         stock: '',
         stockError: ''
       })
-      this.props.createProduct(this.props.product.id, formData)
+      this.props.editProduct(this.props.product.id, formData)
     }
   }
 
@@ -132,7 +132,7 @@ class EditProductForm extends Component {
 }
 
 const mapStateDispatchToProps = dispatch => ({
-  editProduct: formData => {
+  editProduct: (id, formData) => {
     dispatch(editProduct(id, formData))
   }
 })

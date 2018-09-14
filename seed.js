@@ -163,7 +163,7 @@ const users = [{
   lastName: 'Jobs',
   email: 'Steve@me.com',
   password: 'Apple',
-  isAdmin: false,
+  isAdmin: true,
   streetNameNumber: '1 Infinite Loop',
   city: 'Cupertino',
   state: 'CA'
