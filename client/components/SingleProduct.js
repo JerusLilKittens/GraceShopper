@@ -35,12 +35,15 @@ class SingleProduct extends React.Component {
                       <Rating icon='star' rating={review.rating} maxRating={5} />
                       <Item.Description>{review.text}</Item.Description>
                     </Item.Content>
+                    <Button color='teal' icon labelPosition='left'>
+                      <Icon name='cart' />Add to cart
+                    </Button>
                   </Item>
                 )}) : <h1>no reviews yet</h1>}
                   <Header as='h3' dividing>Leave a Review</Header>
                     <Form>
                       <Form.TextArea />
-                        <Button color='teal' content='Leave a review' labelPosition='left' icon='edit' primary />
+                        <Button color='teal' content='Leave a review' labelPosition='left' icon='edit' />
                     </Form>
                 </Comment.Group>
               </Item.Extra>
