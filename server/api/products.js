@@ -20,6 +20,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.productId, { include: Review })
@@ -28,6 +29,7 @@ router.get('/:productId', async (req, res, next) => {
     next(err)
   }
 })
+
 
 // need to test and make a test
 // waiting for single product  route to test
