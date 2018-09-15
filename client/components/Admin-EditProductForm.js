@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {editProduct} from '../store/product'
 import {connect} from 'react-redux'
-import {Form} from 'semantic-ui-react'
+import {Form, Grid, Dropdown, Segment} from 'semantic-ui-react'
 
 class EditProductForm extends Component {
   state = {
@@ -12,10 +12,20 @@ class EditProductForm extends Component {
     price: '',
     priceError: '',
     stock: '',
-    stockError: ''
+    stockError: '',
+    value: '',
+    options: []
   }
 
+
+
   componentDidMount = () => {
+    const catOptions = []
+    console.log(this.props.product.categories, 'categories!!!!!')
+    this.props.product.categories.forEach((ele,index)=>{
+      console.log(ele)
+      catOptions.push({key: index, text: ele.name, value: ele.name})
+    })
     this.setState({
       name: this.props.product.selectedProduct.name,
       nameError: '',
@@ -24,8 +34,10 @@ class EditProductForm extends Component {
       price: this.props.product.selectedProduct.price,
       priceError: '',
       stock: this.props.product.selectedProduct.stock,
-      stockError: ''
+      stockError: '',
+      options: catOptions
     })
+    
   }
   change = event => {
     this.setState({[event.target.name]: event.target.value})
@@ -53,6 +65,8 @@ class EditProductForm extends Component {
 
     return isError
   }
+
+  handleChange = (e, {value}) => this.setState({value})
 
   handleSubmit = event => {
     console.log(event.target.name.value)
@@ -112,6 +126,23 @@ class EditProductForm extends Component {
           value={this.state.description}
           onChange={event => this.change(event)}
         />
+
+        <Grid columns={1}>
+          <Grid.Column>
+            <Dropdown
+              onChange={this.handleChange}
+              options={this.state.options}
+              placeholder="Choose an option"
+              selection
+              value={this.state.value}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <Segment secondary>
+              <pre>Current value: {this.state.value}</pre>
+            </Segment>
+          </Grid.Column>
+        </Grid>
 
         <Form.Button type="submit" className="btn btn-primary">
           Submit
