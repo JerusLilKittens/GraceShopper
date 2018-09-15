@@ -37,7 +37,7 @@ class AdminDashBoard extends React.Component {
   constructor() {
     super()
     this.state = {
-      display: 'add-product'
+      display: 'none'
     };
     this.handleChange = this.handleChange.bind(this)
   }
