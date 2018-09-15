@@ -34,8 +34,9 @@ router.get('/:productId', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
     const id = req.body.id
-    const {name, description, stock, price, catId} = req.body.formData
-    const productCat = await ProdCat.update({categoryId: catId},{where: {productId: id}})
+    const {name, description, stock, price, cat} = req.body.formData
+    const findOrCreateCat = await Category.findOrCreate({where:{name: cat}})
+    const productCat = await ProdCat.update({categoryId: findOrCreateCat[0].id},{where: {productId: id}})
     const product = await Product.update(
       {name, description, stock, price },
       {

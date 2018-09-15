@@ -80,7 +80,7 @@ class EditProductForm extends Component {
       price: event.target.price.value,
       description: event.target.description.value,
       stock: event.target.stock.value,
-      catId: this.state.value
+      cat: this.state.value
     }
     const err = this.validate()
 
