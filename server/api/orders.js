@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order} = require('../db')
+const {Order, LineItem, User} = require('../db')
 
 // const isAdmin = (req, res, next) => {
 //   console.log(req)
@@ -19,5 +19,21 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:orderId', async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.orderId, {
+      include: User
+    })
+    const items = await LineItem.findAll({where: {
+      lineItemOrderId: req.params.orderId
+    }})
+    res.json({order: order, items: items})
+  } catch (err) {
+    next(err)
+  }
+})
+
+
 
 module.exports = router

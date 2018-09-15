@@ -16,6 +16,13 @@ const Order = db.define('order', {
     validate: {
       isDecimal: true
     }
+  },
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isIn: [['created', 'processing', 'cancelled', 'completed']]
+    }
   }
 })
 
