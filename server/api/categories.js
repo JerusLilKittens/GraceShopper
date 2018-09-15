@@ -10,8 +10,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// router.get('/0')
-
 router.get('/:categoryId', async (req, res, next) => {
   const categoryId = req.params.categoryId
   try {
