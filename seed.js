@@ -80,23 +80,24 @@ const products = [
   }
 ]
 
-const orders = [
-  {
-    billingInfo: '1 Hacker Way',
-    shippingInfo: "Sear's Tower, Chicago",
-    totalAmount: 3.99
-  },
-  {
-    billingInfo: '5 Hacker Way',
-    shippingInfo: '405 W Superior, Chicago',
-    totalAmount: 23.99
-  },
-  {
-    billingInfo: '2 Hacker Way',
-    shippingInfo: '305 W Huron, Chicago',
-    totalAmount: 4.99
-  }
-]
+
+const orders = [{
+  billingInfo: '1 Hacker Way',
+  shippingInfo: 'Sear\'s Tower, Chicago',
+  totalAmount: 3.99,
+  status: 'created'
+  },{
+  billingInfo: '5 Hacker Way',
+  shippingInfo: '405 W Superior, Chicago',
+  totalAmount: 23.99,
+  status: 'completed'
+  },{
+  billingInfo: '2 Hacker Way',
+  shippingInfo: '305 W Huron, Chicago',
+  totalAmount: 4.99,
+  status: 'processing'
+  }]
+
 
 const lineItems = [
   {
