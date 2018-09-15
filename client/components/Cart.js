@@ -2,35 +2,31 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Button, Icon, Image, Item, Label, Header} from 'semantic-ui-react'
 
+import {getUserCart} from '../store/cart'
 import CartProductCard from './CartProductCard'
 
-const dummy = {
-  id: 1,
-  name: 'Laser Pointer',
-  description: `Every cat's favorite toy! This laser pointer will entertain your cat for hours.`,
-  imageUrl: '/default_product.png',
-  price: 8.75,
-  stock: 5,
-  cartItem: {
-    quantity: 2
-  }
-}
-
 class Cart extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    if (this.props.user.id) {
+      this.props.getUserCart(this.props.user.id)
+    }
+  }
 
   render() {
+    const cart = this.props.cart
     return (
       <div>
         <Header as="h1">Your Cart</Header>
         <Item.Group divided>
-          <CartProductCard dummy={dummy} />
-          <CartProductCard dummy={dummy} />
-          <CartProductCard dummy={dummy} />
+          {cart ? (
+            cart.map(item => {
+              return <CartProductCard key={item.id} item={item} />
+            })
+          ) : (
+            <h1>no items in cart</h1>
+          )}
         </Item.Group>
-        <Header as="h2">
-          Subtotal: ${dummy.cartItem.quantity * dummy.price}
-        </Header>
+        <Header as="h2">Subtotal: $X.XX</Header>
         <Button>Check Out</Button>
       </div>
     )
@@ -38,11 +34,16 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    cart: state.cart,
+    user: state.user
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    getUserCart: userId => dispatch(getUserCart(userId))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
