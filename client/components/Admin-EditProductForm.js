@@ -17,13 +17,11 @@ class EditProductForm extends Component {
     options: []
   }
 
-
-
   componentDidMount = () => {
     const catOptions = []
-    
-    this.props.product.categories.forEach((ele,index)=>{
-      catOptions.push({key: index, text: ele.name, value: ele.id})
+
+    this.props.product.categories.forEach((ele, index) => {
+      catOptions.push({key: index, text: ele.name, value: ele.name})
     })
     this.setState({
       name: this.props.product.selectedProduct.name,
@@ -34,12 +32,19 @@ class EditProductForm extends Component {
       priceError: '',
       stock: this.props.product.selectedProduct.stock,
       stockError: '',
+      value: this.props.product.selectedProduct.categories[0].name,
       options: catOptions
     })
-    
   }
+
   change = event => {
     this.setState({[event.target.name]: event.target.value})
+  }
+
+  handleAddition = (e, {value}) => {
+    this.setState({
+      options: [{text: value, value}, ...this.state.options]
+    })
   }
 
   validate = () => {
@@ -115,34 +120,43 @@ class EditProductForm extends Component {
             value={this.state.stock}
             onChange={event => this.change(event)}
           />
-          </Form.Group>
-          <Form.Group widths="equal">
-        <Form.TextArea
-          label="Description"
-          placeholder="Write at least a sentence..."
-          className={this.state.descriptionError}
-          name="description"
-          cols="20"
-          rows="4"
-          value={this.state.description}
-          onChange={event => this.change(event)}
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Form.TextArea
+            label="Description"
+            placeholder="Write at least a sentence..."
+            className={this.state.descriptionError}
+            name="description"
+            cols="20"
+            rows="4"
+            value={this.state.description}
+            onChange={event => this.change(event)}
           />
-        <Grid columns={1}>
-          <Grid.Column>
+          <Form.Field>
+            <label>Category</label>
             <Dropdown
               onChange={this.handleChange}
               options={this.state.options}
-              placeholder="Choose an option"
+              text={this.state.value}
+              search
               selection
+              allowAdditions
+              onAddItem={this.handleAddition}
               value={this.state.value}
-              />
-          </Grid.Column>
-        </Grid>
-
-        <Form.Button type="submit" className="btn btn-primary">
-          Submit
-        </Form.Button>
+            />
+          </Form.Field>
         </Form.Group>
+        <Form.Field>
+          <Form.Button
+            style={{marginBottom: 20}}
+            size="big"
+            color="purple"
+            type="submit"
+            className="btn btn-primary"
+          >
+            Submit Edited Product
+          </Form.Button>
+        </Form.Field>
       </Form>
     )
   }
