@@ -16,6 +16,7 @@ User.hasMany(Review)
 
 Product.belongsToMany(Category, {through: ProdCat})
 Category.belongsToMany(Product, {through: ProdCat})
+
 Order.belongsTo(User)
 User.hasMany(Order)
 
@@ -28,12 +29,8 @@ Order.belongsToMany(Product, {
   through: 'lineItem'
 })
 
-Product.belongsToMany(Cart, {
-  foreignKey: 'cartItemProductId',
-  through: 'cartItem'
-})
-Cart.belongsToMany(Product, {foreignKey: 'cartItemCartId', through: 'cartItem'})
-
+Product.belongsToMany(Cart, {through: 'cartItem'})
+Cart.belongsToMany(Product, {through: 'cartItem'})
 Cart.belongsTo(User)
 User.hasOne(Cart)
 

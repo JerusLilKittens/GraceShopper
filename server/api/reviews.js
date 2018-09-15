@@ -13,6 +13,7 @@ const isLoggedIn = (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    isLoggedIn()
     const review = await Review.create(req.body)
     res.status(201).json(review)
   } catch (err) {

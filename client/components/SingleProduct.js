@@ -15,17 +15,20 @@ import {getProduct} from '../store/product'
 import {addReview} from '../store/review'
 import EditProductForm from '../components/Admin-EditProductForm'
 import {getCategories} from '../store/category'
+import ReviewForm from './ReviewForm'
 
 class SingleProduct extends React.Component {
+
   componentDidMount() {
     const productId = this.props.match.params.productId
     this.props.getProduct(Number(productId))
     this.props.getCategories()
   }
 
-  handleClick = event => {
-    console.log('review target', event.target)
-    addReview(event.target)
+  handleSubmit = async (props) => {
+    const productId = Number(this.props.match.params.productId)
+    const review = {rating: props.reviewRating, text: props.reviewName, productId: productId}
+    await this.props.addReview(review)
   }
 
   render() {
@@ -81,7 +84,7 @@ class SingleProduct extends React.Component {
                     <Rating icon="star" defaultRating={0} maxRating={5} />
                     <Button
                       color="teal"
-                      content="Leave a review"
+                      cont a review"
                       labelPosition="left"
                       icon="edit"
                       onClick={this.handleClick}
@@ -105,7 +108,9 @@ const mapStateToProps = state => ({
   selectedProduct: state.selectedProduct,
   isAdmin: state.user,
   categories: state.categories
+  isLoggedIn: !!state.user.id
 })
+
 
 const mapDispatchToProps = dispatch => ({
   getProduct: product => dispatch(getProduct(product)),
