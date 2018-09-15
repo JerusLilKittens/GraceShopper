@@ -1,18 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Rating, Icon, Image, Item, Container, Comment, Header, Form, Button } from 'semantic-ui-react'
-import {getProduct} from '../store/product'
+import { Rating, Icon, Item, Container, Comment, Header, Button } from 'semantic-ui-react'
+import { getProduct } from '../store/product'
 import { addReview } from '../store/review'
+import ReviewForm from './ReviewForm'
+
 
 class SingleProduct extends React.Component {
+
   componentDidMount() {
     const productId = this.props.match.params.productId
     this.props.getProduct(Number(productId))
   }
 
-  handleClick = event => {
-    console.log('review target', event.target)
-    addReview(event.target)
+  handleSubmit = async (props) => {
+    const productId = Number(this.props.match.params.productId)
+    const review = {rating: props.reviewRating, text: props.reviewName, productId: productId}
+    await this.props.addReview(review)
   }
 
   render() {
@@ -46,11 +50,9 @@ class SingleProduct extends React.Component {
                   </Item>
                 )}) : <h1>no reviews yet</h1>}
                   <Header as='h3' dividing>Leave a Review</Header>
-                    <Form>
-                      <Form.TextArea />
-                        <Rating icon='star' defaultRating={0} maxRating={5} />
-                        <Button color='teal' content='Leave a review' labelPosition='left' icon='edit' onClick={this.handleClick} />
-                    </Form>
+                {this.props.isLoggedIn ?
+                  <ReviewForm onSubmit={this.handleSubmit} />
+                : <h4>Please log in to leave a review</h4>}
                 </Comment.Group>
               </Item.Extra>
             </Item.Content>
@@ -62,7 +64,12 @@ class SingleProduct extends React.Component {
 }
 
 
-const mapStateToProps = ({selectedProduct}) => ({selectedProduct})
+
+const mapStateToProps = state => {
+  return {
+  selectedProduct: state.selectedProduct,
+  isLoggedIn: !!state.user.id
+}}
 
 const mapDispatchToProps = dispatch => ({
   getProduct: product => dispatch(getProduct(product)),

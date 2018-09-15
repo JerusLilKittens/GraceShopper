@@ -1,11 +1,12 @@
 import axios from 'axios'
+import { ADDED_REVIEW } from './review'
 
-// const GET_PRODUCTS = 'GET_PRODUCTS'
 const GOT_PRODUCTS = 'GOT_PRODUCTS'
 const GOT_PRODUCT = 'GOT_PRODUCT'
 
 const gotProducts = products => ({type: GOT_PRODUCTS, products})
 const gotProduct = product => ({type: GOT_PRODUCT, product})
+
 
 export const getProducts = () => {
   return async dispatch => {
@@ -68,6 +69,8 @@ export const productReducer = (state = {}, action) => {
   switch (action.type) {
     case GOT_PRODUCT:
       return action.product
+    case ADDED_REVIEW:
+      return {...state, reviews: [...state.reviews, action.review]}
     default:
       return state
   }

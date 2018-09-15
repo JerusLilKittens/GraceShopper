@@ -14,7 +14,7 @@ const items = [
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav>
-      <div class="ui top fixed menu">
+      <div className="ui top fixed menu">
           <Menu.Item position='left' name='home' />
           <Menu.Item position='left'>
             <Dropdown item text='Shop' icon='cart' simple>
