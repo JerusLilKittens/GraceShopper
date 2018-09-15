@@ -1,57 +1,93 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {getOrder} from '../store/order'
+import {table} from 'semantic-ui-react'
+import getOrderTable from '../utilities/order'
+import {Link} from 'react-router-dom'
 
 
 class SingleOrder extends React.Component {
 
   componentDidMount() {
     const orderId = this.props.match.params.orderId
-    console.log(orderId)
     this.props.getOrder(Number(orderId))
   }
 
   render() {
-
     const order = this.props.order.order
     const items = this.props.order.items
-    console.log('order' , order)
+    const products = this.props.order.products
+    const itemTable = getOrderTable(products, items)
 
-    console.log("props" , this.props)
     return(
       <div>
-
-      {order && (
+      {order && items && products && (
         <div>
-          Order Id: {order.id}
+          <h2> Order Summary </h2>
+          <table class="ui collapsing single line table">
+          <tr>
+            <th>Order Attribute</th>
+            <th>Order Detail</th>
+          </tr>
+          <tr>
+            <td>Order Id </td>
+            <td>{order.id}</td>
+          </tr>
+          <tr>
+            <td>Total Amount </td>
+            <td>${order.totalAmount}</td>
+          </tr>
+          <tr>
+            <td>Order Status </td>
+            <td>{order.status}</td>
+          </tr>
+          <tr>
+            <td>Order Placed </td>
+            <td>{order.createdAt}</td>
+          </tr>
+          <tr>
+            <td>Order Shipping Address </td>
+            <td>{order.shippingInfo}</td>
+          </tr>
+          <tr>
+            <td>Order Billing Address </td>
+            <td>{order.billingInfo}</td>
+          </tr>
+          <tr>
+            <td>Order User Id </td>
+            <td>{order.userId}</td>
+          </tr>
+          </table>
           <br />
-          Billing Info: {order.billingInfo}
-          <br />
-          CreatedAt: {order.createdAt}
-          <br />
-          Shipping Info: {order.shippingInfo}
-          <br />
-          <h3> Total: {order.totalAmount} </h3>
-          <br />
-          <br />
-          <table>
-          {items.map(item => {
+
+          <h2> Items Ordered </h2>
+          <table class="ui collapsing single line table">
+          <tr>
+            <th>Id</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Product Price</th>
+          </tr>
+          {itemTable.map(line => {
             return (
-              <p key={item.id}>
-              Item Quantity: {item.quantity} for {item.price} each (Item Number {item.lineItemProductId})
-              </p>
+              <tr key={line.id}>
+                <td>{line.id}</td>
+                <td><Link to={`/products/${line.id}`}>{line.productName}</Link></td>
+                <td>{line.quantity}</td>
+                <td>{line.price}</td>
+              </tr>
             )
           })}
           </table>
+          <br />
+
+          <h2>Adjust Status</h2>
 
 
           </div>
-
-
       )}
        </div>
     )
-
   }
 }
 
