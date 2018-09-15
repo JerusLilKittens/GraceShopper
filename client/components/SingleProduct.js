@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import { Rating, Icon, Image, Item, Container, Comment, Header, Form, Button } from 'semantic-ui-react'
 import {getProduct} from '../store/product'
 import {addReview} from '../store/review'
+import {addToCart} from '../store/cart'
 import EditProductForm from '../components/Admin-EditProductForm'
 import {getCategories} from '../store/category'
 import ReviewForm from './ReviewForm'
@@ -25,6 +26,14 @@ class SingleProduct extends React.Component {
     await this.props.addReview(review)
   }
 
+  handleClick = async item => {
+    item.quantity = 1
+    item.cartId = 1
+    item.productId = item.id
+    console.log('item', item)
+    await this.props.addToCart(item)
+  }
+
   render() {
     console.log(this.props.isAdmin, '++++++++ isAdmin!!!!')
     const product = this.props.selectedProduct
@@ -44,7 +53,7 @@ class SingleProduct extends React.Component {
               )}
               <Item.Description>{product.description}</Item.Description>
               <Item.Extra>
-                <Button color="teal" icon labelPosition="left">
+                <Button color="teal" icon labelPosition="left" onClick={() => this.handleClick(product)}>
                   <Icon name="cart" />Add to cart
                 </Button>
                 <Comment.Group>
@@ -99,7 +108,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getProduct: product => dispatch(getProduct(product)),
   addReview: review => dispatch(addReview(review)),
-  getCategories: () => dispatch(getCategories())
+  getCategories: () => dispatch(getCategories()),
+  addToCart: item => dispatch(addToCart(item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)

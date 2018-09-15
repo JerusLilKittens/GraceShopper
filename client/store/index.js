@@ -9,6 +9,7 @@ import { reducer as formReducer } from 'redux-form'
 import { ordersReducer, orderReducer } from './order'
 import {categoriesReducer, selectedCategory} from './category'
 import {reviewReducer} from './review'
+import { cartReducer } from './cart'
 
 
 
@@ -21,7 +22,8 @@ const reducer = combineReducers({
   categories: categoriesReducer,
   selectedCategory,
   orders: ordersReducer,
-  order: orderReducer
+  order: orderReducer,
+  cartItems: cartReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
