@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Button, Icon, Image, Item, Label, Header} from 'semantic-ui-react'
+import {Button, Icon, Image, Item, Label, Header, Container} from 'semantic-ui-react'
 
 import CartProductCard from './CartProductCard'
 
@@ -21,7 +21,7 @@ class Cart extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <Header as="h1">Your Cart</Header>
         <Item.Group divided>
           <CartProductCard dummy={dummy} />
@@ -32,7 +32,7 @@ class Cart extends Component {
           Subtotal: ${dummy.cartItem.quantity * dummy.price}
         </Header>
         <Button>Check Out</Button>
-      </div>
+      </Container>
     )
   }
 }

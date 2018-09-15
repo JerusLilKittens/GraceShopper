@@ -1,16 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-  Rating,
-  Icon,
-  Image,
-  Item,
-  Container,
-  Comment,
-  Header,
-  Form,
-  Button
-} from 'semantic-ui-react'
+import { Rating, Icon, Image, Item, Container, Comment, Header, Form, Button } from 'semantic-ui-react'
 import {getProduct} from '../store/product'
 import {addReview} from '../store/review'
 import EditProductForm from '../components/Admin-EditProductForm'
@@ -31,6 +21,7 @@ class SingleProduct extends React.Component {
       text: props.reviewName,
       productId: productId
     }
+    console.log('review', review)
     await this.props.addReview(review)
   }
 
@@ -79,20 +70,9 @@ class SingleProduct extends React.Component {
                   ) : (
                     <h1>no reviews yet</h1>
                   )}
-                  <Header as="h3" dividing>
-                    Leave a Review
-                  </Header>
-                  <Form>
-                    <Form.TextArea />
-                    <Rating icon="star" defaultRating={0} maxRating={5} />
-                    <Button
-                      color="teal"
-                      content="leave a review"
-                      labelPosition="left"
-                      icon="edit"
-                      onClick={this.handleClick}
-                    />
-                  </Form>
+                  <Header as="h3" dividing>Leave a Review</Header>
+                  {this.props.isLoggedIn ? <ReviewForm onSubmit={this.handleSubmit}/>
+                  : <h3>Please log in to leave a review</h3>}
                 </Comment.Group>
               </Item.Extra>
             </Item.Content>
