@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, Review, Category} = require('../db')
+const {Product, Review, Category,ProdCat} = require('../db')
 
 const isAdmin = (req, res, next) => {
   console.log(req)
@@ -34,9 +34,10 @@ router.get('/:productId', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
     const id = req.body.id
-    const {name, description, stock, price} = req.body.formData
+    const {name, description, stock, price, catId} = req.body.formData
+    const productCat = await ProdCat.update({categoryId: catId},{where: {productId: id}})
     const product = await Product.update(
-      {name, description, stock, price},
+      {name, description, stock, price },
       {
         where: {id: id},
         returning: true,

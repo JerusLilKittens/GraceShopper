@@ -21,10 +21,9 @@ class EditProductForm extends Component {
 
   componentDidMount = () => {
     const catOptions = []
-    console.log(this.props.product.categories, 'categories!!!!!')
+    
     this.props.product.categories.forEach((ele,index)=>{
-      console.log(ele)
-      catOptions.push({key: index, text: ele.name, value: ele.name})
+      catOptions.push({key: index, text: ele.name, value: ele.id})
     })
     this.setState({
       name: this.props.product.selectedProduct.name,
@@ -69,13 +68,14 @@ class EditProductForm extends Component {
   handleChange = (e, {value}) => this.setState({value})
 
   handleSubmit = event => {
-    console.log(event.target.name.value)
+    console.log(this.state.value)
     event.preventDefault()
     const formData = {
       name: event.target.name.value,
       price: event.target.price.value,
       description: event.target.description.value,
-      stock: event.target.stock.value
+      stock: event.target.stock.value,
+      catId: this.state.value
     }
     const err = this.validate()
 
@@ -115,7 +115,8 @@ class EditProductForm extends Component {
             value={this.state.stock}
             onChange={event => this.change(event)}
           />
-        </Form.Group>
+          </Form.Group>
+          <Form.Group widths="equal">
         <Form.TextArea
           label="Description"
           placeholder="Write at least a sentence..."
@@ -125,8 +126,7 @@ class EditProductForm extends Component {
           rows="4"
           value={this.state.description}
           onChange={event => this.change(event)}
-        />
-
+          />
         <Grid columns={1}>
           <Grid.Column>
             <Dropdown
@@ -135,18 +135,14 @@ class EditProductForm extends Component {
               placeholder="Choose an option"
               selection
               value={this.state.value}
-            />
-          </Grid.Column>
-          <Grid.Column>
-            <Segment secondary>
-              <pre>Current value: {this.state.value}</pre>
-            </Segment>
+              />
           </Grid.Column>
         </Grid>
 
         <Form.Button type="submit" className="btn btn-primary">
           Submit
         </Form.Button>
+        </Form.Group>
       </Form>
     )
   }

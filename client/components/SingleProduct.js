@@ -29,8 +29,8 @@ class SingleProduct extends React.Component {
   }
 
   render() {
+    console.log(this.props.isAdmin, "++++++++ isAdmin!!!!")
     const product = this.props.selectedProduct
-    console.log(product, '+++++++++= product')
     const reviews = product.reviews
     return (
       <Container>
@@ -42,11 +42,9 @@ class SingleProduct extends React.Component {
               <Item.Header as="a">{product.name}</Item.Header>
               <Rating icon="star" rating={0} maxRating={5} />
               <Item.Meta>${product.price}</Item.Meta>
-              {
-              product.categories &&
-              (
-              <Item.Meta>Category: {product.categories[0].name}</Item.Meta>)
-              }
+              {product.categories && (
+                <Item.Meta>Category: {product.categories[0].name}</Item.Meta>
+              )}
               <Item.Description>{product.description}</Item.Description>
               <Item.Extra>
                 <Button color="teal" icon labelPosition="left">
@@ -96,7 +94,7 @@ class SingleProduct extends React.Component {
         </Item.Group>
         <div>
           {this.props.selectedProduct.id &&
-            this.props.isAdmin && <EditProductForm product={this.props} />}
+            this.props.isAdmin.isAdmin && <EditProductForm product={this.props} />}
         </div>
       </Container>
     )
