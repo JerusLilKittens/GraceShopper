@@ -3,6 +3,7 @@ import { ADDED_REVIEW } from './review'
 
 const GOT_PRODUCTS = 'GOT_PRODUCTS'
 const GOT_PRODUCT = 'GOT_PRODUCT'
+const GOT_PRODUCTS_BY_CATEGORY = 'GOT_PRODUCTS_BY_CATEGORY'
 
 const gotProducts = products => ({type: GOT_PRODUCTS, products})
 const gotProduct = product => ({type: GOT_PRODUCT, product})
@@ -13,6 +14,17 @@ export const getProducts = () => {
     try {
       const {data} = await axios.get('/api/products')
       dispatch(gotProducts(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+export const getProductsByCategory = id => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(`/api/categories/${id}`)
+      dispatch(gotProducts(data[0].products))
     } catch (err) {
       console.error(err)
     }
@@ -59,6 +71,8 @@ export const createProduct = formData => {
 export const productsReducer = (state = [], action) => {
   switch (action.type) {
     case GOT_PRODUCTS:
+      return action.products
+    case GOT_PRODUCTS_BY_CATEGORY:
       return action.products
     default:
       return state

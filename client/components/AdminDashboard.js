@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {Container, Card, Dropdown, Header, Segment, Divider} from 'semantic-ui-react'
 import AddProductForm from './Admin-AddProductForm'
 import EditProductForm from './Admin-EditProductForm'
+import ViewOrders from './Admin-ViewOrders'
 
 
 const optionsProduct = [
@@ -36,7 +37,7 @@ class AdminDashBoard extends React.Component {
   constructor() {
     super()
     this.state = {
-      display: 'add-product'
+      display: 'none'
     };
     this.handleChange = this.handleChange.bind(this)
   }
@@ -91,6 +92,10 @@ class AdminDashBoard extends React.Component {
     {/* <AddProductForm /> */}
     {(this.state.display === 'add-product' && <AddProductForm />)}
     {(this.state.display === 'edit-product' && <EditProductForm />)}
+    {(this.state.display === 'view-all-orders' && <ViewOrders />)}
+
+
+
 
 
 
