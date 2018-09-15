@@ -9,7 +9,8 @@ import {
   Segment,
   Dropdown,
   Divider,
-  Header
+  Header,
+  Button
 } from 'semantic-ui-react'
 import {logout} from '../store'
 
@@ -24,6 +25,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <nav>
       <div className="ui top fixed menu">
         <Menu.Item position="left" name="home" />
+        <Menu.Item>
+          <Link to="/cart">Cart</Link>
+        </Menu.Item>
         <Menu.Item position="left">
           <Dropdown item text="Shop" icon="cart" simple>
             <Dropdown.Menu>
