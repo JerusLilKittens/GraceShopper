@@ -20,7 +20,6 @@ const reducer = combineReducers({
   form: formReducer,
   categories: categoriesReducer,
   selectedCategory,
-  review: reviewReducer,
   orders: ordersReducer,
   order: orderReducer
 })
