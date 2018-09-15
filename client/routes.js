@@ -9,8 +9,6 @@ import SingleProduct from './components/SingleProduct'
 import AdminDashboard from './components/AdminDashboard'
 import SingleOrder from './components/Admin-SingleOrder'
 
-
-
 /**
  * COMPONENT
  */
@@ -36,7 +34,6 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
