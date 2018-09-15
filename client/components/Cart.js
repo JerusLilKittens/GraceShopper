@@ -18,15 +18,15 @@ class Cart extends Component {
       <div>
         <Header as="h1">Your Cart</Header>
         <Item.Group divided>
-          {cart ? (
-            cart.map(item => {
+          {cart.items ? (
+            cart.items.map(item => {
               return <CartProductCard key={item.id} item={item} />
             })
           ) : (
             <h1>no items in cart</h1>
           )}
         </Item.Group>
-        <Header as="h2">Subtotal: $X.XX</Header>
+        <Header as="h2">Subtotal: ${cart.subtotal}</Header>
         <Button>Check Out</Button>
       </div>
     )
