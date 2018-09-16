@@ -18,17 +18,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav>
       <div className="ui top fixed menu">
-        <Menu.Item position="left">
+        {/* <Menu.Item position="left">
           <Dropdown item as={Link} to="/products" text="Shop" icon="cart" simple>
             <Dropdown.Menu>
               <Dropdown.Item>
                 <span className="text">New</span>
               </Dropdown.Item>
               <Dropdown.Item>Open</Dropdown.Item>
-              {/* map over categories to map dropdown items */}
             </Dropdown.Menu>
           </Dropdown>
-        </Menu.Item>
+        </Menu.Item> */}
+        <Menu.Item as={Link} to="/products" position="left">Shop</Menu.Item>
         <Menu.Item as={Link} to="/cart" position="left">Cart</Menu.Item>
 
         <Menu.Item position="right">
