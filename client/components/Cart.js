@@ -6,7 +6,6 @@ import CartProductCard from './CartProductCard'
 
 class Cart extends Component {
   async componentDidMount() {
-    console.log('mounted')
     await this.props.getUserCart()
   }
 
