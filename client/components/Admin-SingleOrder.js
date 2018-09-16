@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {getOrder} from '../store/order'
+import {getOrder, updateOrderStatus} from '../store/order'
 import {table} from 'semantic-ui-react'
 import getOrderTable from '../utilities/order'
 import {Link} from 'react-router-dom'
@@ -11,6 +11,10 @@ class SingleOrder extends React.Component {
   componentDidMount() {
     const orderId = this.props.match.params.orderId
     this.props.getOrder(Number(orderId))
+  }
+
+  async handleClick(orderId, newStatus) {
+    await this.props.updateOrderStatus(orderId, newStatus)
   }
 
   render() {
@@ -83,9 +87,24 @@ class SingleOrder extends React.Component {
 
           <h2>Adjust Status</h2>
 
-
+          <div class="ui buttons">
+          {order.status !== 'created' &&  <button type='button' class='ui button' onClick={()=>{this.handleClick(order.id, 'created').bind(this)}}>Mark Created</button>}
+          {order.status !== 'processing' &&  <button type='button' class='ui button' onClick={()=>{this.handleClick(order.id, 'processing').bind(this)}}>Mark Processing</button>}
+          {order.status !== 'cancelled' &&  <button type='button' class='ui button' onClick={()=>{this.handleClick(order.id, 'cancelled').bind(this)}}>Mark Cancelled</button>}
+          {order.status !== 'completed' &&  <button type='button' class='ui button' onClick={()=>{this.handleClick(order.id, 'completed').bind(this)}}>Mark Completed</button>}
           </div>
+          <br />
+          <br />
+          <br />
+          <Link to="/admin-dashboard">Admin Dashboard</Link>
+
+
+        </div>
+
       )}
+
+
+
        </div>
     )
   }
@@ -96,8 +115,8 @@ const mapStateToProps = ({order}) => (
 )
 
 const mapDispatchToProps = dispatch => ({
-  getOrder: (order) => dispatch(getOrder(order))
-
+  getOrder: (order) => dispatch(getOrder(order)),
+  updateOrderStatus: (orderId, newStatus) => dispatch(updateOrderStatus(orderId, newStatus))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleOrder)

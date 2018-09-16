@@ -13,8 +13,7 @@ class ViewOrders extends React.Component {
 
   render() {
     const orders = this.props.orders
-    console.log(orders)
-    console.log(orders.length)
+    const display = this.props.display
 
     return (
       <div>
@@ -31,6 +30,7 @@ class ViewOrders extends React.Component {
               <th>Shipping Info   </th>
             </tr>
             {orders.map(order => {
+              if (display === 'all' || order.status === display) {
               return (
                 <tr key={order.id}>
                   <td><Link to={`/admin-orders/orders/${order.id}`}>{order.id}</Link></td>
@@ -40,6 +40,7 @@ class ViewOrders extends React.Component {
                   <td>{order.shippingInfo}</td>
                 </tr>
               )
+            }
             })}
         </tbody>
         </table>
