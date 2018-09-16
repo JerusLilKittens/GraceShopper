@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Container, Card} from 'semantic-ui-react'
+import {Container, Card, Grid} from 'semantic-ui-react'
 
 import {getProducts} from '../store/product'
 
@@ -16,20 +16,24 @@ class ProductList extends React.Component {
     const products = this.props.products
 
     return (
-      <div>
-        <CategoryList />
         <Container>
-          <Card.Group>
-            {products ? (
-              products.map(product => {
-                return <ProductCard key={product.id} product={product} />
-              })
-            ) : (
-              <h1>nothing</h1>
-            )}
-          </Card.Group>
+          <Grid>
+            <Grid.Column width={3}>
+              <CategoryList />
+            </Grid.Column>
+            <Grid.Column width={13}>
+              <Card.Group>
+                {products ? (
+                  products.map(product => {
+                    return <ProductCard key={product.id} product={product} />
+                  })
+                ) : (
+                  <h1>no products</h1>
+                )}
+              </Card.Group>
+            </Grid.Column>
+          </Grid>
         </Container>
-      </div>
     )
   }
 }

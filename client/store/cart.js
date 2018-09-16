@@ -1,18 +1,32 @@
 import axios from 'axios'
 
-const GOT_ITEMS = 'GOT_TEMS'
+const GOT_USER_CART = 'GOT_USER_CART'
 const ADDED_TO_CART = 'ADDED_TO_CART'
 const REMOVED_FROM_CART = 'REMOVED_FROM_CART'
 
-const gotCartItems = items => ({ type: GOT_ITEMS, items })
-const addedToCart = item => ({ type: ADDED_TO_CART, item })
-const removedFromCart = item => ({ type: REMOVED_FROM_CART, item})
 
-export const getCartItems = cartId => {
+const gotUserCart = cart => ({
+  type: GOT_USER_CART,
+  items: cart.items,
+  subtotal: cart.subtotal
+})
+const addedToCart = (item, data) => ({ type: ADDED_TO_CART, item, data })
+const removedFromCart = (item, data) => ({ type: REMOVED_FROM_CART, item, data })
+
+export const getUserCart = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/cartItems/${cartId}`)
-      dispatch(gotCartItems(data))
+      const {data} = await axios.get('/api/carts')
+      const items = data ? data.products : []
+      let subtotal = 0
+      items.forEach(item => {
+        subtotal += item.cartItem.quantity * item.price
+      })
+      const userCart = {
+        items,
+        subtotal
+      }
+      dispatch(gotUserCart(userCart))
     } catch (err) {
       console.error(err)
     }
@@ -23,7 +37,8 @@ export const addToCart = item => {
   return async dispatch => {
     try {
       const { data } = await axios.post('/api/cartItems', item)
-      dispatch(addedToCart(data))
+      dispatch(addedToCart(item, data))
+      dispatch(getUserCart())
     } catch (err) {
       console.error(err)
     }
@@ -33,22 +48,23 @@ export const addToCart = item => {
 export const removeFromCart = item => {
   return async dispatch => {
     try {
-      const { data } = await axios.delete(`/api/cartItems/`, item)
-      dispatch(removedFromCart(data))
+      const {cartId, productId} = item.cartItem
+      const { data } = await axios.delete('/api/cartItems', { data: {cartId, productId} })
+      dispatch(removedFromCart(item, data))
     } catch (err) {
       console.error(err)
     }
   }
 }
 
-export const cartReducer = (state = [], action) => {
+export const cartReducer = (state = {items: []}, action) => {
   switch (action.type) {
-    case GOT_ITEMS:
-      return action.items
+    case GOT_USER_CART:
+      return {items: [...action.items], subtotal: action.subtotal}
     case ADDED_TO_CART:
-      return
+      return {...state, items: [...state.items, action.item]}
     case REMOVED_FROM_CART:
-      return
+      return {...state, items: [...state.items.filter(item => item.id !== action.item.id)]}
     default:
       return state
   }

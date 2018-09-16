@@ -14,22 +14,12 @@ import {
 } from 'semantic-ui-react'
 import {logout} from '../store'
 
-const items = [
-  {key: 'home', active: true, name: 'Home'},
-  {key: 'shop', name: 'Shop'},
-  {key: 'events', name: 'Upcoming Events'}
-]
-
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav>
       <div className="ui top fixed menu">
-        <Menu.Item position="left" name="home" />
-        <Menu.Item>
-          <Link to="/cart">Cart</Link>
-        </Menu.Item>
         <Menu.Item position="left">
-          <Dropdown item text="Shop" icon="cart" simple>
+          <Dropdown item as={Link} to="/products" text="Shop" icon="cart" simple>
             <Dropdown.Menu>
               <Dropdown.Item>
                 <span className="text">New</span>
@@ -39,12 +29,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>
+        <Menu.Item as={Link} to="/cart" position="left">Cart</Menu.Item>
 
         <Menu.Item position="right">
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
+              <Link to="/home">My Account</Link>
               <a href="#" onClick={handleClick}>
                 Logout
               </a>
