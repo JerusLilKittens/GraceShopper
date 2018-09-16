@@ -54,12 +54,17 @@ const createApp = () => {
   // session middleware with passport
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+      secret: process.env.SESSION_SECRET || 'we love cats',
       store: sessionStore,
       resave: false,
       saveUninitialized: false
     })
   )
+  app.use((req, res, next) => {
+    if (!req.session.hasCart) req.session.hasCart = true
+    next()
+  })
+
   app.use(passport.initialize())
   app.use(passport.session())
 
