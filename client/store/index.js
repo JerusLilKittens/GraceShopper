@@ -8,7 +8,6 @@ import {productsReducer, productReducer} from './product'
 import {reducer as formReducer} from 'redux-form'
 import {ordersReducer, orderReducer} from './order'
 import {categoriesReducer, selectedCategory} from './category'
-import {reviewReducer} from './review'
 import {cartReducer as cart} from './cart'
 
 const reducer = combineReducers({

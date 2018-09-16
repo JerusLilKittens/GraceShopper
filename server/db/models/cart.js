@@ -7,7 +7,7 @@ const Cart = db.define('cart', {
     allowNull: true
   },
   sessionId: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   }
 })
 

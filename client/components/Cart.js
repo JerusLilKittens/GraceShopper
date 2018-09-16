@@ -1,42 +1,47 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Button, Icon, Image, Item, Label, Header} from 'semantic-ui-react'
-
+import {Button, Icon, Image, Item, Label, Header, Container} from 'semantic-ui-react'
 import {getUserCart} from '../store/cart'
 import CartProductCard from './CartProductCard'
 
 class Cart extends Component {
-  componentDidMount() {
-    if (this.props.user.id) {
-      this.props.getUserCart(this.props.user.id)
-    }
+  async componentDidMount() {
+    await this.props.getUserCart()
   }
 
   render() {
     const cart = this.props.cart
     return (
-      <div>
+      <Container>
         <Header as="h1">Your Cart</Header>
         <Item.Group divided>
-          {cart.items ? (
+          {cart.items.length ? (
             cart.items.map(item => {
               return <CartProductCard key={item.id} item={item} />
-            })
-          ) : (
-            <h1>no items in cart</h1>
-          )}
+            })) : (
+                    <h1>Your cart is empty</h1>
+                  )}
         </Item.Group>
-        <Header as="h2">Subtotal: ${cart.subtotal}</Header>
-        <Button>Check Out</Button>
-      </div>
+        <Item.Group>
+          <Item>
+            <Item.Content>
+              <Header as="h2">Subtotal: ${cart.subtotal}</Header>
+              <Item.Extra>
+                <Button color="teal" icon labelPosition="left" floated="right"><Icon name="dollar"/>Check Out</Button>
+              </Item.Extra>
+            </Item.Content>
+          </Item>
+        </Item.Group>
+      </Container>
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart,
-    user: state.user
+    user: state.user,
+    isLoggedIn: !!state.user.id,
+    cart: state.cart
   }
 }
 
