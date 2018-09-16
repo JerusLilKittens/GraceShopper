@@ -14,7 +14,7 @@ class ProductList extends React.Component {
 
   render() {
     const products = this.props.products
-
+    console.log('session: ', document.location.href)
     return (
       <div>
         <CategoryList />
