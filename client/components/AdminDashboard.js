@@ -92,14 +92,13 @@ class AdminDashBoard extends React.Component {
     {/* <AddProductForm /> */}
     {(this.state.display === 'add-product' && <AddProductForm />)}
     {(this.state.display === 'edit-product' && <EditProductForm />)}
-    {(this.state.display === 'view-all-orders' && <ViewOrders />)}
 
-
-
-
-
-
-
+    {/* <Orders Routing /> */}
+    {(this.state.display === 'view-all-orders' && <ViewOrders display='all' />)}
+    {(this.state.display === 'view-created' && <ViewOrders display='created' />)}
+    {(this.state.display === 'view-processing' && <ViewOrders display='processing' />)}
+    {(this.state.display === 'view-completed' && <ViewOrders display='completed' />)}
+    {(this.state.display === 'view-cancelled' && <ViewOrders display='cancelled' />)}
     </Container>
 
 
