@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, LineItem, User} = require('../db')
+const {Order, LineItem, User, Product} = require('../db')
 
 // const isAdmin = (req, res, next) => {
 //   console.log(req)
@@ -28,10 +28,32 @@ router.get('/:orderId', async (req, res, next) => {
     const items = await LineItem.findAll({where: {
       lineItemOrderId: req.params.orderId
     }})
-    res.json({order: order, items: items})
+    const products = await Product.findAll()
+    res.json({order: order, items: items, products: products})
   } catch (err) {
     next(err)
   }
+})
+
+router.put('/', async (req, res, next) => {
+  try {
+    const orderId = req.body.orderId
+    const newStatus = req.body.newStatus
+    console.log(orderId, newStatus)
+    const order = await Order.update(
+      {status: newStatus},
+      {where: {
+        id: orderId
+      }}
+    )
+    res.send(order)
+
+  } catch (err)
+  {
+    next(err)
+  }
+
+
 })
 
 
