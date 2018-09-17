@@ -9,6 +9,7 @@ import SingleProduct from './components/SingleProduct'
 import AdminDashboard from './components/AdminDashboard'
 import Cart from './components/Cart'
 import SingleOrder from './components/Admin-SingleOrder'
+import UserOrder from './components/User-Order'
 
 /**
  * COMPONENT
@@ -31,6 +32,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/admin-dashboard" component={AdminDashboard} />
         <Route path="/admin-orders/orders/:orderId" component={SingleOrder} />
+        <Route path="/user-orders/:userId" component={UserOrder} />
 
         {isLoggedIn && (
           <Switch>

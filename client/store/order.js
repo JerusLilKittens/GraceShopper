@@ -20,6 +20,18 @@ export const getOrders = () => {
   }
 }
 
+export const getOrdersByUser = (userId) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(`/api/orders/users/${userId}`)
+      console.log("got data", data)
+      dispatch(gotOrders(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 export const getOrder = orderId => {
   return async dispatch => {
     try {
@@ -36,7 +48,7 @@ export const updateOrderStatus = (orderId, newStatus) => {
   console.log(orderId, newStatus)
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/orders/`, {orderId, newStatus})
+      const {data} = await axios.put(`/api/orders/${orderId}`, {newStatus})
       dispatch(updatedOrderStatus(data))
     } catch (err) {
       console.error(err)
