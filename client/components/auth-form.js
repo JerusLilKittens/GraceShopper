@@ -1,5 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Form, Button, Container } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
@@ -31,6 +33,19 @@ const AuthForm = props => {
       </form>
       <a href="/auth/google">{displayName} with Google</a>
     </div>
+    // <Container>
+    //   <Form onSubmit={handleSubmit} name={name}>
+    //     <Form.Field>
+    //       <input placeholder='Email' />
+    //     </Form.Field>
+    //     <Form.Field>
+    //       <input placeholder='Password' />
+    //     </Form.Field>
+    //     <Button type='submit'>{displayName}</Button>
+    //     {error && error.response && <div> {error.response.data} </div>}
+    //   </Form>
+    //   <Button as={Link} to="/auth/google">{displayName} with Google</Button>
+    // </Container>
   )
 }
 
@@ -61,6 +76,7 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
+      console.log('event target', evt.target)
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
