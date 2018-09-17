@@ -21,7 +21,7 @@ const ProductCard = props => {
       <Card.Content>
         <Card.Header>{name}</Card.Header>
         <Card.Meta>
-          <span className="date">${price}</span>
+          <span className="date">${price/100}</span>
         </Card.Meta>
         <Card.Description>{description}</Card.Description>
       </Card.Content>

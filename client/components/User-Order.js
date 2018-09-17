@@ -34,7 +34,7 @@ class UserOrder extends React.Component {
                     {order.id}
                   </Link>
                 </Table.Cell>
-                <Table.Cell>{order.totalAmount}</Table.Cell>
+                <Table.Cell>{order.totalAmount/100}</Table.Cell>
                 <Table.Cell>{order.createdAt}</Table.Cell>
                 <Table.Cell>{order.status}</Table.Cell>
                 <Table.Cell>{order.shippingInfo}</Table.Cell>

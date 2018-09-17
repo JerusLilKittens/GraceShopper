@@ -40,7 +40,7 @@ class SingleOrder extends React.Component {
           </tr>
           <tr>
             <td>Total Amount </td>
-            <td>${order.totalAmount}</td>
+            <td>${order.totalAmount/100}</td>
           </tr>
           <tr>
             <td>Order Status </td>

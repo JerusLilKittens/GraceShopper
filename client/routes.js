@@ -2,14 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {Login, Signup, UserHome, Cart, Checkout, SingleProduct, AdminDashboard, SingleOrder, UserOrder} from './components'
 import {me} from './store'
 import ProductList from './components/ProductList'
-import SingleProduct from './components/SingleProduct'
-import AdminDashboard from './components/AdminDashboard'
-import Cart from './components/Cart'
-import SingleOrder from './components/Admin-SingleOrder'
-import UserOrder from './components/User-Order'
 
 /**
  * COMPONENT
@@ -26,6 +21,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
         <Route exact path="/products" component={ProductList} />
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/login" component={Login} />
