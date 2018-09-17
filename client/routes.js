@@ -28,6 +28,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/admin-dashboard" component={AdminDashboard} />
         <Route path="/admin-orders/orders/:orderId" component={SingleOrder} />
+        <Route path="/user-orders/:userId" component={UserOrder} />
 
         {isLoggedIn && (
           <Switch>

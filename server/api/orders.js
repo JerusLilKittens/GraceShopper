@@ -44,11 +44,23 @@ router.get('/:orderId', async (req, res, next) => {
   }
 })
 
-router.put('/', async (req, res, next) => {
+router.get('/users/:userId', async (req, res, next) => {
   try {
-    const orderId = req.body.orderId
+    const orders = await Order.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    })
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:orderId', async (req, res, next) => {
+  try {
+    const orderId = req.params.orderId
     const newStatus = req.body.newStatus
-    console.log(orderId, newStatus)
     const order = await Order.update(
       {status: newStatus},
       {where: {

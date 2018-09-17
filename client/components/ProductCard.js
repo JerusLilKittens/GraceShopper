@@ -16,7 +16,7 @@ const ProductCard = props => {
     }
   }
   return (
-    <Card as={Link} to={`/products/${id}`} onClick={() => props.getProduct(props.product)}>
+    <Card as={Link} to={`/products/${id}`} >
       <Image src={imageUrl} />
       <Card.Content>
         <Card.Header>{name}</Card.Header>
