@@ -208,7 +208,7 @@ const users = [
     email: 'rb@mail.com',
     password: '123456',
     isAdmin: false,
-    address: '405 W Superior',
+    streetNameNumber: '405 W Superior',
     city: 'Chicago',
     state: 'IL'
   },
@@ -218,7 +218,7 @@ const users = [
     email: 'eguo@mail.com',
     password: '123456',
     isAdmin: false,
-    address: '233 S Wacker Drive',
+    streetNameNumber: '233 S Wacker Drive',
     city: 'Chicago',
     state: 'IL'
   },
@@ -228,7 +228,7 @@ const users = [
     email: 'mickey@mail.com',
     password: '123456',
     isAdmin: false,
-    address: '1 Happiest Place',
+    streetNameNumber: '1 Happiest Place',
     city: 'Orlando',
     state: 'FL'
   },
@@ -238,7 +238,7 @@ const users = [
     email: 'Steve@me.com',
     password: 'Apple',
     isAdmin: true,
-    address: '1 Infinite Loop',
+    streetNameNumber: '1 Infinite Loop',
     city: 'Cupertino',
     state: 'CA'
   }
