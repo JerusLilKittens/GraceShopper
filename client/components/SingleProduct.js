@@ -22,7 +22,9 @@ import ReviewForm from './ReviewForm'
 class SingleProduct extends React.Component {
   componentDidMount() {
     const productId = this.props.match.params.productId
+
     this.props.getProduct(Number(productId))
+
     this.props.getCategories()
   }
 
@@ -44,7 +46,6 @@ class SingleProduct extends React.Component {
   render() {
     const product = this.props.selectedProduct
     const reviews = product.reviews
-    console.log(product.categories, ' ++++++++++ product.categories')
     return (
       <Container>
         <Item.Group>
@@ -55,9 +56,6 @@ class SingleProduct extends React.Component {
               <Item.Header as="a">{product.name}</Item.Header>
               <Rating icon="star" rating={0} maxRating={5} />
               <Item.Meta>${product.price}</Item.Meta>
-              {/* {product.categories && (
-                <Item.Meta>Category: {product.categories[0].name}</Item.Meta>
-              )} */}
               <Item.Description>{product.description}</Item.Description>
               <Item.Extra>
                 <Button
@@ -107,7 +105,7 @@ class SingleProduct extends React.Component {
           </Item>
         </Item.Group>
         <div>
-          {this.props.selectedProduct.id &&
+          {this.props.selectedProduct.id === Number(this.props.match.params.productId) &&
             this.props.isAdmin.isAdmin && (
               <EditProductForm product={this.props} />
             )}

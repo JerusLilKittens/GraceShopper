@@ -34,6 +34,7 @@ export const getProductsByCategory = id => {
 export const getProduct = productId => {
   return async dispatch => {
     try {
+      console.log(productId, "++++++ productId from store *******")
       const {data} = await axios.get(`/api/products/${productId}`)
       dispatch(gotProduct(data))
     } catch (err) {

@@ -62,8 +62,6 @@ router.put('/', async (req, res, next) => {
 router.delete('/', async (req, res, next) => {
   try {
     const id = await Category.findOne({where: {name: req.body.catName}})
-    console.log(req.body.productId, id.id, '+++++++++++++++')
-
     await ProdCat.destroy({
       where: {
         productId: req.body.productId,

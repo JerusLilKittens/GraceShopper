@@ -19,13 +19,15 @@ class EditProductForm extends Component {
 
   componentDidMount = () => {
     const catOptions = []
-    if(this.props.product.selectedProduct.categories){
-    this.props.product.selectedProduct.categories.forEach(ele => {
-      this.setState(prevState => {
-        return {value: [...prevState.value, ele.name]}
+    console.log('mounting happened edit view')
+
+    if (this.props.product.selectedProduct.categories) {
+      this.props.product.selectedProduct.categories.forEach(ele => {
+        this.setState(prevState => {
+          return {value: [...prevState.value, ele.name]}
+        })
       })
-    })
-  }
+    }
     this.props.product.categories.forEach((ele, index) => {
       catOptions.push({key: index, text: ele.name, value: ele.name})
     })
