@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {editProduct, deleteCategoryFromProduct} from '../store/product'
 import {connect} from 'react-redux'
-import {Form, Grid, Dropdown, Segment} from 'semantic-ui-react'
+import {Form, Dropdown} from 'semantic-ui-react'
 
 class EditProductForm extends Component {
   state = {
@@ -19,13 +19,15 @@ class EditProductForm extends Component {
 
   componentDidMount = () => {
     const catOptions = []
-    console.log(this.props.product.categories)
-    this.props.product.categories.forEach((ele, index) => {
-      catOptions.push({key: index, text: ele.name, value: ele.name})
+    if(this.props.product.selectedProduct.categories){
+    this.props.product.selectedProduct.categories.forEach(ele => {
       this.setState(prevState => {
-        console.log(prevState.value, ele.name)
         return {value: [...prevState.value, ele.name]}
       })
+    })
+  }
+    this.props.product.categories.forEach((ele, index) => {
+      catOptions.push({key: index, text: ele.name, value: ele.name})
     })
     this.setState({
       name: this.props.product.selectedProduct.name,
@@ -36,7 +38,6 @@ class EditProductForm extends Component {
       priceError: '',
       stock: this.props.product.selectedProduct.stock,
       stockError: '',
-     //  value: this.props.product.selectedProduct.categories,
       options: catOptions
     })
   }
@@ -74,21 +75,21 @@ class EditProductForm extends Component {
     return isError
   }
 
-  handleChange = (e, {value}) =>  {
-    this.state.options.forEach(option =>{
-      
-      const testValue = value.findIndex(ele=>{
-        
+  handleChange = (e, {value}) => {
+    this.state.options.forEach(option => {
+      const testValue = value.findIndex(ele => {
         return ele === option.value
       })
-      console.log(testValue, "++++++++ testValue")
-      if(testValue === -1 ){
-        this.props.deleteCategoryFromProduct(option.value,this.props.product.selectedProduct.id)
+      if (testValue === -1) {
+        this.props.deleteCategoryFromProduct(
+          option.value,
+          this.props.product.selectedProduct.id
+        )
       }
     })
-    this.setState({value})}
-    
-  
+    this.setState({value})
+  }
+
   handleSubmit = event => {
     event.preventDefault()
     const formData = {
@@ -153,14 +154,13 @@ class EditProductForm extends Component {
             <Dropdown
               onChange={this.handleChange}
               options={this.state.options}
-              text={this.state.value}
-              fluid
               multiple
+              value={this.state.value}
+              fluid
               search
               selection
               allowAdditions
               onAddItem={this.handleAddition}
-              value={this.state.value}
             />
           </Form.Field>
         </Form.Group>
@@ -184,8 +184,8 @@ const mapDispatchToProps = dispatch => ({
   editProduct: (id, formData) => {
     dispatch(editProduct(id, formData))
   },
-  deleteCategoryFromProduct: (catName, prodId) =>{
-    dispatch(deleteCategoryFromProduct(catName,prodId))
+  deleteCategoryFromProduct: (catName, prodId) => {
+    dispatch(deleteCategoryFromProduct(catName, prodId))
   }
 })
 
