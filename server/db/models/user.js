@@ -38,7 +38,7 @@ const User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN
   },
-  address: {
+  streetNameNumber: {
     type: Sequelize.STRING
   },
   city: {
