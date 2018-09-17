@@ -9,7 +9,6 @@ import SingleProduct from './components/SingleProduct'
 import AdminDashboard from './components/AdminDashboard'
 import Cart from './components/Cart'
 import SingleOrder from './components/Admin-SingleOrder'
-
 /**
  * COMPONENT
  */
@@ -40,7 +39,6 @@ class Routes extends Component {
         )}
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
-
       </Switch>
     )
   }

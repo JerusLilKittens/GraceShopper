@@ -80,24 +80,26 @@ const products = [
   }
 ]
 
-
-const orders = [{
-  billingInfo: '1 Hacker Way',
-  shippingInfo: 'Sear\'s Tower, Chicago',
-  totalAmount: 3.99,
-  status: 'created'
-  },{
-  billingInfo: '5 Hacker Way',
-  shippingInfo: '405 W Superior, Chicago',
-  totalAmount: 23.99,
-  status: 'completed'
-  },{
-  billingInfo: '2 Hacker Way',
-  shippingInfo: '305 W Huron, Chicago',
-  totalAmount: 4.99,
-  status: 'processing'
-  }]
-
+const orders = [
+  {
+    billingInfo: '1 Hacker Way',
+    shippingInfo: "Sear's Tower, Chicago",
+    totalAmount: 3.99,
+    status: 'created'
+  },
+  {
+    billingInfo: '5 Hacker Way',
+    shippingInfo: '405 W Superior, Chicago',
+    totalAmount: 23.99,
+    status: 'completed'
+  },
+  {
+    billingInfo: '2 Hacker Way',
+    shippingInfo: '305 W Huron, Chicago',
+    totalAmount: 4.99,
+    status: 'processing'
+  }
+]
 
 const lineItems = [
   {
@@ -199,43 +201,48 @@ const reviews = [
   }
 ]
 
-const users = [{
-  firstName: 'Rajiv',
-  lastName: 'Bhatia',
-  email: 'rb@mail.com',
-  password: '123456',
-  isAdmin: false,
-  streetNameNumber: '405 W Superior',
-  city: 'Chicago',
-  state: 'IL'
-},{
-  firstName: 'Eric',
-  lastName: 'Guo',
-  email: 'eguo@mail.com',
-  password: '123456',
-  isAdmin: false,
-  streetNameNumber: '233 S Wacker Drive',
-  city: 'Chicago',
-  state: 'IL'
-},{
-  firstName: 'Mickey',
-  lastName: 'Mouse',
-  email: 'mickey@mail.com',
-  password: '123456',
-  isAdmin: false,
-  streetNameNumber: '1 Happiest Place',
-  city: 'Orlando',
-  state: 'FL'
-},{
-  firstName: 'Steve',
-  lastName: 'Jobs',
-  email: 'Steve@me.com',
-  password: 'Apple',
-  isAdmin: true,
-  streetNameNumber: '1 Infinite Loop',
-  city: 'Cupertino',
-  state: 'CA'
-}]
+const users = [
+  {
+    firstName: 'Rajiv',
+    lastName: 'Bhatia',
+    email: 'rb@mail.com',
+    password: '123456',
+    isAdmin: false,
+    streetNameNumber: '405 W Superior',
+    city: 'Chicago',
+    state: 'IL'
+  },
+  {
+    firstName: 'Eric',
+    lastName: 'Guo',
+    email: 'eguo@mail.com',
+    password: '123456',
+    isAdmin: false,
+    streetNameNumber: '233 S Wacker Drive',
+    city: 'Chicago',
+    state: 'IL'
+  },
+  {
+    firstName: 'Mickey',
+    lastName: 'Mouse',
+    email: 'mickey@mail.com',
+    password: '123456',
+    isAdmin: false,
+    streetNameNumber: '1 Happiest Place',
+    city: 'Orlando',
+    state: 'FL'
+  },
+  {
+    firstName: 'Steve',
+    lastName: 'Jobs',
+    email: 'Steve@me.com',
+    password: 'Apple',
+    isAdmin: true,
+    streetNameNumber: '1 Infinite Loop',
+    city: 'Cupertino',
+    state: 'CA'
+  }
+]
 
 const categories = [
   {
