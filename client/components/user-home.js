@@ -2,21 +2,35 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Button} from 'semantic-ui-react'
+import UserForm from './UserForm'
+import UserInfo from './UserInfo'
 
 export class UserHome extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      editView: false
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    this.setState({editView: !this.state.editView})
+  }
+
   render() {
     return (
       <div>
-        <h2>
-          Welcome, {user.firstName} {user.lastName}
-        </h2>
-        <h3>Your Information:</h3>
-        <h4>Email: {user.email}</h4>
-        <h3>Address:</h3>
-        <h4>{user.streetNameNumber}</h4>
-        <h4>
-          {user.city}, {user.state}
-        </h4>
+        {this.state.editView ? (
+          <div>
+            <UserForm handleClick={this.handleClick} />
+          </div>
+        ) : (
+          <div>
+            <UserInfo />
+            <button onClick={this.handleClick}>Edit</button>
+          </div>
+        )}
       </div>
     )
   }

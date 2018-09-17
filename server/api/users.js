@@ -15,3 +15,36 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId)
+    res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:userId', async (req, res, next) => {
+  const {firstName, lastName, address, city, state, email, id} = req.body
+  try {
+    await User.update(
+      {
+        firstName,
+        lastName,
+        address,
+        city,
+        state,
+        email
+      },
+      {
+        where: {id},
+        returning: true,
+        plain: true
+      }
+    )
+    res.status(201).end()
+  } catch (err) {
+    next(err)
+  }
+})
