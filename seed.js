@@ -18,64 +18,64 @@ const products = [
     name: 'Laser Pointer',
     description:
       "Every cat's favorite toy! This laser pointer will entertain your cat for hours.",
-    price: 8.75,
+    price: 875,
     stock: 5
   },
   {
     name: 'Kitty Litter',
     description: 'Just your average clumping kitty litter.',
-    price: 13.45,
+    price: 1345,
     stock: 10
   },
   {
     name: 'Fish Kick Toy',
     description:
       'A fish-shaped kick toy for your cat to practice disembowelment.',
-    price: 5.6,
+    price: 560,
     stock: 8
   },
   {
     name: 'Flower Drinking Fountain',
     description:
       'A drinking fountain in the shape of a flower so your cat can drink fresh water in style.',
-    price: 28.9,
+    price: 2890,
     stock: 25
   },
   {
     name: 'Cat Tunnel',
     description: 'The perfect place for your cat to hide and play in!',
-    price: 21.1,
+    price: 2110,
     stock: 12
   },
   {
     name: 'Cat Tunnel Expansion',
     description: 'Attach this to your Cat Tunnel for even more fun!',
-    price: 10.99,
+    price: 1099,
     stock: 0
   },
   {
     name: 'Litter Fortress',
     description:
       'The most secure litter box there is. Will keep litter from being thrown all over your floor.',
-    price: 14.5,
+    price: 1450,
     stock: 4
   },
   {
     name: 'Fluffy bed',
     description: 'A lovely fluffy bed for your favorite fluffy friend.',
-    price: 26.9,
+    price: 2690,
     stock: 17
   },
   {
     name: 'Scratching post',
     description: 'A nice scratching post for kitty to keep her claws sharp.',
-    price: 15.9,
+    price: 1590,
     stock: 21
   },
   {
     name: 'Water bowl',
     description: "Just a plain water bowl that your cat probably won't use.",
-    price: 2.5,
+    price: 250,
     stock: 10
   }
 ]
@@ -84,17 +84,17 @@ const products = [
 const orders = [{
   billingInfo: '1 Hacker Way',
   shippingInfo: 'Sear\'s Tower, Chicago',
-  totalAmount: 3.99,
+  totalAmount: 399,
   status: 'created'
   },{
   billingInfo: '5 Hacker Way',
   shippingInfo: '405 W Superior, Chicago',
-  totalAmount: 23.99,
+  totalAmount: 2399,
   status: 'completed'
   },{
   billingInfo: '2 Hacker Way',
   shippingInfo: '305 W Huron, Chicago',
-  totalAmount: 4.99,
+  totalAmount: 499,
   status: 'processing'
   }]
 
@@ -102,19 +102,19 @@ const orders = [{
 const lineItems = [
   {
     quantity: 2,
-    price: 3.99,
+    price: 399,
     lineItemProductId: 1,
     lineItemOrderId: 2
   },
   {
     quantity: 2,
-    price: 3.99,
+    price: 399,
     lineItemProductId: 3,
     lineItemOrderId: 2
   },
   {
     quantity: 2,
-    price: 3.99,
+    price: 399,
     lineItemProductId: 1,
     lineItemOrderId: 1
   }

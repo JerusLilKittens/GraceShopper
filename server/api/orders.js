@@ -13,8 +13,17 @@ const {Order, LineItem, User, Product} = require('../db')
 
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Order.findAll()
-    res.json(products)
+    const orders = await Order.findAll()
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  try {
+    const order = await Order.create(req.body)
+    res.json(order)
   } catch (err) {
     next(err)
   }

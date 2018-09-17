@@ -11,7 +11,7 @@ const Order = db.define('order', {
     allowNull: false
   },
   totalAmount: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       isDecimal: true
