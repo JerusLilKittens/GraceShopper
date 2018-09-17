@@ -1,6 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 
+
 /**
  * ACTION TYPES
  */
@@ -15,7 +16,10 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
+const getUser = user => {
+  console.log('link other state cartReducer')
+  return {type: GET_USER, user}
+}
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -62,7 +66,7 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-   console.log(action.user, "+++++++ GET_USER")
+      console.log(action.user, '+++++++ GET_USER')
       return action.user
     case REMOVE_USER:
       return defaultUser
