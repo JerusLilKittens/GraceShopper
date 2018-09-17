@@ -18,143 +18,146 @@ const products = [
     name: 'Laser Pointer',
     description:
       "Every cat's favorite toy! This laser pointer will entertain your cat for hours.",
-    price: 8.75,
+    price: 875,
     stock: 5
   },
   {
     name: 'Kitty Litter',
     description: 'Just your average clumping kitty litter.',
-    price: 13.45,
+    price: 1345,
     stock: 10
   },
   {
     name: 'Fish Kick Toy',
     description:
       'A fish-shaped kick toy for your cat to practice disembowelment.',
-    price: 5.6,
+    price: 560,
     stock: 8
   },
   {
     name: 'Flower Drinking Fountain',
     description:
       'A drinking fountain in the shape of a flower so your cat can drink fresh water in style.',
-    price: 28.9,
+    price: 2890,
     stock: 25
   },
   {
     name: 'Cat Tunnel',
     description: 'The perfect place for your cat to hide and play in!',
-    price: 21.1,
+    price: 2110,
     stock: 12
   },
   {
     name: 'Cat Tunnel Expansion',
     description: 'Attach this to your Cat Tunnel for even more fun!',
-    price: 10.99,
+    price: 1099,
     stock: 0
   },
   {
     name: 'Litter Fortress',
     description:
       'The most secure litter box there is. Will keep litter from being thrown all over your floor.',
-    price: 14.5,
+    price: 1450,
     stock: 4
   },
   {
     name: 'Fluffy bed',
     description: 'A lovely fluffy bed for your favorite fluffy friend.',
-    price: 26.9,
+    price: 2690,
     stock: 17
   },
   {
     name: 'Scratching post',
     description: 'A nice scratching post for kitty to keep her claws sharp.',
-    price: 15.9,
+    price: 1590,
     stock: 21
   },
   {
     name: 'Water bowl',
     description: "Just a plain water bowl that your cat probably won't use.",
-    price: 2.5,
+    price: 250,
     stock: 10
   }
 ]
 
-
-const orders = [{
-  billingInfo: '1 Hacker Way',
-  shippingInfo: 'Sear\'s Tower, Chicago',
-  totalAmount: 3.99,
-  status: 'created',
-  userId: 2
-  },{
-  billingInfo: '5 Hacker Way',
-  shippingInfo: '405 W Superior, Chicago',
-  totalAmount: 23.99,
-  status: 'completed',
-  userId: 1
-  },{
-  billingInfo: '2 Hacker Way',
-  shippingInfo: '305 W Huron, Chicago',
-  totalAmount: 4.99,
-  status: 'processing',
-  userId: 1
-  },{
-  billingInfo: '23 Hacker Way',
-  shippingInfo: '35 W Huron, Chicago',
-  totalAmount: 44.99,
-  status: 'cancelled',
-  userId: 3
-  },{
-  billingInfo: '2 Hacker Way',
-  shippingInfo: '305 W Huron, Chicago',
-  totalAmount: 5.99,
-  status: 'processing',
-  userId: 1
+const orders = [
+  {
+    billingInfo: '1 Hacker Way',
+    shippingInfo: "Sear's Tower, Chicago",
+    totalAmount: 399,
+    status: 'created',
+    userId: 2
+  },
+  {
+    billingInfo: '5 Hacker Way',
+    shippingInfo: '405 W Superior, Chicago',
+    totalAmount: 2399,
+    status: 'completed',
+    userId: 1
+  },
+  {
+    billingInfo: '2 Hacker Way',
+    shippingInfo: '305 W Huron, Chicago',
+    totalAmount: 499,
+    status: 'processing',
+    userId: 1
+  },
+  {
+    billingInfo: '23 Hacker Way',
+    shippingInfo: '35 W Huron, Chicago',
+    totalAmount: 4499,
+    status: 'cancelled',
+    userId: 3
+  },
+  {
+    billingInfo: '2 Hacker Way',
+    shippingInfo: '305 W Huron, Chicago',
+    totalAmount: 599,
+    status: 'processing',
+    userId: 1
   }
-  ]
-
+]
 
 const lineItems = [
   {
     quantity: 2,
-    price: 3.99,
+    price: 399,
     lineItemProductId: 1,
     lineItemOrderId: 2
   },
   {
     quantity: 2,
-    price: 3.99,
+    price: 399,
     lineItemProductId: 3,
     lineItemOrderId: 2
   },
   {
     quantity: 2,
-    price: 3.99,
+    price: 399,
     lineItemProductId: 1,
     lineItemOrderId: 1
   },
   {
     quantity: 1,
-    price: 6.99,
+    price: 699,
     lineItemProductId: 3,
     lineItemOrderId: 3
   },
   {
     quantity: 2,
-    price: 3.99,
+    price: 399,
     lineItemProductId: 4,
     lineItemOrderId: 3
   },
   {
     quantity: 2,
-    price: 3.99,
+    price: 399,
     lineItemProductId: 2,
     lineItemOrderId: 4
   },
   {
     quantity: 1,
-    price: 44.99,
+    price: 4499,
     lineItemProductId: 5,
     lineItemOrderId: 5
   }
@@ -239,43 +242,48 @@ const reviews = [
   }
 ]
 
-const users = [{
-  firstName: 'Rajiv',
-  lastName: 'Bhatia',
-  email: 'rb@mail.com',
-  password: '123456',
-  isAdmin: false,
-  streetNameNumber: '405 W Superior',
-  city: 'Chicago',
-  state: 'IL'
-},{
-  firstName: 'Eric',
-  lastName: 'Guo',
-  email: 'eguo@mail.com',
-  password: '123456',
-  isAdmin: false,
-  streetNameNumber: '233 S Wacker Drive',
-  city: 'Chicago',
-  state: 'IL'
-},{
-  firstName: 'Mickey',
-  lastName: 'Mouse',
-  email: 'mickey@mail.com',
-  password: '123456',
-  isAdmin: false,
-  streetNameNumber: '1 Happiest Place',
-  city: 'Orlando',
-  state: 'FL'
-},{
-  firstName: 'Steve',
-  lastName: 'Jobs',
-  email: 'Steve@me.com',
-  password: 'Apple',
-  isAdmin: true,
-  streetNameNumber: '1 Infinite Loop',
-  city: 'Cupertino',
-  state: 'CA'
-}]
+const users = [
+  {
+    firstName: 'Rajiv',
+    lastName: 'Bhatia',
+    email: 'rb@mail.com',
+    password: '123456',
+    isAdmin: false,
+    address: '405 W Superior',
+    city: 'Chicago',
+    state: 'IL'
+  },
+  {
+    firstName: 'Eric',
+    lastName: 'Guo',
+    email: 'eguo@mail.com',
+    password: '123456',
+    isAdmin: false,
+    address: '233 S Wacker Drive',
+    city: 'Chicago',
+    state: 'IL'
+  },
+  {
+    firstName: 'Mickey',
+    lastName: 'Mouse',
+    email: 'mickey@mail.com',
+    password: '123456',
+    isAdmin: false,
+    address: '1 Happiest Place',
+    city: 'Orlando',
+    state: 'FL'
+  },
+  {
+    firstName: 'Steve',
+    lastName: 'Jobs',
+    email: 'Steve@me.com',
+    password: 'Apple',
+    isAdmin: true,
+    address: '1 Infinite Loop',
+    city: 'Cupertino',
+    state: 'CA'
+  }
+]
 
 const categories = [
   {

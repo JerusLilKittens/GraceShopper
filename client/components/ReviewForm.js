@@ -3,7 +3,6 @@ import {Field, reduxForm} from 'redux-form'
 import {Rating, Form, Button, TextArea} from 'semantic-ui-react'
 
 
-//removed selection {...props.input} from both
 
 const ReviewTextField = props => (
   <Form.Field>

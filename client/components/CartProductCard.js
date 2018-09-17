@@ -14,7 +14,7 @@ const CartProductCard = props => {
       <Item.Image src={item.imageUrl} />
       <Item.Content>
         <Item.Header>{item.name}</Item.Header>
-        <Item.Meta>Price: ${item.price}</Item.Meta>
+        <Item.Meta>Price: ${item.price/100}</Item.Meta>
         <Item.Description>Quantity: {item.cartItem ? item.cartItem.quantity : 1}</Item.Description>
         <Item.Extra>
           <Button color='purple' floated='right' onClick={() => handleClick(item)}>Remove</Button>

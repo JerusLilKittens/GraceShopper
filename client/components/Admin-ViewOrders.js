@@ -34,7 +34,7 @@ class ViewOrders extends React.Component {
               return (
                 <tr key={order.id}>
                   <td><Link to={`/admin-orders/orders/${order.id}`}>{order.id}</Link></td>
-                  <td>{order.totalAmount}</td>
+                  <td>{order.totalAmount/100}</td>
                   <td>{order.createdAt}</td>
                   <td>{order.status}</td>
                   <td>{order.shippingInfo}</td>

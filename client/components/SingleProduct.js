@@ -55,7 +55,7 @@ class SingleProduct extends React.Component {
             <Item.Content>
               <Item.Header as="a">{product.name}</Item.Header>
               <Rating icon="star" rating={0} maxRating={5} />
-              <Item.Meta>${product.price}</Item.Meta>
+              <Item.Meta>${product.price/100}</Item.Meta>
               <Item.Description>{product.description}</Item.Description>
               <Item.Extra>
                 <Button

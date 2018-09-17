@@ -1,18 +1,49 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Button} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
+import UserForm from './UserForm'
+import UserInfo from './UserInfo'
 
-/**
- * COMPONENT
- */
-export const UserHome = props => {
-  const {email} = props
+export class UserHome extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      editView: false
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
+  handleClick() {
+    this.setState({editView: !this.state.editView})
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.editView ? (
+          <div>
+            <UserForm handleClick={this.handleClick} />
+          </div>
+        ) : (
+          <div>
+            <UserInfo />
+            <button onClick={this.handleClick}>Edit</button>
+            <br />
+            <br />
+            <br />
+            <Button
+              as={Link}
+              to={`/user-orders/${this.props.user.id}`}
+              size="massive"
+              content="Order History"
+            />
+          </div>
+        )}
+      </div>
+    )
+  }
 }
 
 /**
@@ -20,7 +51,7 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    user: state.user
   }
 }
 
@@ -29,6 +60,6 @@ export default connect(mapState)(UserHome)
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
+// UserHome.propTypes = {
+//   email: PropTypes.string
+// }

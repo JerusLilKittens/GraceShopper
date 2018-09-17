@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
 import {Button, Icon, Image, Item, Label, Header, Container} from 'semantic-ui-react'
 import {getUserCart} from '../store/cart'
 import CartProductCard from './CartProductCard'
@@ -25,9 +26,9 @@ class Cart extends Component {
         <Item.Group>
           <Item>
             <Item.Content>
-              <Header as="h2">Subtotal: ${cart.subtotal}</Header>
+              <Header as="h2">Subtotal: ${cart.subtotal/100}</Header>
               <Item.Extra>
-                <Button color="teal" icon labelPosition="left" floated="right"><Icon name="dollar"/>Check Out</Button>
+                <Button as={Link} to="/checkout" color="teal" icon labelPosition="left" floated="right"><Icon name="dollar"/>Check Out</Button>
               </Item.Extra>
             </Item.Content>
           </Item>
