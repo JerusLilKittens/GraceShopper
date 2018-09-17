@@ -1,51 +1,48 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {Header, Table, Rating} from 'semantic-ui-react'
 // import {Container, Card} from 'semantic-ui-react'
 
 import {getOrdersByUser} from '../store/order'
 import {getUser} from '../store/user'
 
 class UserOrder extends React.Component {
-
   componentDidMount() {
-    console.log('hello')
-    const userId = this.props.match.params.userId
-    this.props.getOrdersByUser(Number(userId))
+    const userId = this.props.user.id
+    this.props.getOrdersByUser(userId)
   }
 
   render() {
-    const orders = this.props.orders
-
+    const {orders, user} = this.props
     return (
       <div>
-        <br />
-        <br />
-        <hr />
-        <h2> Orders Made By UserId: {this.props.match.params.userId} </h2>
-        <table className="ordersTable">
-          <tbody>
-            <tr>
-              <th>View Order</th>
-              <th>Amount   ($)</th>
-              <th>Date   </th>
-              <th>Status </th>
-              <th>Shipping Info   </th>
-            </tr>
-            {orders.map(order => {
-              return (
-                <tr key={order.id}>
-                  <td><Link to={`/admin-orders/orders/${order.id}`}>View (Order Id: {order.id})</Link></td>
-                  <td>{order.totalAmount/100}</td>
-                  <td>{order.createdAt}</td>
-                  <td>{order.status}</td>
-                  <td>{order.shippingInfo}</td>
-                </tr>
-              )
-            })}
-        </tbody>
-        </table>
-        </div>
+        <h2>Your Orders:</h2>
+        <Table celled padded>
+          <Table.Row>
+            <Table.HeaderCell>Order</Table.HeaderCell>
+            <Table.HeaderCell>Total</Table.HeaderCell>
+            <Table.HeaderCell>Date</Table.HeaderCell>
+            <Table.HeaderCell>Status</Table.HeaderCell>
+            <Table.HeaderCell>Address</Table.HeaderCell>
+          </Table.Row>
+          {orders.map(order => {
+            return (
+              <Table.Row key={order.id}>
+                <Table.Cell>
+                  <Link to={`/admin-orders/orders/${order.id}`}>
+                    {order.id}
+                  </Link>
+                </Table.Cell>
+                <Table.Cell>{order.totalAmount/100}</Table.Cell>
+                <Table.Cell>{order.createdAt}</Table.Cell>
+                <Table.Cell>{order.status}</Table.Cell>
+                <Table.Cell>{order.shippingInfo}</Table.Cell>
+              </Table.Row>
+            )
+          })}
+        </Table>
+      </div>
     )
   }
 }
@@ -59,7 +56,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getOrdersByUser: (userId) => dispatch(getOrdersByUser(userId)),
+    getOrdersByUser: userId => dispatch(getOrdersByUser(userId))
   }
 }
 
