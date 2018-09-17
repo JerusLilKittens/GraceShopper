@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const Order = db.define('order', {
   billingInfo: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: true
   },
   shippingInfo: {
     type: Sequelize.TEXT,
@@ -14,7 +14,7 @@ const Order = db.define('order', {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
-      isDecimal: true
+      isDecimal: false
     }
   },
   status: {

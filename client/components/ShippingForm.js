@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { Form, Button, Step, Container, Icon } from 'semantic-ui-react'
+import {addOrder} from '../store/order'
 
 const options = [
   {key: 'AL', text: 'AL', value: "Alabama"}, {key: 'AK', text: 'AK', value: "Alaska"}, {key: 'AZ', text: 'AZ', value: "Arizona"}, {key: 'AR', text: 'AR', value: "Arkansas"}, {key: 'CA', text:'CA', value: "California"}, {key: 'CO', text: 'CO', value: "Colorado"}, {key: 'CT', text: 'CT', value: "Connecticut"}, {key: 'DE', text: 'DE', value: "Delaware"}, {key: 'DC', text: 'DC', value: "District Of Columbia"}, {key: 'FL', text: 'FL', value: "Florida"}, {key: 'GA', text: 'GA', value: "Georgia"}, {key: 'HI', text: 'HI', value: "Hawaii"},
@@ -20,18 +22,22 @@ class ShippingForm extends Component{
     zip: '',
     state: ''
   }
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  handleChange = (evt, { name, value }) => this.setState({ [name]: value })
 
-  handleSubmit = () => {
-    const { name, lastName, address, city, zip, state } = this.state
+  handleSubmit = async () => {
+    const { firstName, lastName, address, city, zip, state } = this.state
 
-    this.setState({
-      firstName: name,
-      lastName: lastName,
-      address: address,
-      city: city,
-      zip: zip,
-      state: state })
+    const subtotal = this.props.cart.subtotal
+
+    const order = {
+      shippingInfo: `${firstName} ${lastName}, ${address}, ${city}, ${state} ${zip}`,
+      totalAmount: subtotal + 399 + Math.floor(subtotal * 0.06),
+      status: 'created',
+      userId: this.props.user.id}
+    console.log('order', order)
+    await this.props.addOrder(order)
+    this.props.history.push('/checkout/billing')
+
   }
 
   render() {
@@ -72,13 +78,27 @@ class ShippingForm extends Component{
             <Form.Input fluid label='Street Address' placeholder='First name' name='address' value={address} onChange={this.handleChange}/>
             <Form.Input fluid label='City' placeholder='City' name='city' value={city} onChange={this.handleChange}/>
             <Form.Input fluid label='Zip Code' placeholder='Zip Code' name='zip' value={zip} onChange={this.handleChange}/>
-            <Form.Select fluid label='State' options={options} placeholder='State' name='state' value={state} onChange={this.handleChange}/>
+            {/* <Form.Select fluid label='State' options={options} placeholder='State' name='state' value={state} onChange={this.handleChange}/> */}
+            <Form.Input fluid label='State' placeholder='State' name='state' value={state} onChange={this.handleChange}/>
           </Form.Group>
-          <Button as={Link} to="/checkout/billing" color="teal" float="right">Next</Button>
+          <Button type="submit"  color="teal" float="right" >Next</Button>
       </Form>
       </Container>
     )
   }
 }
 
-export default ShippingForm
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    cart: state.cart
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addOrder: order => dispatch(addOrder(order))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShippingForm)

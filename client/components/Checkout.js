@@ -2,10 +2,10 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Button, Icon, Image, Item, Label, Header, Container, Step, Form, Card} from 'semantic-ui-react'
 import { Link, Switch, Route } from 'react-router-dom'
-import CartProductCard from './CartProductCard'
 import ShippingForm from './ShippingForm'
 import Billing from './BillingInfo'
 import CompletedOrder from './CompletedOrder'
+import {addOrder} from '../store/order'
 
 
 class Checkout extends Component {
@@ -36,7 +36,6 @@ class Checkout extends Component {
           <Route path="/checkout/billing" component={Billing} />
           <Route path="/checkout/thankyou" component={CompletedOrder} />
           <Route exact path="/checkout" component={ShippingForm} />
-
         </Switch>
       </Container>
     )
