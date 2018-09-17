@@ -1,7 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Rating, Icon, Image, Item, Container, Comment, Header, Form, Button } from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
+import {
+  Rating,
+  Icon,
+  Image,
+  Item,
+  Container,
+  Comment,
+  Header,
+  Form,
+  Button
+} from 'semantic-ui-react'
 import {getProduct} from '../store/product'
 import {addReview} from '../store/review'
 import {addToCart} from '../store/cart'
@@ -12,7 +22,9 @@ import ReviewForm from './ReviewForm'
 class SingleProduct extends React.Component {
   componentDidMount() {
     const productId = this.props.match.params.productId
+
     this.props.getProduct(Number(productId))
+
     this.props.getCategories()
   }
 
@@ -44,12 +56,16 @@ class SingleProduct extends React.Component {
               <Item.Header as="a">{product.name}</Item.Header>
               <Rating icon="star" rating={0} maxRating={5} />
               <Item.Meta>${product.price}</Item.Meta>
-              {product.categories && (
-                <Item.Meta>Category: {product.categories[0].name}</Item.Meta>
-              )}
               <Item.Description>{product.description}</Item.Description>
               <Item.Extra>
-                <Button as={Link} to="/cart" color="teal" icon labelPosition="left" onClick={() => this.handleClick(product)}>
+                <Button
+                  as={Link}
+                  to="/cart"
+                  color="teal"
+                  icon
+                  labelPosition="left"
+                  onClick={() => this.handleClick(product)}
+                >
                   <Icon name="cart" />Add to cart
                 </Button>
                 <Comment.Group>
@@ -75,16 +91,21 @@ class SingleProduct extends React.Component {
                   ) : (
                     <h1>no reviews yet</h1>
                   )}
-                  <Header as="h3" dividing>Leave a Review</Header>
-                  {this.props.isLoggedIn ? <ReviewForm onSubmit={this.handleSubmit}/>
-                  : <h3>Please log in to leave a review</h3>}
+                  <Header as="h3" dividing>
+                    Leave a Review
+                  </Header>
+                  {this.props.isLoggedIn ? (
+                    <ReviewForm onSubmit={this.handleSubmit} />
+                  ) : (
+                    <h3>Please log in to leave a review</h3>
+                  )}
                 </Comment.Group>
               </Item.Extra>
             </Item.Content>
           </Item>
         </Item.Group>
         <div>
-          {this.props.selectedProduct.id &&
+          {this.props.selectedProduct.id === Number(this.props.match.params.productId) &&
             this.props.isAdmin.isAdmin && (
               <EditProductForm product={this.props} />
             )}
@@ -105,7 +126,7 @@ const mapDispatchToProps = dispatch => ({
   getProduct: product => dispatch(getProduct(product)),
   addReview: review => dispatch(addReview(review)),
   getCategories: () => dispatch(getCategories()),
-  addToCart: item => dispatch(addToCart(item)),
+  addToCart: item => dispatch(addToCart(item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
