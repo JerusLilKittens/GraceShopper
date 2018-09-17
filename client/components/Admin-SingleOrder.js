@@ -13,8 +13,9 @@ class SingleOrder extends React.Component {
     this.props.getOrder(Number(orderId))
   }
 
-  async handleClick(orderId, newStatus) {
+  handleClick = async (orderId, newStatus) => {
     await this.props.updateOrderStatus(orderId, newStatus)
+    this.props.getOrder(Number(orderId))
   }
 
   render() {
@@ -59,7 +60,7 @@ class SingleOrder extends React.Component {
           </tr>
           <tr>
             <td>Order User Id </td>
-            <td>{order.userId}</td>
+            <td><Link to={`/user-orders/${order.userId}`}>{order.userId}</Link></td>
           </tr>
           </table>
           <br />
@@ -85,7 +86,7 @@ class SingleOrder extends React.Component {
           </table>
           <br />
 
-          <h2>Adjust Status</h2>
+          <h3>Adjust Status (The current status is {order.status})</h3>
 
           <div class="ui buttons">
           {order.status !== 'created' &&  <button type='button' class='ui button' onClick={()=>{this.handleClick(order.id, 'created').bind(this)}}>Mark Created</button>}
@@ -97,22 +98,16 @@ class SingleOrder extends React.Component {
           <br />
           <br />
           <Link to="/admin-dashboard">Admin Dashboard</Link>
-
-
         </div>
-
       )}
-
-
-
        </div>
     )
   }
 }
 
-const mapStateToProps = ({order}) => (
-  {order}
-)
+const mapStateToProps = (state) => ({
+  order: state.order
+})
 
 const mapDispatchToProps = dispatch => ({
   getOrder: (order) => dispatch(getOrder(order)),

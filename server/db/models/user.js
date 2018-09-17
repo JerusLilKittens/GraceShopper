@@ -46,6 +46,9 @@ const User = db.define('user', {
   },
   state: {
     type: Sequelize.STRING
+  },
+  googleId: {
+    type: Sequelize.STRING
   }
 })
 

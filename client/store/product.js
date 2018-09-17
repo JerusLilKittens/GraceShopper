@@ -34,9 +34,22 @@ export const getProductsByCategory = id => {
 export const getProduct = productId => {
   return async dispatch => {
     try {
+      console.log(productId, "++++++ productId from store *******")
       const {data} = await axios.get(`/api/products/${productId}`)
       dispatch(gotProduct(data))
     } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+export const deleteCategoryFromProduct = (catName, productId) =>{
+  const optionInfo = {data:{catName,productId}}
+  return async dispatch =>{
+    try{
+     const {data} = await axios.delete('/api/products', optionInfo )
+     dispatch(getProduct(productId))
+    } catch(err){
       console.error(err)
     }
   }
@@ -58,9 +71,6 @@ export const createProduct = formData => {
   return async dispatch => {
     try {
       const {data} = await axios.post('/api/products', formData)
-      // sending back the single product created to be displayed
-      //TODO: need to create a gotProduct actions
-      //dispatch(gotProduct(data))
       console.log(data)
     } catch (err) {
       console.error(err)

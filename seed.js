@@ -85,19 +85,36 @@ const orders = [
     billingInfo: '1 Hacker Way',
     shippingInfo: "Sear's Tower, Chicago",
     totalAmount: 3.99,
-    status: 'created'
+    status: 'created',
+    userId: 2
   },
   {
     billingInfo: '5 Hacker Way',
     shippingInfo: '405 W Superior, Chicago',
     totalAmount: 23.99,
-    status: 'completed'
+    status: 'completed',
+    userId: 1
   },
   {
     billingInfo: '2 Hacker Way',
     shippingInfo: '305 W Huron, Chicago',
     totalAmount: 4.99,
-    status: 'processing'
+    status: 'processing',
+    userId: 1
+  },
+  {
+    billingInfo: '23 Hacker Way',
+    shippingInfo: '35 W Huron, Chicago',
+    totalAmount: 44.99,
+    status: 'cancelled',
+    userId: 3
+  },
+  {
+    billingInfo: '2 Hacker Way',
+    shippingInfo: '305 W Huron, Chicago',
+    totalAmount: 5.99,
+    status: 'processing',
+    userId: 1
   }
 ]
 
@@ -119,6 +136,30 @@ const lineItems = [
     price: 3.99,
     lineItemProductId: 1,
     lineItemOrderId: 1
+  },
+  {
+    quantity: 1,
+    price: 6.99,
+    lineItemProductId: 3,
+    lineItemOrderId: 3
+  },
+  {
+    quantity: 2,
+    price: 3.99,
+    lineItemProductId: 4,
+    lineItemOrderId: 3
+  },
+  {
+    quantity: 2,
+    price: 3.99,
+    lineItemProductId: 2,
+    lineItemOrderId: 4
+  },
+  {
+    quantity: 1,
+    price: 44.99,
+    lineItemProductId: 5,
+    lineItemOrderId: 5
   }
 ]
 
@@ -263,9 +304,10 @@ const seed = async () => {
   await db.sync({force: true})
   await Promise.all(categories.map(category => Category.create(category)))
   await Promise.all(products.map(product => Product.create(product)))
+
+  await Promise.all(users.map(user => User.create(user)))
   await Promise.all(orders.map(order => Order.create(order)))
   await Promise.all(lineItems.map(lineItem => LineItem.create(lineItem)))
-  await Promise.all(users.map(user => User.create(user)))
   await Promise.all(reviews.map(review => Review.create(review)))
   await ProdCat.create({
     productId: 1,
