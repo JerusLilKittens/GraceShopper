@@ -19,7 +19,6 @@ class EditProductForm extends Component {
 
   componentDidMount = () => {
     const catOptions = []
-    console.log('mounting happened edit view')
 
     if (this.props.product.selectedProduct.categories) {
       this.props.product.selectedProduct.categories.forEach(ele => {
