@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, Review, Category,ProdCat} = require('../db')
+const {Product, Review, Category, ProdCat} = require('../db')
 
 const isAdmin = (req, res, next) => {
   console.log(req)
@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.productId, {
-      include: [Review,Category]
+      include: [Review, Category]
     })
     res.json(product)
   } catch (err) {
@@ -34,11 +34,18 @@ router.get('/:productId', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
     const id = req.body.id
-    const {name, description, stock, price, cat} = req.body.formData
-    const findOrCreateCat = await Category.findOrCreate({where:{name: cat}})
-    const productCat = await ProdCat.update({categoryId: findOrCreateCat[0].id},{where: {productId: id}})
+    const {name, description, stock, price, cats} = req.body.formData
+    cats.forEach(async cat => {
+      const findOrCreateCat = await Category.findOrCreate({where: {name: cat}})
+      const productCat = await ProdCat.findOrCreate({
+        where: {
+          categoryId: findOrCreateCat[0].id,
+          productId: id
+        }
+      })
+    })
     const product = await Product.update(
-      {name, description, stock, price },
+      {name, description, stock, price},
       {
         where: {id: id},
         returning: true,
@@ -47,6 +54,23 @@ router.put('/', async (req, res, next) => {
     )
     const updatedProduct = await Product.findById(product[1].id)
     res.send(updatedProduct)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/', async (req, res, next) => {
+  try {
+    const id = await Category.findOne({where: {name: req.body.catName}})
+    console.log(req.body.productId, id.id, '+++++++++++++++')
+
+    await ProdCat.destroy({
+      where: {
+        productId: req.body.productId,
+        categoryId: id.id
+      }
+    })
+    res.status(200).end()
   } catch (err) {
     next(err)
   }

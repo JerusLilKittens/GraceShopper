@@ -42,6 +42,18 @@ export const getProduct = productId => {
   }
 }
 
+export const deleteCategoryFromProduct = (catName, productId) =>{
+  const optionInfo = {data:{catName,productId}}
+  return async dispatch =>{
+    try{
+     const {data} = await axios.delete('/api/products', optionInfo )
+     dispatch(getProduct(productId))
+    } catch(err){
+      console.error(err)
+    }
+  }
+}
+
 export const editProduct = (id, formData) => {
   return async dispatch => {
     try {
@@ -58,9 +70,6 @@ export const createProduct = formData => {
   return async dispatch => {
     try {
       const {data} = await axios.post('/api/products', formData)
-      // sending back the single product created to be displayed
-      //TODO: need to create a gotProduct actions
-      //dispatch(gotProduct(data))
       console.log(data)
     } catch (err) {
       console.error(err)
