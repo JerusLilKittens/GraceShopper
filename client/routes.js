@@ -27,7 +27,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isAdmin} = this.props
 
     return (
       <Switch>
@@ -37,8 +37,8 @@ class Routes extends Component {
         <Route exact path="/products" component={ProductList} />
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        {this.props.isAdmin ? (
+        <Route path="/signup" component={SignupForm} />
+        {isAdmin ? (
           <Route path="/admin-dashboard" component={AdminDashboard} />
         ) : (
           <Route path="/admin-dashboard" component={NotAllowed} />
@@ -46,7 +46,6 @@ class Routes extends Component {
 
         <Route path="/admin-orders/orders/:orderId" component={SingleOrder} />
         <Route path="/user-orders/:userId" component={UserOrder} />
-        <Route path="*" component={WrongPage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -55,6 +54,7 @@ class Routes extends Component {
         )}
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
+        <Route path="*" component={WrongPage} />
       </Switch>
     )
   }

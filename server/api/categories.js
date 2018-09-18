@@ -23,6 +23,4 @@ router.get('/:categoryId', async (req, res, next) => {
   }
 })
 
-router.get('')
-
 module.exports = router

@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
+const {isSelf, isAdmin} = require('./auth')
 
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
@@ -16,7 +17,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', isSelf, async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId)
     res.json(user)
@@ -25,8 +26,8 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req,res,next)=>{
-  const {firstName, lastName, address, city, state,email,password} = req.body
+router.post('/', async (req, res, next) => {
+  const {firstName, lastName, address, city, state, email, password} = req.body
   try {
     const newUser = await User.create({
       firstName,
@@ -38,12 +39,12 @@ router.post('/', async (req,res,next)=>{
       password
     })
     res.send(newUser)
-  } catch(err){
+  } catch (err) {
     next(err)
   }
 })
 
-router.put('/:userId', async (req, res, next) => {
+router.put('/:userId', isSelf, async (req, res, next) => {
   const {firstName, lastName, address, city, state, email, id} = req.body
   try {
     await User.update(

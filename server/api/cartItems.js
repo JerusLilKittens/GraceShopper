@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const {Cart, CartItem} = require('../db')
+const {isAdmin, isSelf} = require('./auth')
 
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const cartItems = await CartItem.findAll()
     res.json(cartItems)

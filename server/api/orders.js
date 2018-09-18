@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Order, LineItem, User, Product} = require('../db')
+const {isAdmin} = require('./auth')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -69,7 +70,7 @@ router.get('/users/:userId', async (req, res, next) => {
   }
 })
 
-router.put('/:orderId', async (req, res, next) => {
+router.put('/:orderId', isAdmin, async (req, res, next) => {
   try {
     const orderId = req.params.orderId
     const newStatus = req.body.newStatus
