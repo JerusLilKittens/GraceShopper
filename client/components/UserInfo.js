@@ -1,19 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Header, Item} from 'semantic-ui-react'
 
 const UserInfo = props => {
   const {user} = props
   return (
-    <div>
-      <h1>
-        Welcome, {user.firstName} {user.lastName}
-      </h1>
-      <h3>Email: {user.email}</h3>
-      <h3>Address: {user.address}</h3>
-      <h3>
-        {user.city}, {user.state}
-      </h3>
-    </div>
+    <Item.Content>
+      <Header>Welcome, {user.firstName} {user.lastName}</Header>
+      <Item.Description>Email: {user.email}</Item.Description>
+      <Item.Description>Address: {user.address}, {user.city}, {user.state}</Item.Description>
+    </Item.Content>
   )
 }
 
