@@ -1,6 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 
+
 /**
  * ACTION TYPES
  */
@@ -16,7 +17,10 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
+const getUser = user => {
+  console.log('link other state cartReducer')
+  return {type: GET_USER, user}
+}
 const removeUser = () => ({type: REMOVE_USER})
 const editUser = user => ({type: EDIT_USER, user})
 
