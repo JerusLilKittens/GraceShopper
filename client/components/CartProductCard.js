@@ -1,7 +1,7 @@
 import React from 'react'
-import { Item, Button } from 'semantic-ui-react'
-import { connect } from 'react-redux'
-import { removeFromCart } from '../store/cart'
+import {Item, Button} from 'semantic-ui-react'
+import {connect} from 'react-redux'
+import {removeFromCart, incrementItem} from '../store/cart'
 
 const CartProductCard = props => {
   const {item} = props
@@ -14,10 +14,20 @@ const CartProductCard = props => {
       <Item.Image src={item.imageUrl} />
       <Item.Content>
         <Item.Header>{item.name}</Item.Header>
-        <Item.Meta>Price: ${item.price/100}</Item.Meta>
-        <Item.Description>Quantity: {item.cartItem ? item.cartItem.quantity : 1}</Item.Description>
+        <Item.Meta>Price: ${item.price / 100}</Item.Meta>
+        <Item.Description>
+          Quantity: {item.cartItem ? item.cartItem.quantity : 1}
+        </Item.Description>
+        <Button onClick={() => props.incrementItem(item, false)}>-</Button>
+        <Button onClick={() => props.incrementItem(item, true)}>+</Button>
         <Item.Extra>
-          <Button color='purple' floated='right' onClick={() => handleClick(item)}>Remove</Button>
+          <Button
+            color="purple"
+            floated="right"
+            onClick={() => handleClick(item)}
+          >
+            Remove
+          </Button>
         </Item.Extra>
       </Item.Content>
     </Item>
@@ -32,7 +42,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeFromCart: item => dispatch(removeFromCart(item))
+    removeFromCart: item => dispatch(removeFromCart(item)),
+    incrementItem: (item, inc) => dispatch(incrementItem(item, inc))
   }
 }
 
