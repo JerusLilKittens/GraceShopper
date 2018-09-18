@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Step, Container, Icon, Header } from 'semantic-ui-react'
+import CheckoutForm from './CheckoutForm'
+import {Elements} from 'react-stripe-elements'
 
 class Billing extends React.Component {
 
@@ -33,9 +35,12 @@ class Billing extends React.Component {
         </Step.Group>
 
         <Header>Billing with Stripe here</Header>
-        <Button as={Link} to="/checkout/thankyou" color="teal" float="right">Finish</Button>
 
-        </Container>
+        <Elements>
+          <CheckoutForm history={this.props.history}/>
+        </Elements>
+
+      </Container>
     )
   }
 }
