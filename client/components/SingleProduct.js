@@ -53,7 +53,7 @@ class SingleProduct extends React.Component {
     const { open } = this.state
     const product = this.props.selectedProduct
     const reviews = product.reviews
-    let averageRating = 'n/a'
+    let averageRating = 'be the first to add a rating!'
     if (reviews) {
       averageRating = averageReview(reviews)
     }
