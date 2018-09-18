@@ -36,6 +36,15 @@ router.post('/order-items/:orderId', async(req, res, next) => {
       const orderId = req.params.orderId
       const cartItems = cartToOrder(req.body.items, orderId)
       const lineItems = await LineItem.bulkCreate(cartItems)
+
+      let productRow
+      for (let i=0; i<cartItems.length; i++) {
+        console.log('pr', productRow)
+        productRow = await Product.findById(cartItems[i].lineItemProductId)
+        productRow.stock -= cartItems[i].quantity
+        productRow.save().then(()=>{})
+        console.log('updated:', productRow)
+      }
       res.send(lineItems)
   } catch (err) {
     next(err)
