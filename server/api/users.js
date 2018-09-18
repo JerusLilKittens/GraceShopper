@@ -17,7 +17,7 @@ router.get('/', isAdmin, async (req, res, next) => {
   }
 })
 
-router.get('/:userId', isSelf, async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId)
     res.json(user)
@@ -44,7 +44,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:userId', isSelf, async (req, res, next) => {
+router.put('/:userId', async (req, res, next) => {
   const {firstName, lastName, address, city, state, email, id} = req.body
   try {
     await User.update(

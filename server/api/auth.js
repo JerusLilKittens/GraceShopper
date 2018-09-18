@@ -17,6 +17,8 @@ const isUser = (req, res, next) => {
 }
 
 const isSelf = (req, res, next) => {
+  console.log('USER ID!!', req.user.id)
+  console.log('REQUESTED USER', req.requestedUser)
   if (req.user === req.requestedUser) {
     next()
   }
