@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Form, Button, Container } from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
+import {Form, Button, Container} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
@@ -76,7 +76,6 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      console.log('event target', evt.target)
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value

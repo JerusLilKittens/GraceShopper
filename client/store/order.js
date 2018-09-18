@@ -7,9 +7,8 @@ const ADDED_ORDER = 'ADDED_ORDER'
 
 const gotOrders = orders => ({type: GOT_ORDERS, orders})
 const gotOrder = order => ({type: GOT_ORDER, order})
-const updatedOrderStatus = order =>({type: UPDATED_ORDER, order})
-const addedOrder = order => ({ type: ADDED_ORDER, order})
-
+const updatedOrderStatus = order => ({type: UPDATED_ORDER, order})
+const addedOrder = order => ({type: ADDED_ORDER, order})
 
 export const getOrders = () => {
   return async dispatch => {
@@ -22,11 +21,10 @@ export const getOrders = () => {
   }
 }
 
-export const getOrdersByUser = (userId) => {
+export const getOrdersByUser = userId => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/orders/users/${userId}`)
-      console.log("got data", data)
       dispatch(gotOrders(data))
     } catch (err) {
       console.error(err)
@@ -53,22 +51,22 @@ export const updateOrderStatus = (orderId, newStatus) => {
     } catch (err) {
       console.error(err)
     }
+  }
+}
+
+export const addOrder = order => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/orders/', order)
+      dispatch(addedOrder(data))
+    } catch (err) {
+      console.error(err)
     }
   }
+}
 
-  export const addOrder = order => {
-    return async dispatch => {
-      try {
-        const {data} = await axios.post('/api/orders/', order)
-        dispatch(addedOrder(data))
-      } catch (err) {
-        console.error(err)
-      }
-    }
-  }
-
-export const ordersReducer = (state=[], action) => {
-  switch(action.type) {
+export const ordersReducer = (state = [], action) => {
+  switch (action.type) {
     case GOT_ORDERS:
       return action.orders
     case ADDED_ORDER:
@@ -88,6 +86,3 @@ export const orderReducer = (state = {}, action) => {
       return state
   }
 }
-
-
-

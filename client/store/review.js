@@ -2,14 +2,13 @@ import axios from 'axios'
 
 export const ADDED_REVIEW = 'ADDED_REVIEW'
 
-const addedReview = review => ({ type: ADDED_REVIEW, review })
+const addedReview = review => ({type: ADDED_REVIEW, review})
 
 export const addReview = review => {
   return async dispatch => {
     try {
       await axios.post('/api/reviews', review)
       dispatch(addedReview(review))
-      console.log('after dispatch')
     } catch (err) {
       console.error(err)
     }
