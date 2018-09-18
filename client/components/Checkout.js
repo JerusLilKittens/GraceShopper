@@ -10,7 +10,8 @@ import {
   Container,
   Step,
   Form,
-  Card
+  Card,
+  Message
 } from 'semantic-ui-react'
 import {Link, Switch, Route} from 'react-router-dom'
 import ShippingForm from './ShippingForm'
@@ -26,17 +27,20 @@ class Checkout extends Component {
     const total = subtotal + tax + 399
     return (
       <Container>
-        <Header>Complete Your Order</Header>
-        <Card>
+        <Message info>
+        <Header >Complete Your Order</Header>
+
+        </Message>
+        <Card float='right'>
           <Card.Content header="Order Summary" />
           <Card.Content description={`Subtotal: $${subtotal / 100}`} />
           <Card.Content description="Shipping: $3.99" />
           <Card.Content description={`Tax: $${tax / 100} `} />
           <Card.Content description={`Total: $${total / 100}`} />
-          <Card.Content extra>
+          {/* <Card.Content extra>
             <Icon name="user" />
             4 Friends
-          </Card.Content>
+          </Card.Content> */}
         </Card>
 
         <Switch>

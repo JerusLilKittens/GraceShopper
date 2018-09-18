@@ -6,6 +6,7 @@ import {
   Input,
   Icon,
   Menu,
+  Label,
   Segment,
   Dropdown,
   Divider,
@@ -14,22 +15,15 @@ import {
 } from 'semantic-ui-react'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = (props, {handleClick, isLoggedIn}) => (
   <div>
     <nav>
       <div className="ui top fixed menu">
-        {/* <Menu.Item position="left">
-          <Dropdown item as={Link} to="/products" text="Shop" icon="cart" simple>
-            <Dropdown.Menu>
-              <Dropdown.Item>
-                <span className="text">New</span>
-              </Dropdown.Item>
-              <Dropdown.Item>Open</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Item> */}
+
         <Menu.Item as={Link} to="/products" position="left">Shop</Menu.Item>
-        <Menu.Item as={Link} to="/cart" position="left">Cart</Menu.Item>
+        <Menu.Item as={Link} to="/cart" position="left">Cart
+          <Label color="teal" circular>{props.cart.items.length}</Label>
+          </Menu.Item>
 
         <Menu.Item position="right">
           {isLoggedIn ? (
@@ -76,7 +70,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cart: state.cart
   }
 }
 
