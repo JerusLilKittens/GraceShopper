@@ -25,6 +25,24 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req,res,next)=>{
+  const {firstName, lastName, address, city, state,email,password} = req.body
+  try {
+    const newUser = await User.create({
+      firstName,
+      lastName,
+      address,
+      city,
+      state,
+      email,
+      password
+    })
+    res.send(newUser)
+  } catch(err){
+    next(err)
+  }
+})
+
 router.put('/:userId', async (req, res, next) => {
   const {firstName, lastName, address, city, state, email, id} = req.body
   try {

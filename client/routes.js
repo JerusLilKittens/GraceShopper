@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Cart, Checkout, SingleProduct, AdminDashboard, SingleOrder, UserOrder} from './components'
+import {Login, SignupForm, UserHome, Cart, Checkout, SingleProduct, AdminDashboard, SingleOrder, UserOrder,WrongPage} from './components'
 import {me} from './store'
 import ProductList from './components/ProductList'
 
@@ -25,11 +25,11 @@ class Routes extends Component {
         <Route exact path="/products" component={ProductList} />
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/signup" component={SignupForm} />
         <Route path="/admin-dashboard" component={AdminDashboard} />
         <Route path="/admin-orders/orders/:orderId" component={SingleOrder} />
         <Route path="/user-orders/:userId" component={UserOrder} />
-
+        <Route path="*" component={WrongPage}/>
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

@@ -18,7 +18,6 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => {
-  console.log('link other state cartReducer')
   return {type: GET_USER, user}
 }
 const removeUser = () => ({type: REMOVE_USER})
@@ -33,6 +32,17 @@ export const updateUser = user => {
       await axios.put(`/api/users/${user.id}`, user)
       dispatch(editUser(user))
     } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
+export const createUser = user => {
+  return async dispatch =>{
+    try{
+     const {data} = await axios.post('/api/users', user)
+     dispatch(getUser(data))
+    } catch (err){
       console.error(err)
     }
   }
