@@ -30,7 +30,6 @@ const mergeCarts= async (cart1ID,oldCart = [], savedCart = [])=> {
   }
   for (let l = 0; l < savedCart.length; l++) {
     if (oldCartIds.indexOf(savedCart[l].id) === -1) {
-      console.log(savedCart[l], "++++++++++++++++++ savedCart")
       await CartItem.findOrCreate({where: {cartId: cart1ID, productId: savedCart[l].id},defaults: {quantity: 1}})
       mergedCart.push(savedCart[l])
     }
