@@ -13,18 +13,38 @@ const gotUserCart = cart => ({
 const addedToCart = (item, data) => ({type: ADDED_TO_CART, item, data})
 const removedFromCart = (item, data) => ({type: REMOVED_FROM_CART, item, data})
 
+// export const getUserCart = () => {
+//   return async dispatch => {
+//     try {
+//       const {data} = await axios.get('/api/carts')
+//       const cart = data.cart ? data.cart : []
+//       const cart2 = data.cart2 ? data.cart2 : []
+
+//       const mergedCart = mergeCarts(cart.products, cart2.products)
+//       const items = mergedCart
+//       let subtotal = 0
+//       items.forEach(item => {
+
+//         subtotal += item.cartItem.quantity * item.price
+//       })
+//       const userCart = {
+//         items,
+//         subtotal
+//       }
+//       dispatch(gotUserCart(userCart))
+//     } catch (err) {
+//       console.error(err)
+//     }
+//   }
+// }
+
 export const getUserCart = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/carts')
-      const cart = data.cart ? data.cart : []
-      const cart2 = data.cart2 ? data.cart2 : []
-
-      const mergedCart = mergeCarts(cart.products, cart2.products)
-      const items = mergedCart
+      const items = data ? data.products : []
       let subtotal = 0
       items.forEach(item => {
-        
         subtotal += item.cartItem.quantity * item.price
       })
       const userCart = {

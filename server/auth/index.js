@@ -2,8 +2,9 @@ const router = require('express').Router()
 const User = require('../db/models/user')
 const Cart = require('../db/models/cart')
 const Product = require('../db/models/product')
+const CartItem = require('../db/models/cartItem')
 
-const mergeCarts= (oldCart = [], savedCart = [])=> {
+const mergeCarts= async (cart1ID,oldCart = [], savedCart = [])=> {
   let mergedCart = []
   let savedCartIds = []
   let oldCartIds = []
@@ -29,11 +30,16 @@ const mergeCarts= (oldCart = [], savedCart = [])=> {
   }
   for (let l = 0; l < savedCart.length; l++) {
     if (oldCartIds.indexOf(savedCart[l].id) === -1) {
+      await CartItem.findOrCreate({where: {cartId: cart1ID, productId: savedCart[l].id},defaults: {quantity: 1}})
       mergedCart.push(savedCart[l])
     }
   }
+
+  //  looking use this to apply to cart 
+
   return mergedCart
 }
+
 
 
 module.exports = router
@@ -60,12 +66,11 @@ router.post('/login', async (req, res, next) => {
       })
       const cart1 = await Cart.findOne({
         include: [{model: Product}],
-        where: user.id
+        where: {userId: user.id}
       })
       
       if(cart2){
-        const merged = mergeCarts(cart1.products,cart2.products)
-        console.log(merged, '++++++++++++++++++++')
+        const merged = mergeCarts(cart1.id,cart1.products,cart2.products)
       }
 
       req.login(user, err => (err ? next(err) : res.json(user)))
