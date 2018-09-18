@@ -26,7 +26,7 @@ class ProductList extends React.Component {
               <Card.Group>
                 {products ? (
                   products.map(product => {
-                    return <ProductCard key={product.id} product={product} />
+                    if(product.stock > 0) {return <ProductCard key={product.id} product={product} />}
                   })
                 ) : (
                   <h1>no products</h1>

@@ -53,7 +53,7 @@ class SingleProduct extends React.Component {
     const { open } = this.state
     const product = this.props.selectedProduct
     const reviews = product.reviews
-    let averageRating = 'n/a'
+    let averageRating = 'be the first to add a rating!'
     if (reviews) {
       averageRating = averageReview(reviews)
     }
@@ -73,15 +73,20 @@ class SingleProduct extends React.Component {
               <Item.Meta>${product.price/100}</Item.Meta>
               <Item.Description>{product.description}</Item.Description>
               <Item.Extra>
-                <Button
+
+                {(product.stock > 0) ? (<Button
                   color="teal"
                   icon
                   labelPosition="left"
                   onClick={this.show}>
                   <Icon name="cart" />Add to cart
-                </Button>
-                <Confirm open={open} content='Add to cart?' onCancel={this.handleCancel} onConfirm={() => this.handleConfirm(product)} size='small' />
+                </Button>) : (
+                  <Label color='red'>Out of stock in our Cat-alogue but check back soon!</Label>
 
+                )}
+                <br />
+                <Confirm open={open} content='Add to cart?' onCancel={this.handleCancel} onConfirm={() => this.handleConfirm(product)} size='small' />
+                <br />
                 <Comment.Group>
                   <Header as="h3" dividing>
                     Reviews

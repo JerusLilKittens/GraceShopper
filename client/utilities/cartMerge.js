@@ -27,7 +27,5 @@ export function mergeCarts(oldCart = [], savedCart = []) {
       mergedCart.push(savedCart[l])
     }
   }
-  console.log(oldCart, savedCart)
-  console.log(mergedCart, "inside mergedCart++++++++++++")
   return mergedCart
 }

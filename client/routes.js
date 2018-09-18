@@ -2,7 +2,19 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, SignupForm, UserHome, Cart, Checkout, SingleProduct, AdminDashboard, SingleOrder, UserOrder,WrongPage} from './components'
+import {
+  Login,
+  SignupForm,
+  UserHome,
+  Cart,
+  Checkout,
+  SingleProduct,
+  AdminDashboard,
+  SingleOrder,
+  UserOrder,
+  NotAllowed,
+  WrongPage
+} from './components'
 import {me} from './store'
 import ProductList from './components/ProductList'
 
@@ -15,21 +27,25 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isAdmin} = this.props
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={ProductList} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
         <Route exact path="/products" component={ProductList} />
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignupForm} />
-        <Route path="/admin-dashboard" component={AdminDashboard} />
+        {isAdmin ? (
+          <Route path="/admin-dashboard" component={AdminDashboard} />
+        ) : (
+          <Route path="/admin-dashboard" component={NotAllowed} />
+        )}
+
         <Route path="/admin-orders/orders/:orderId" component={SingleOrder} />
         <Route path="/user-orders/:userId" component={UserOrder} />
-        <Route path="*" component={WrongPage}/>
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -38,6 +54,7 @@ class Routes extends Component {
         )}
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
+        <Route path="*" component={WrongPage} />
       </Switch>
     )
   }
@@ -50,7 +67,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin
   }
 }
 
