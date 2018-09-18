@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Cart, CartItem } = require('../db')
+const {Cart, CartItem} = require('../db')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -10,13 +10,49 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:cartId', async (req, res, next) => {
+  const {cartId} = req.params
+  try {
+    const cartItems = await CartItem.findAll({
+      where: {cartId}
+    })
+    res.json(cartItems)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:cartId/:productId', async (req, res, next) => {
+  try {
+    const {productId, cartId} = req.params
+    const prevQuant = req.body.item.cartItem.quantity
+    const quantity = req.body.inc ? prevQuant + 1 : prevQuant - 1
+    const [numberOfAffectedRows, affectedRows] = await CartItem.update(
+      {
+        quantity
+      },
+      {
+        where: {cartId, productId},
+        returning: true,
+        plain: true
+      }
+    )
+    console.log(affectedRows.dataValues)
+    res.status(201).json(affectedRows)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const {productId} = req.body
-    const findId = req.user ? {userId: req.user.id}
-  : {sessionId: req.sessionID}
+    const findId = req.user ? {userId: req.user.id} : {sessionId: req.sessionID}
     const [cart] = await Cart.findOrCreate({where: findId})
-    const [cartItem, wasCreated] = await CartItem.findOrCreate({where: {cartId: cart.id, productId}, defaults: {quantity: 1}})
+    const [cartItem, wasCreated] = await CartItem.findOrCreate({
+      where: {cartId: cart.id, productId},
+      defaults: {quantity: 1}
+    })
     if (wasCreated === true) {
       res.status(201).json(cartItem)
     } else {
