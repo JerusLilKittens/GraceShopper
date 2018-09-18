@@ -54,10 +54,13 @@ export const updateOrderStatus = (orderId, newStatus) => {
   }
 }
 
-export const addOrder = order => {
+export const addOrder = (order, cart) => {
   return async dispatch => {
     try {
       const {data} = await axios.post('/api/orders/', order)
+      const orderId = data.id
+      const x = await axios.post(`/api/orders/order-items/${orderId}`, cart)
+      console.log(x)
       dispatch(addedOrder(data))
     } catch (err) {
       console.error(err)
