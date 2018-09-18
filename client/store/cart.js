@@ -24,6 +24,7 @@ export const getUserCart = () => {
       const items = mergedCart
       let subtotal = 0
       items.forEach(item => {
+        
         subtotal += item.cartItem.quantity * item.price
       })
       const userCart = {
