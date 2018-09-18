@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ADDED_REVIEW } from './review'
+import {ADDED_REVIEW} from './review'
 
 const GOT_PRODUCTS = 'GOT_PRODUCTS'
 const GOT_PRODUCT = 'GOT_PRODUCT'
@@ -7,7 +7,6 @@ const GOT_PRODUCTS_BY_CATEGORY = 'GOT_PRODUCTS_BY_CATEGORY'
 
 const gotProducts = products => ({type: GOT_PRODUCTS, products})
 const gotProduct = product => ({type: GOT_PRODUCT, product})
-
 
 export const getProducts = () => {
   return async dispatch => {
@@ -34,7 +33,6 @@ export const getProductsByCategory = id => {
 export const getProduct = productId => {
   return async dispatch => {
     try {
-      console.log(productId, "++++++ productId from store *******")
       const {data} = await axios.get(`/api/products/${productId}`)
       dispatch(gotProduct(data))
     } catch (err) {
@@ -43,13 +41,13 @@ export const getProduct = productId => {
   }
 }
 
-export const deleteCategoryFromProduct = (catName, productId) =>{
-  const optionInfo = {data:{catName,productId}}
-  return async dispatch =>{
-    try{
-     const {data} = await axios.delete('/api/products', optionInfo )
-     dispatch(getProduct(productId))
-    } catch(err){
+export const deleteCategoryFromProduct = (catName, productId) => {
+  const optionInfo = {data: {catName, productId}}
+  return async dispatch => {
+    try {
+      const {data} = await axios.delete('/api/products', optionInfo)
+      dispatch(getProduct(productId))
+    } catch (err) {
       console.error(err)
     }
   }
@@ -63,7 +61,6 @@ export const editProduct = (id, formData) => {
     } catch (err) {
       console.error(err)
     }
-
   }
 }
 
@@ -71,7 +68,6 @@ export const createProduct = formData => {
   return async dispatch => {
     try {
       const {data} = await axios.post('/api/products', formData)
-      console.log(data)
     } catch (err) {
       console.error(err)
     }
