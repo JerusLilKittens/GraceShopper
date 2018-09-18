@@ -79,7 +79,7 @@ class SingleOrder extends React.Component {
                 <td>{line.id}</td>
                 <td><Link to={`/products/${line.id}`}>{line.productName}</Link></td>
                 <td>{line.quantity}</td>
-                <td>{line.price}</td>
+                <td>{line.price/100}</td>
               </tr>
             )
           })}
