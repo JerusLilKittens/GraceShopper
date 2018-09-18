@@ -1,16 +1,6 @@
 const router = require('express').Router()
 const {Order, LineItem, User, Product} = require('../db')
-
-
-// const isAdmin = (req, res, next) => {
-//   console.log(req)
-//   if (!req.user || !req.user.isAdmin) {
-//     const err = Error('Admin not logged in')
-//     err.status = 403
-//     return next(err)
-//   }
-//   next()
-// }
+const {isAdmin} = require('./auth')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -30,22 +20,21 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-
-router.post('/order-items/:orderId', async(req, res, next) => {
+router.post('/order-items/:orderId', async (req, res, next) => {
   try {
-      const orderId = req.params.orderId
-      const cartItems = cartToOrder(req.body.items, orderId)
-      const lineItems = await LineItem.bulkCreate(cartItems)
+    const orderId = req.params.orderId
+    const cartItems = cartToOrder(req.body.items, orderId)
+    const lineItems = await LineItem.bulkCreate(cartItems)
 
-      let productRow
-      for (let i=0; i<cartItems.length; i++) {
-        console.log('pr', productRow)
-        productRow = await Product.findById(cartItems[i].lineItemProductId)
-        productRow.stock -= cartItems[i].quantity
-        productRow.save().then(()=>{})
-        console.log('updated:', productRow)
-      }
-      res.send(lineItems)
+    let productRow
+    for (let i = 0; i < cartItems.length; i++) {
+      console.log('pr', productRow)
+      productRow = await Product.findById(cartItems[i].lineItemProductId)
+      productRow.stock -= cartItems[i].quantity
+      productRow.save().then(() => {})
+      console.log('updated:', productRow)
+    }
+    res.send(lineItems)
   } catch (err) {
     next(err)
   }
@@ -56,9 +45,11 @@ router.get('/:orderId', async (req, res, next) => {
     const order = await Order.findById(req.params.orderId, {
       include: User
     })
-    const items = await LineItem.findAll({where: {
-      lineItemOrderId: req.params.orderId
-    }})
+    const items = await LineItem.findAll({
+      where: {
+        lineItemOrderId: req.params.orderId
+      }
+    })
     const products = await Product.findAll()
     res.json({order: order, items: items, products: products})
   } catch (err) {
@@ -79,39 +70,35 @@ router.get('/users/:userId', async (req, res, next) => {
   }
 })
 
-router.put('/:orderId', async (req, res, next) => {
+router.put('/:orderId', isAdmin, async (req, res, next) => {
   try {
     const orderId = req.params.orderId
     const newStatus = req.body.newStatus
     const order = await Order.update(
       {status: newStatus},
-      {where: {
-        id: orderId
-      }}
+      {
+        where: {
+          id: orderId
+        }
+      }
     )
     res.send(order)
-
-  } catch (err)
-  {
+  } catch (err) {
     next(err)
   }
-
-
 })
-
 
 function cartToOrder(cart, orderId) {
   const result = []
-  for(let i=0; i<cart.length; i++) {
+  for (let i = 0; i < cart.length; i++) {
     let row = {}
     row.quantity = cart[i].cartItem.quantity
-    row.price =  cart[i].price
+    row.price = cart[i].price
     row.lineItemProductId = cart[i].id
     row.lineItemOrderId = orderId
     result.push(row)
   }
   return result
 }
-
 
 module.exports = router

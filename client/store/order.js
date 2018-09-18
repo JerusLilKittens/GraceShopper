@@ -60,7 +60,6 @@ export const addOrder = (order, cart) => {
       const {data} = await axios.post('/api/orders/', order)
       const orderId = data.id
       const x = await axios.post(`/api/orders/order-items/${orderId}`, cart)
-      console.log(x)
       dispatch(addedOrder(data))
     } catch (err) {
       console.error(err)

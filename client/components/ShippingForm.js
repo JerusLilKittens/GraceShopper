@@ -53,8 +53,6 @@ class ShippingForm extends Component {
   }
 
   render() {
-    console.log('cart')
-    console.log(this.props.cart)
     const {firstName, lastName, address, city, zip, state} = this.state
     return (
       <Container>
