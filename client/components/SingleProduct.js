@@ -11,7 +11,8 @@ import {
   Header,
   Form,
   Label,
-  Button
+  Button,
+  Confirm
 } from 'semantic-ui-react'
 import {getProduct} from '../store/product'
 import {addReview} from '../store/review'
@@ -22,12 +23,14 @@ import ReviewForm from './ReviewForm'
 import averageReview from '../utilities/averageReview'
 
 class SingleProduct extends React.Component {
-  componentDidMount() {
-    const productId = this.props.match.params.productId
+  state = { open: false }
 
-    this.props.getProduct(Number(productId))
-
-    this.props.getCategories()
+  show = () => { this.setState({ open: true }) }
+  handleCancel = () => this.setState({ open: false })
+  handleConfirm = async item => {
+    item.productId = item.id
+    this.setState({ open: false })
+    await this.props.addToCart(item)
   }
 
   handleSubmit = async props => {
@@ -40,19 +43,20 @@ class SingleProduct extends React.Component {
     await this.props.addReview(review)
   }
 
-  handleClick = async item => {
-    item.productId = item.id
-    await this.props.addToCart(item)
+  componentDidMount() {
+    const productId = this.props.match.params.productId
+    this.props.getProduct(Number(productId))
+    this.props.getCategories()
   }
 
   render() {
+    const { open } = this.state
     const product = this.props.selectedProduct
     const reviews = product.reviews
     let averageRating = 'n/a'
     if (reviews) {
       averageRating = averageReview(reviews)
     }
-
 
     return (
       <Container>
@@ -62,25 +66,21 @@ class SingleProduct extends React.Component {
 
             <Item.Content>
               <Item.Header as="a">{product.name}</Item.Header>
+              <Label pointing='left' color='yellow'>
+                  <Icon name='star' /> {averageRating}
+                  </Label>
               {/* <Rating icon="star" rating={2.5} maxRating={5} /> */}
               <Item.Meta>${product.price/100}</Item.Meta>
               <Item.Description>{product.description}</Item.Description>
               <Item.Extra>
                 <Button
-                  as={Link}
-                  to="/cart"
                   color="teal"
                   icon
                   labelPosition="left"
-                  onClick={() => this.handleClick(product)}
-                >
+                  onClick={this.show}>
                   <Icon name="cart" />Add to cart
                 </Button>
-                <br />
-                Avg. Rating: <Label color='orange'>
-                  <Icon name='star' /> {averageRating}
-                  </Label>
-                  <br />
+                <Confirm open={open} content='Add to cart?' onCancel={this.handleCancel} onConfirm={() => this.handleConfirm(product)} size='small' />
 
                 <Comment.Group>
                   <Header as="h3" dividing>
