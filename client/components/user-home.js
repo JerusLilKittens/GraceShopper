@@ -20,6 +20,7 @@ export class UserHome extends React.Component {
   }
 
   render() {
+    const {user} = this.props
     return (
       <div>
         {this.state.editView ? (
@@ -29,16 +30,32 @@ export class UserHome extends React.Component {
         ) : (
           <div>
             <UserInfo />
-            <button onClick={this.handleClick}>Edit</button>
+            <br />
+            <Button onClick={this.handleClick}>Edit</Button>
             <br />
             <br />
             <br />
             <Button
               as={Link}
-              to={`/user-orders/${this.props.user.id}`}
+              to={`/user-orders/${user.id}`}
               size="massive"
               content="Order History"
             />
+            {user.isAdmin ? (
+              <div>
+                <br />
+                <br />
+                <br />
+                <Button
+                  as={Link}
+                  to="/admin-dashboard"
+                  size="massive"
+                  content="Admin Dash"
+                />
+              </div>
+            ) : (
+              <br />
+            )}
           </div>
         )}
       </div>

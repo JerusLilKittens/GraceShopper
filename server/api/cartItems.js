@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Cart, CartItem } = require('../db')
+const {Cart, CartItem} = require('../db')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -13,15 +13,17 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {productId} = req.body
-    const findId = req.user ? {userId: req.user.id}
-  : {sessionId: req.sessionID}
+    const findId = req.user ? {userId: req.user.id} : {sessionId: req.sessionID}
     const [cart] = await Cart.findOrCreate({where: findId})
-    const [cartItem, wasCreated] = await CartItem.findOrCreate({where: {cartId: cart.id, productId}, defaults: {quantity: 1}})
+    const [cartItem, wasCreated] = await CartItem.findOrCreate({
+      where: {cartId: cart.id, productId},
+      defaults: {quantity: 1}
+    })
     if (wasCreated === true) {
       res.status(201).json(cartItem)
     } else {
       cartItem.dataValues.quantity = cartItem.dataValues.quantity + 1
-      console.log('cartitem found', cartItem)
+
       res.status(201).json(cartItem)
     }
   } catch (err) {
