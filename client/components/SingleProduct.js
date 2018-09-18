@@ -10,6 +10,7 @@ import {
   Comment,
   Header,
   Form,
+  Label,
   Button
 } from 'semantic-ui-react'
 import {getProduct} from '../store/product'
@@ -18,6 +19,7 @@ import {addToCart} from '../store/cart'
 import EditProductForm from '../components/Admin-EditProductForm'
 import {getCategories} from '../store/category'
 import ReviewForm from './ReviewForm'
+import averageReview from '../utilities/averageReview'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
@@ -46,6 +48,12 @@ class SingleProduct extends React.Component {
   render() {
     const product = this.props.selectedProduct
     const reviews = product.reviews
+    let averageRating = 'n/a'
+    if (reviews) {
+      averageRating = averageReview(reviews)
+    }
+
+
     return (
       <Container>
         <Item.Group>
@@ -54,7 +62,7 @@ class SingleProduct extends React.Component {
 
             <Item.Content>
               <Item.Header as="a">{product.name}</Item.Header>
-              <Rating icon="star" rating={0} maxRating={5} />
+              {/* <Rating icon="star" rating={2.5} maxRating={5} /> */}
               <Item.Meta>${product.price/100}</Item.Meta>
               <Item.Description>{product.description}</Item.Description>
               <Item.Extra>
@@ -68,6 +76,12 @@ class SingleProduct extends React.Component {
                 >
                   <Icon name="cart" />Add to cart
                 </Button>
+                <br />
+                Avg. Rating: <Label color='orange'>
+                  <Icon name='star' /> {averageRating}
+                  </Label>
+                  <br />
+
                 <Comment.Group>
                   <Header as="h3" dividing>
                     Reviews

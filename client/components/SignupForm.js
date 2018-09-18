@@ -44,7 +44,6 @@ class SignupForm extends React.Component {
   }
   render() {
     const {firstName, lastName, address, city, state, email, password, submit} = this.state
-    console.log(submit)
     return (
       
       <div>
@@ -52,8 +51,8 @@ class SignupForm extends React.Component {
         {submit ? 
         <Form style={{margin: 10}}>
           <Form.Group width="equal">
-        <Link to="/home" ><Form.Button  color="teal" content="Got to Account"/> </Link>
-        <Link to="/products"><Form.Button  color="purple" content="Go Shopping"/></Link>
+        <Link to="/home" ><Form.Button width={20} color="teal" content="Got to Account"/> </Link>
+        <Link to="/products"><Form.Button width={20} color="purple" content="Go Shopping"/></Link>
       </Form.Group>
         </Form> :
         

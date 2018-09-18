@@ -78,7 +78,7 @@ class UserForm extends React.Component {
           />
         </Form.Group>
         <Form.Button content="Update" />
-        <Button onClick={this.props.handleClick}>Cancel</Button>
+        <Button color="teal" onClick={this.props.handleClick}>Cancel</Button>
       </Form>
     )
   }
