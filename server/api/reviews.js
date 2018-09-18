@@ -1,17 +1,8 @@
 const router = require('express').Router()
 const {Review} = require('../db')
+const {isUser} = require('./auth')
 
-const isLoggedIn = (req, res, next) => {
-  console.log(req)
-  if (!req.user) {
-    const err = Error('User is not logged in')
-    err.status = 403
-    return next(err)
-  }
-  next()
-}
-
-router.post('/', async (req, res, next) => {
+router.post('/', isUser, async (req, res, next) => {
   try {
     // isLoggedIn()
     const review = await Review.create(req.body)

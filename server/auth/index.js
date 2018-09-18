@@ -4,7 +4,7 @@ const Cart = require('../db/models/cart')
 const Product = require('../db/models/product')
 const CartItem = require('../db/models/cartItem')
 
-const mergeCarts= async (cart1ID,oldCart = [], savedCart = [])=> {
+const mergeCarts = async (cart1ID, oldCart = [], savedCart = []) => {
   let mergedCart = []
   let savedCartIds = []
   let oldCartIds = []
@@ -30,25 +30,35 @@ const mergeCarts= async (cart1ID,oldCart = [], savedCart = [])=> {
   }
   for (let l = 0; l < savedCart.length; l++) {
     if (oldCartIds.indexOf(savedCart[l].id) === -1) {
-      await CartItem.findOrCreate({where: {cartId: cart1ID, productId: savedCart[l].id},defaults: {quantity: 1}})
+      await CartItem.findOrCreate({
+        where: {cartId: cart1ID, productId: savedCart[l].id},
+        defaults: {quantity: 1}
+      })
       mergedCart.push(savedCart[l])
     }
   }
 
-  //  looking use this to apply to cart 
+  //  looking use this to apply to cart
 
   return mergedCart
 }
 
-
+const isAdmin = (req, res, next) => {
+  console.log(req)
+  if (!req.user || !req.user.isAdmin) {
+    const err = Error('Admin not logged in')
+    err.status = 403
+    return next(err)
+  }
+  next()
+}
 
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
   try {
     const sessionId = req.sessionID
-    
-    
+
     console.log(sessionId, 'sessionId')
     const user = await User.findOne({where: {email: req.body.email}})
     if (!user) {
@@ -68,9 +78,9 @@ router.post('/login', async (req, res, next) => {
         include: [{model: Product}],
         where: {userId: user.id}
       })
-      
-      if(cart2){
-        const merged = mergeCarts(cart1.id,cart1.products,cart2.products)
+
+      if (cart2) {
+        const merged = mergeCarts(cart1.id, cart1.products, cart2.products)
       }
 
       req.login(user, err => (err ? next(err) : res.json(user)))

@@ -1,17 +1,6 @@
 const router = require('express').Router()
 const {Product, Review, Category, ProdCat} = require('../db')
-const Sequilize = require('sequelize')
-const Op = Sequilize.Op
-
-const isAdmin = (req, res, next) => {
-  console.log(req)
-  if (!req.user || !req.user.isAdmin) {
-    const err = Error('Admin not logged in')
-    err.status = 403
-    return next(err)
-  }
-  next()
-}
+const {isAdmin} = require('./auth')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -22,13 +11,12 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-
-// doesn't allow to search with varibles only can hard search
 router.get('/search/:que', async (req, res, next) => {
   try {
     const que = req.params.que
-    const results = await Product.findAll({limit: 2, 
-       where: {name: {$iLike: `%${que}%` }}
+    const results = await Product.findAll({
+      limit: 2,
+      where: {name: {$iLike: `%${que}%`}}
     })
     res.send(results)
   } catch (err) {
@@ -47,7 +35,7 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.put('/', async (req, res, next) => {
+router.put('/', isAdmin, async (req, res, next) => {
   try {
     const id = req.body.id
     const {name, description, stock, price, cats} = req.body.formData
@@ -75,7 +63,7 @@ router.put('/', async (req, res, next) => {
   }
 })
 
-router.delete('/', async (req, res, next) => {
+router.delete('/', isAdmin, async (req, res, next) => {
   try {
     const id = await Category.findOne({where: {name: req.body.catName}})
     await ProdCat.destroy({
@@ -90,7 +78,7 @@ router.delete('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAdmin, async (req, res, next) => {
   const {name, description, price, stock} = req.body
   try {
     const product = await Product.create({

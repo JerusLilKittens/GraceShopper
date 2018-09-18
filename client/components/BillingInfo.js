@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Form, Button, Step, Container, Icon, Header } from 'semantic-ui-react'
+import { Step, Container, Icon, Header } from 'semantic-ui-react'
 import CheckoutForm from './CheckoutForm'
 import {Elements} from 'react-stripe-elements'
 
@@ -8,7 +7,7 @@ class Billing extends React.Component {
 
   render() {
     return(
-      <Container>
+      <Container textAlign='center'>
       <Step.Group>
           <Step completed>
             <Icon name='truck' />
@@ -34,7 +33,7 @@ class Billing extends React.Component {
           </Step>
         </Step.Group>
 
-        <Header>Billing with Stripe here</Header>
+        <Header as='h3'>Please enter your credit card information</Header>
 
         <Elements>
           <CheckoutForm history={this.props.history}/>

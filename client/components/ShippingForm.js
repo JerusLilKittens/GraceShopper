@@ -53,11 +53,9 @@ class ShippingForm extends Component {
   }
 
   render() {
-    console.log('cart')
-    console.log(this.props.cart)
     const {firstName, lastName, address, city, zip, state} = this.state
     return (
-      <Container>
+      <Container textAlign='center'>
         <Step.Group>
           <Step active>
             <Icon name="truck" />
@@ -91,7 +89,7 @@ class ShippingForm extends Component {
               placeholder="First name"
               name="firstName"
               value={firstName}
-              onChange={this.handleChange}
+              onChange={this.handleChange} error={firstName === ''}
             />
             <Form.Input
               fluid
@@ -99,17 +97,17 @@ class ShippingForm extends Component {
               placeholder="Last name"
               name="lastName"
               value={lastName}
-              onChange={this.handleChange}
+              onChange={this.handleChange} error={lastName === ''}
             />
           </Form.Group>
           <Form.Group widths="equal">
             <Form.Input
               fluid
               label="Street Address"
-              placeholder="First name"
+              placeholder="Street address"
               name="address"
               value={address}
-              onChange={this.handleChange}
+              onChange={this.handleChange} error={address === ''}
             />
             <Form.Input
               fluid
@@ -117,7 +115,7 @@ class ShippingForm extends Component {
               placeholder="City"
               name="city"
               value={city}
-              onChange={this.handleChange}
+              onChange={this.handleChange} error={city === ''}
             />
             <Form.Input
               fluid
@@ -125,7 +123,7 @@ class ShippingForm extends Component {
               placeholder="Zip Code"
               name="zip"
               value={zip}
-              onChange={this.handleChange}
+              onChange={this.handleChange} error={zip.length < 5}
             />
             {/* <Form.Select fluid label='State' options={options} placeholder='State' name='state' value={state} onChange={this.handleChange}/> */}
             <Form.Input
@@ -134,10 +132,10 @@ class ShippingForm extends Component {
               placeholder="State"
               name="state"
               value={state}
-              onChange={this.handleChange}
+              onChange={this.handleChange} error={state.length < 2}
             />
           </Form.Group>
-          <Button type="submit" color="teal" float="right">
+          <Button type="submit" color="teal" float="right" disabled={!firstName || !lastName || !address || !city || !zip || !state}>
             Next
           </Button>
         </Form>

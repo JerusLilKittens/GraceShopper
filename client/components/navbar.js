@@ -16,14 +16,14 @@ import {
 import {logout} from '../store'
 import Search from './Search'
 
-const Navbar = (props, {handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, cart}) => (
   <div>
     <nav>
       <div className="ui top fixed menu">
 
         <Menu.Item as={Link} to="/products" position="left">Shop</Menu.Item>
         <Menu.Item as={Link} to="/cart" position="left">Cart
-          <Label color="teal" circular>{props.cart.items.length}</Label>
+          <Label color="teal" circular>{cart.items.length}</Label>
           </Menu.Item>
 
         <Menu.Item position="right">

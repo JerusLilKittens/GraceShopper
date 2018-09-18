@@ -11,6 +11,7 @@ import {
 import AddProductForm from './Admin-AddProductForm'
 import EditProductForm from './Admin-EditProductForm'
 import ViewOrders from './Admin-ViewOrders'
+import InventoryViewer from './Admin-InventoryViewer'
 
 const optionsProduct = [
   {value: 'add-product', text: 'Add Product'},
@@ -19,7 +20,8 @@ const optionsProduct = [
   {value: 'remove-category', text: 'Remove Category'},
   {value: 'add-category-for-product', text: 'Add Category for Product'},
   {value: 'remove-category-for-product', text: 'Remove Category for Product'},
-  {value: 'manage-availability', text: 'Manage Product Availability'}
+  {value: 'manage-availability', text: 'Manage Product Availability'},
+  {value: 'inventory-viewer', text: 'View Inventory'}
 ]
 
 const optionsOrder = [
@@ -89,6 +91,9 @@ class AdminDashBoard extends React.Component {
           {/* <AddProductForm /> */}
           {this.state.display === 'add-product' && <AddProductForm />}
           {this.state.display === 'edit-product' && <EditProductForm />}
+          {this.state.display === 'inventory-viewer' && <InventoryViewer />}
+
+
 
           {/* <Orders Routing /> */}
           {this.state.display === 'view-all-orders' && (
@@ -106,6 +111,8 @@ class AdminDashBoard extends React.Component {
           {this.state.display === 'view-cancelled' && (
             <ViewOrders display="cancelled" />
           )}
+
+
         </Container>
       </div>
     )

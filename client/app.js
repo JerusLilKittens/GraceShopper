@@ -1,5 +1,4 @@
 import React from 'react'
-import {StripeProvider} from 'react-stripe-elements'
 import {Navbar} from './components'
 import Routes from './routes'
 
