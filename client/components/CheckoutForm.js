@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {CardElement, injectStripe} from 'react-stripe-elements'
-import { Button } from 'semantic-ui-react'
+import {Button} from 'semantic-ui-react'
 import Redirect from 'react-router-dom'
 
 class CheckoutForm extends Component {
@@ -11,25 +11,26 @@ class CheckoutForm extends Component {
   }
 
   async submit(evt) {
-    let {token} = await this.props.stripe.createToken({name: "Name"});
-  let response = await fetch("/charge", {
-    method: "POST",
-    headers: {"Content-Type": "text/plain"},
-    body: token.id
-  });
+    let {token} = await this.props.stripe.createToken({name: 'Name'})
+    let response = await fetch('/charge', {
+      method: 'POST',
+      headers: {'Content-Type': 'text/plain'},
+      body: token.id
+    })
 
-  if (response.ok) console.log("Purchase Complete!")
-  if (response.ok) this.setState({complete: true})
-  this.props.history.push('/checkout/thankyou')
+    if (response.ok) this.setState({complete: true})
+    this.props.history.push('/checkout/thankyou')
   }
 
   render() {
     return (
       <div className="checkout">
         <CardElement />
-        <Button color="teal" onClick={this.submit}>Finish</Button>
+        <Button color="teal" onClick={this.submit}>
+          Finish
+        </Button>
       </div>
-    );
+    )
   }
 }
 

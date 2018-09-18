@@ -5,16 +5,14 @@ const UserInfo = props => {
   const {user} = props
   return (
     <div>
-      <h2>
+      <h1>
         Welcome, {user.firstName} {user.lastName}
-      </h2>
-      <h3>Your Information:</h3>
-      <h4>Email: {user.email}</h4>
-      <h3>Address:</h3>
-      <h4>{user.address}</h4>
-      <h4>
+      </h1>
+      <h3>Email: {user.email}</h3>
+      <h3>Address: {user.address}</h3>
+      <h3>
         {user.city}, {user.state}
-      </h4>
+      </h3>
     </div>
   )
 }

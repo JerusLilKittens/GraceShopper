@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Field, reduxForm} from 'redux-form'
 import {Form, Button} from 'semantic-ui-react'
 
 import {updateUser} from '../store/user'
@@ -79,6 +78,7 @@ class UserForm extends React.Component {
           />
         </Form.Group>
         <Form.Button content="Update" />
+        <Button onClick={this.props.handleClick}>Cancel</Button>
       </Form>
     )
   }

@@ -57,7 +57,7 @@ router.post('/', async (req, res, next) => {
       res.status(201).json(cartItem)
     } else {
       cartItem.dataValues.quantity = cartItem.dataValues.quantity + 1
-      console.log('cartitem found', cartItem)
+
       res.status(201).json(cartItem)
     }
   } catch (err) {

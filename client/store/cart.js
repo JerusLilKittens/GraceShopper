@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {mergeCarts} from '../utilities/cartMerge'
 
 const GOT_USER_CART = 'GOT_USER_CART'
 const ADDED_TO_CART = 'ADDED_TO_CART'
