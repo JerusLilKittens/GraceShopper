@@ -19,6 +19,26 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.post('/order-items/:orderId', async (req, res, next) => {
+  try {
+    const orderId = req.params.orderId
+    const cartItems = cartToOrder(req.body.items, orderId)
+    const lineItems = await LineItem.bulkCreate(cartItems)
+
+    let productRow
+    for (let i = 0; i < cartItems.length; i++) {
+      console.log('pr', productRow)
+      productRow = await Product.findById(cartItems[i].lineItemProductId)
+      productRow.stock -= cartItems[i].quantity
+      productRow.save().then(() => {})
+      console.log('updated:', productRow)
+    }
+    res.send(lineItems)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:orderId', async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.orderId, {
@@ -66,5 +86,18 @@ router.put('/:orderId', async (req, res, next) => {
     next(err)
   }
 })
+
+function cartToOrder(cart, orderId) {
+  const result = []
+  for (let i = 0; i < cart.length; i++) {
+    let row = {}
+    row.quantity = cart[i].cartItem.quantity
+    row.price = cart[i].price
+    row.lineItemProductId = cart[i].id
+    row.lineItemOrderId = orderId
+    result.push(row)
+  }
+  return result
+}
 
 module.exports = router

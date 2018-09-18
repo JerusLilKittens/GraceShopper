@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Form, Button, Step, Container, Icon} from 'semantic-ui-react'
 import {addOrder} from '../store/order'
@@ -46,11 +45,16 @@ class ShippingForm extends Component {
       status: 'created',
       userId: this.props.user.id
     }
-    await this.props.addOrder(order)
+
+    const cart = this.props.cart
+
+    await this.props.addOrder(order, cart)
     this.props.history.push('/checkout/billing')
   }
 
   render() {
+    console.log('cart')
+    console.log(this.props.cart)
     const {firstName, lastName, address, city, zip, state} = this.state
     return (
       <Container>
@@ -151,7 +155,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addOrder: order => dispatch(addOrder(order))
+    addOrder: (order, cart) => dispatch(addOrder(order, cart))
   }
 }
 

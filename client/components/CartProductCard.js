@@ -1,6 +1,7 @@
 import React from 'react'
 import {Item, Button} from 'semantic-ui-react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {removeFromCart, incrementItem} from '../store/cart'
 
 const CartProductCard = props => {
@@ -11,7 +12,7 @@ const CartProductCard = props => {
 
   return (
     <Item>
-      <Item.Image src={item.imageUrl} />
+      <Item.Image as={Link} to={`/products/${item.id}`} src={item.imageUrl} />
       <Item.Content>
         <Item.Header>{item.name}</Item.Header>
         <Item.Meta>Price: ${item.price / 100}</Item.Meta>
@@ -24,8 +25,7 @@ const CartProductCard = props => {
           <Button
             color="purple"
             floated="right"
-            onClick={() => handleClick(item)}
-          >
+            onClick={() => handleClick(item)}>
             Remove
           </Button>
         </Item.Extra>
