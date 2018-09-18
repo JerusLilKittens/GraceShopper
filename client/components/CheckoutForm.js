@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {CardElement, injectStripe} from 'react-stripe-elements'
 import {Button} from 'semantic-ui-react'
-import Redirect from 'react-router-dom'
+import {updateOrderStatus} from '../store/order'
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -19,19 +20,34 @@ class CheckoutForm extends Component {
     })
 
     if (response.ok) this.setState({complete: true})
+    //update order status
+    console.log('order prop', this.props)
+    this.props.updateOrderStatus(this.props.order.id, 'processing')
     this.props.history.push('/checkout/thankyou')
   }
 
   render() {
     return (
       <div className="checkout">
-        <CardElement />
-        <Button color="teal" onClick={this.submit}>
-          Finish
-        </Button>
+        <CardElement className='example' />
+        <button onClick={this.submit}>Send</button>
       </div>
     )
   }
 }
 
-export default injectStripe(CheckoutForm)
+const mapStateToProps = state => {
+  return {
+    order: state.orders[0]
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateOrderStatus: () => dispatch(updateOrderStatus)
+  }
+}
+
+// (CheckoutForm)
+
+export default injectStripe(connect(mapStateToProps, mapDispatchToProps)(CheckoutForm))

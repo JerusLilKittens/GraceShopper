@@ -16,6 +16,8 @@ class ProductList extends React.Component {
     const products = this.props.products
     return (
         <Container>
+          <h1 id="site-header">Jeru's Lil Kittens</h1>
+          <hr />
           <Grid>
             <Grid.Column width={3}>
               <CategoryList />
