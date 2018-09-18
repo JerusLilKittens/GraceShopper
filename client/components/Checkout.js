@@ -17,7 +17,6 @@ import {Link, Switch, Route} from 'react-router-dom'
 import ShippingForm from './ShippingForm'
 import Billing from './BillingInfo'
 import CompletedOrder from './CompletedOrder'
-import {addOrder} from '../store/order'
 
 class Checkout extends Component {
   render() {
