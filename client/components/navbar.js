@@ -14,6 +14,7 @@ import {
   Button
 } from 'semantic-ui-react'
 import {logout} from '../store'
+import Search from './Search'
 
 const Navbar = (props, {handleClick, isLoggedIn}) => (
   <div>
@@ -46,12 +47,13 @@ const Navbar = (props, {handleClick, isLoggedIn}) => (
         <Menu.Item position="right">
           <div className="ui right aligned category search item">
             <div className="ui transparent icon input">
-              <input
+              <Search />
+              {/* <input
                 className="prompt"
                 type="text"
                 placeholder="Search products..."
               />
-              <i className="search link icon" />
+              <i className="search link icon" /> */}
             </div>
             <div className="results" />
           </div>

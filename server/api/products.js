@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const {Product, Review, Category, ProdCat} = require('../db')
+const Sequilize = require('sequelize')
+const Op = Sequilize.Op
 
 const isAdmin = (req, res, next) => {
   console.log(req)
@@ -15,6 +17,20 @@ router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
     res.json(products)
+  } catch (err) {
+    next(err)
+  }
+})
+
+
+// doesn't allow to search with varibles only can hard search
+router.get('/search/:que', async (req, res, next) => {
+  try {
+    const que = req.params.que
+    const results = await Product.findAll({limit: 2, 
+       where: {name: {$iLike: `%${que}%` }}
+    })
+    res.send(results)
   } catch (err) {
     next(err)
   }
