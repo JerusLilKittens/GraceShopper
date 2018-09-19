@@ -4,9 +4,27 @@ import {ADDED_REVIEW} from './review'
 const GOT_PRODUCTS = 'GOT_PRODUCTS'
 const GOT_PRODUCT = 'GOT_PRODUCT'
 const GOT_PRODUCTS_BY_CATEGORY = 'GOT_PRODUCTS_BY_CATEGORY'
+const GOT_SEARCHED_PRODUCTS = 'GOT_SEARCHED_PRODUCTS'
 
+
+const gotSearchedProducts = results => ({type: GOT_SEARCHED_PRODUCTS, results})
 const gotProducts = products => ({type: GOT_PRODUCTS, products})
 const gotProduct = product => ({type: GOT_PRODUCT, product})
+
+
+
+export const searchProducts = query =>{
+  return async dispatch =>{
+    try{
+      // const {data} = await axios.get('/api/products')
+      // doesn't allow to search sequlize properly 
+       const  {data} = await axios.get(`/api/products/search/${query}`)
+      dispatch(gotSearchedProducts(data))
+    } catch (err){
+      console.error(err)
+    }
+  }
+}
 
 export const getProducts = () => {
   return async dispatch => {
@@ -71,6 +89,15 @@ export const createProduct = formData => {
     } catch (err) {
       console.error(err)
     }
+  }
+}
+
+export const searchProductReducer = (state = [], action)=>{
+  switch(action.type){
+    case GOT_SEARCHED_PRODUCTS:
+      return action.results
+    default:
+      return state 
   }
 }
 
