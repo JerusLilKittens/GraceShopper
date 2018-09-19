@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {CardElement, injectStripe} from 'react-stripe-elements'
-import {Button} from 'semantic-ui-react'
 import {updateOrderStatus} from '../store/order'
 
 class CheckoutForm extends Component {
@@ -20,8 +19,6 @@ class CheckoutForm extends Component {
     })
 
     if (response.ok) this.setState({complete: true})
-    //update order status
-    console.log('order prop', this.props)
     this.props.updateOrderStatus(this.props.order.id, 'processing')
     this.props.history.push('/checkout/thankyou')
   }
@@ -47,7 +44,5 @@ const mapDispatchToProps = dispatch => {
     updateOrderStatus: () => dispatch(updateOrderStatus)
   }
 }
-
-// (CheckoutForm)
 
 export default injectStripe(connect(mapStateToProps, mapDispatchToProps)(CheckoutForm))

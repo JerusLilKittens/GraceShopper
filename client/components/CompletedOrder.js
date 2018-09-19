@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Step, Container, Icon, Header } from 'semantic-ui-react'
+import { Step, Container, Icon, Header } from 'semantic-ui-react'
 
 class CompletedOrder extends React.Component {
 
@@ -31,7 +31,7 @@ class CompletedOrder extends React.Component {
           </Step>
         </Step.Group>
 
-        <Header>Thank you!</Header>
+        <Header>Thank you! Your order will be on its way in a meowment.</Header>
 
         </Container>
     )
