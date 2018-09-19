@@ -11,6 +11,19 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/search/:que', async (req, res, next) => {
+  try {
+    const que = req.params.que
+    const results = await Product.findAll({
+      limit: 2,
+      where: {name: {$iLike: `%${que}%`}}
+    })
+    res.send(results)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.productId, {
