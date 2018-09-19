@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Step, Container, Icon, Header } from 'semantic-ui-react'
+import { Step, Container, Icon, Header } from 'semantic-ui-react'
 
 class CompletedOrder extends React.Component {
 

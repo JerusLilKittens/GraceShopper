@@ -5,7 +5,6 @@ import {
   Card,
   Dropdown,
   Header,
-  Segment,
   Divider
 } from 'semantic-ui-react'
 import AddProductForm from './Admin-AddProductForm'
@@ -57,7 +56,6 @@ class AdminDashBoard extends React.Component {
 
   render() {
     return (
-      <div>
         <Container widths="equal">
           <Card.Group>
             <Divider hidden />
@@ -87,9 +85,7 @@ class AdminDashBoard extends React.Component {
               onChange={this.handleChange.bind(this)}
             />
           </Card.Group>
-        </Container>
 
-        <Container>
           {/* <AddProductForm /> */}
           {this.state.display === 'add-product' && <AddProductForm />}
           {this.state.display === 'edit-product' && <EditProductForm />}
@@ -119,7 +115,6 @@ class AdminDashBoard extends React.Component {
 
 
         </Container>
-      </div>
     )
   }
 }
