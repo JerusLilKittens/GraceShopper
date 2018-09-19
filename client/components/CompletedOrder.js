@@ -31,7 +31,7 @@ class CompletedOrder extends React.Component {
           </Step>
         </Step.Group>
 
-        <Header>Thank you!</Header>
+        <Header>Thank you! Your order will be on its way in a meowment.</Header>
 
         </Container>
     )

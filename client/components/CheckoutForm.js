@@ -23,6 +23,7 @@ class CheckoutForm extends Component {
     //update order status
     console.log('order prop', this.props)
     this.props.updateOrderStatus(this.props.order.id, 'processing')
+    console.log('after updat staus')
     this.props.history.push('/checkout/thankyou')
   }
 
