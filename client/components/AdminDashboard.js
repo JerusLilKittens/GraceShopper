@@ -12,6 +12,7 @@ import AddProductForm from './Admin-AddProductForm'
 import EditProductForm from './Admin-EditProductForm'
 import ViewOrders from './Admin-ViewOrders'
 import InventoryViewer from './Admin-InventoryViewer'
+import AdminCharts from './Admin-Charts'
 
 const optionsProduct = [
   {value: 'add-product', text: 'Add Product'},
@@ -29,7 +30,8 @@ const optionsOrder = [
   {value: 'view-created', text: 'View Created Orders'},
   {value: 'view-processing', text: 'View Processing Orders'},
   {value: 'view-cancelled', text: 'View Cancelled Orders'},
-  {value: 'view-completed', text: 'View Completed Orders'}
+  {value: 'view-completed', text: 'View Completed Orders'},
+  {value: 'analytics-orders', text: 'Orders Analytics'}
 ]
 
 const optionsUser = [
@@ -110,6 +112,9 @@ class AdminDashBoard extends React.Component {
           )}
           {this.state.display === 'view-cancelled' && (
             <ViewOrders display="cancelled" />
+          )}
+          {this.state.display === 'analytics-orders' && (
+            <AdminCharts />
           )}
 
 
